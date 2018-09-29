@@ -108,4 +108,21 @@ class EditController extends Controller
         }
     }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $user = User::findOrFail($id);
+        $user->is_delete = 1;
+        $user->save();
+        if(\Auth::user()->id === $user->id)
+        {
+            \Auth::logout();
+        }
+        return redirect()->route('users.index');
+    }
 }

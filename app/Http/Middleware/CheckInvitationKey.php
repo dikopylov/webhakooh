@@ -16,7 +16,8 @@ class CheckInvitationKey
      */
     public function handle($request, Closure $next)
     {
-        if (InvitationController::getInvitationIdByCode($request->session()->get('invitation_key')) != NULL)
+        if (session('invitation-key') !== NULL &&
+            InvitationController::getInvitationIdByCode(session('invitation-key')) != NULL)
         {
             return $next($request);
         }

@@ -10,19 +10,23 @@ use Mockery\Generator\Method;
 class InvitationController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->middleware('check.admin');
-    }
-
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * @throws \Exception
      */
     public function showInvitationKeyForm()
     {
-        $invitationKey = $this->getKey();
-        return view('users.generate-key', ['invitationKey' => $invitationKey['key']]);
+        if (\Auth::check())
+        {
+            $invitationKey = $this->getKey();
+            return view('users.generate-key', ['invitationKey' => $invitationKey['key']]);
+        }
+        else
+        {
+
+            return view('auth.invitation-key');
+        }
+
     }
 
     /**
@@ -43,7 +47,7 @@ class InvitationController extends Controller
         $invitationKey = new InvitationKey();
 
         $invitationKey->key = bin2hex(random_bytes(16));
-        $invitationKey->author_id = \Auth::id();
+        $invitationKey->author_id = \Auth::user()->id;
 
         $invitationKey->save();
 
@@ -76,21 +80,27 @@ class InvitationController extends Controller
         return $invitationKey;
     }
 
+    public function verifyKey($key)
+    {
+
+    }
+
     /**
      * @param string $key
      * @return InvitationKey
      */
-    public static function getInvitationByCode($key) {
-        return InvitationKey::where('key', $key)->whereNull('is_used')->first();
+    public static function getInvitationIdByCode($key) {
+
+        return InvitationKey::where('key', $key)->where('is_used', false)->first()['id'];
     }
 
     /**
      * @param $id
      * @return mixed
      */
-    public static function getInvitationIdByCode($id) {
+    public static function getInvitationById($id) {
 
-        return InvitationKey::find($id)->where('is_used', false)->first()['id'];
+        return InvitationKey::find($id)->where('is_used', false)->first();
     }
 
     protected function validateKey(array $data)

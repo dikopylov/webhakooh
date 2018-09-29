@@ -5,7 +5,17 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Edit profile
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-10">
+                    <h3>Редактирование данных</h3>
+                        </div>
+                        {{--<form action="{PS"></form>--}}
+
+                    {!! Form::open(['method' => 'POST', 'route' => ['delete-myself', Auth::user()->id] ]) !!}
+                    {!! Form::submit('Удалить себя', ['class' => 'float-right btn btn-danger']) !!}
+                    {!! Form::close() !!}
+                    </div>
                 </div>
 
                 <div class="card-body">
@@ -89,7 +99,7 @@
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
-                                        {{ __('Изменить') }}
+                                        {{ __('Сохранить') }}
                                     </button>
                                 </div>
                             </div>

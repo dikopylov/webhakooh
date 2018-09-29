@@ -2,6 +2,9 @@
 
 use Illuminate\Database\Seeder;
 
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
+
 class UsersTableSeeder extends Seeder
 {
     /**
@@ -22,5 +25,9 @@ class UsersTableSeeder extends Seeder
             'is_admin' => true,
             'invitation_key' => '0',
         ]);
+
+        \App\User::find(DB::getPdo()->lastInsertId())->assignRole('Администратор');
+
+
     }
 }

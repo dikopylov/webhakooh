@@ -10,7 +10,7 @@ use Spatie\Permission\Models\Role;
 class UserController extends Controller
 {
     public function __construct() {
-        $this->middleware(['auth', 'check.admin']); //isAdmin middleware lets only users with a //specific permission permission to access these resources
+        $this->middleware(['auth', 'check.delete', 'check.admin' ]); //isAdmin middleware lets only users with a //specific permission permission to access these resources
     }
 
     /**
@@ -20,7 +20,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::whereNull('is_delete')->where('id', '<>', \Auth::id())->get();
+        $users = User::where('is_delete', false)->where('id', '<>', \Auth::id())->get();
         return view('users.index')->with('users', $users);
     }
 
@@ -77,16 +77,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        $this->validate($request, [
-            'email' => 'required|string|email|max:255',
-            'first_name' => 'required|string|max:255',
-            'second_name' => 'required|string|max:255',
-            'phone' => 'required|regex:/[0-9]{5,11}/',
-        ]);
-
-        $input = $request->only(['first_name','second_name', 'email', 'phone']);
         $roles = $request['roles'];
-        $user->fill($input)->save();
 
         if (isset($roles)) {
             $user->roles()->sync($roles);  //If one or more role is selected associate user to roles
@@ -108,7 +99,10 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->is_delete = 1;
         $user->save();
-
+        if(\Auth::user()->id === $user->id)
+        {
+            \Auth::logout();
+        }
         return redirect()->route('users.index');
     }
 }

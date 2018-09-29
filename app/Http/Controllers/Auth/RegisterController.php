@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Psr\Log\NullLogger;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Traits\HasRoles;
 
 class RegisterController extends Controller
 {
@@ -69,10 +72,10 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        if(InvitationController::getInvitationIdByCode(session('invitation_key')) != NULL &&
-            InvitationController::setKeyIsUsed(session('invitation_key')))
+        if(InvitationController::getInvitationIdByCode(session('invitation-key')) != NULL &&
+            InvitationController::setKeyIsUsed(session('invitation-key')))
         {
-            return User::create([
+            $user = User::create([
             'login' => $data['login'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
@@ -80,9 +83,12 @@ class RegisterController extends Controller
             'patronymic' => $data['patronymic'],
             'second_name' => $data['second_name'],
             'phone' => $data['phone'],
-            'invitation_key' => session('invitation_key'),
+            'invitation_key' => session('invitation-key'),
         ]);
+            $user->assignRole('Менеджер');
+            return $user;
         }
-        return NULL;
+            return NULL;
+
     }
 }

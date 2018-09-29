@@ -39,7 +39,7 @@
                         <td>{{ $user->created_at }}</td>
                         <td>{{ $user->roles()->pluck('name')->implode(' ') }}</td>{{-- Retrieve array of roles associated to a user and convert to string --}}
                         <td>
-                            @if($user->hasRole('Менеджер'))
+                            @if(!$user->hasRole('Администратор'))
                                 <p><a href="{{ route('users.edit', $user->id) }}" class="btn btn-info pull-left" style="margin-right: 3px;">Редактировать</a></p>
 
                                 {!! Form::open(['method' => 'DELETE', 'route' => ['users.destroy', $user->id] ]) !!}
