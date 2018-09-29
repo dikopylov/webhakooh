@@ -3,14 +3,13 @@
 namespace Tests\Feature;
 
 use App\User;
+use Prophecy\Argument;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Traits\HasRoles;
-
-
 
 class RoleTest extends TestCase
 {
@@ -19,7 +18,7 @@ class RoleTest extends TestCase
      */
     public function RoleTest()
     {
-        $user = User::find(1);
+        $user = mock(User::find(1));
         $user->assignRole('manager');
         $roles = $user->getRoleNames();
         var_dump($roles);

@@ -66,13 +66,11 @@ class EditController extends Controller
     public function updateProfile(Request $request)
     {
         $requestData = $request->All();
-        $validator = $this->validatePassword($requestData);
+        $validator = $this->validateProfile($requestData);
 
-        if($validator->fails())
-        {
+        if ($validator->fails()) {
             return response()->json(array('error' => $validator->getMessageBag()->toArray()), 400);
-        }
-        else {
+        } else {
             $user = User::find(Auth::id());
 
             $user->email = $requestData['email'];
@@ -84,7 +82,7 @@ class EditController extends Controller
             $user->save();
         }
 
-        return redirect('/home');
+        return view('administration.home')->with('user', $user);
     }
 
 
@@ -93,23 +91,17 @@ class EditController extends Controller
         $requestData = $request->All();
         $validator = $this->validatePassword($requestData);
 
-        if($validator->fails())
-        {
+        if ($validator->fails()) {
             return response()->json(array('error' => $validator->getMessageBag()->toArray()), 400);
-        }
-        else
-        {
+        } else {
             $currentPassword = Auth::User()->password;
-            if(\Hash::check($requestData['current_password'], $currentPassword))
-            {
+            if (\Hash::check($requestData['current_password'], $currentPassword)) {
                 $userId = Auth::User()->id;
                 $user = User::find($userId);
                 $user->password = \Hash::make($requestData['password']);;
                 $user->save();
-                return redirect('/home');
-            }
-            else
-            {
+                return view('/home');
+            } else {
                 $error = array('current_password' => 'Please enter correct current password');
                 return response()->json(array('error' => $error), 400);
             }
