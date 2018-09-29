@@ -14,7 +14,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                        <form method="POST" action="{{ route('edit/profile') }}">
+                        <form method="POST" action="{{ URL::route('edit/profile') }}">
                             @csrf
 
                             <div class="form-group row">

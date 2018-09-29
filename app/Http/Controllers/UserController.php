@@ -6,7 +6,6 @@ use App\User;
 use Illuminate\Http\Request;
 
 use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 
 class UserController extends Controller
 {
@@ -21,7 +20,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::whereNull('is_delete')->get();
+        $users = User::whereNull('is_delete')->where('id', '<>', \Auth::id())->get();
         return view('users.index')->with('users', $users);
     }
 
@@ -37,48 +36,6 @@ class UserController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-//    public function store(Request $request)
-//    {
-//        $this->validate($request, [
-//            'login' => 'required|string|max:255',
-//            'email' => 'required|string|email|max:255|unique:users',
-//            'password' => 'required|string|min:6|confirmed',
-//            'first_name' => 'required|string|max:255',
-//            'patronymic' => 'string|max:255',
-//            'second_name' => 'required|string|max:255',
-//            'phone' => 'required|regex:/[0-9]{5,11}/|unique:users',
-//        ]);
-//
-//        $user = User::create([
-//            'login' => $request['login'],
-//            'email' => $request['email'],
-//            'password' => \Hash::make($request['password']),
-//            'first_name' => $request['first_name'],
-//            'patronymic' => $request['patronymic'],
-//            'second_name' => $request['second_name'],
-//            'phone' => $request['phone'],
-//            'invitation_key' => 0,
-//        ]);
-//
-//        $roles = $request['roles'];
-//
-//        if (isset($roles)) {
-//
-//            foreach ($roles as $role) {
-//                $role_r = Role::findById($role);
-//                $user->assignRole($role_r);
-//            }
-//        }
-//
-//        return redirect()->route('users.index');
-//    }
-
-    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -90,17 +47,23 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id)
     {
         $user = User::findOrFail($id);
         $roles = Role::get();
 
-        return view('users.edit', compact('user', 'roles')); //pass user and roles data to view
+        if ($user->hasRole('Администратор'))
+        { //Сделать норм обработчик.
+            abort('401', 'THERE ISN\'T ACCESS TO ADMIN EDIT');
+        }
+        else
+        {
+            return view('users.edit', compact('user', 'roles'));
+        }
+
     }
 
     /**
