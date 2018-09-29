@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 
 use App;
 use App\InvitationKey;
-use Illuminate\Http\Request;
 
 class InvitationController extends Controller
 {
@@ -15,35 +14,27 @@ class InvitationController extends Controller
         $this->middleware('check.admin');
     }
 
-    private $checkKey;
-
-    /**
-     * @return bool
-     */
-    public function getCheckKey() : bool
-    {
-        return $this->checkKey;
-    }
-
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * @throws \Exception
      */
     public function showInvitationKeyForm()
     {
-        if(\Auth::check())
-        {
-            $invitationKey = $this->getKey();
-            return view('administration.generate-key', ['invitationKey' => $invitationKey['key']]);
-        }
-        else
-        {
-            return view('auth.invitation-key');
-        }
+        $invitationKey = $this->getKey();
+        return view('users.generate-key', ['invitationKey' => $invitationKey['key']]);
     }
 
     /**
-     * @return InvitationKey
+     * @param $invitationKey
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showNewInvitationKeyForm($invitationKey)
+    {
+        return view('users.generate-key', ['invitationKey' => $invitationKey]);
+    }
+
+    /**
+     * @return InvitationKey|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * @throws \Exception
      */
     protected function createKey()
@@ -55,7 +46,15 @@ class InvitationController extends Controller
 
         $invitationKey->save();
 
-        return $invitationKey;
+        if (\Request::method() == 'POST')
+        {
+            return $this->showNewInvitationKeyForm($invitationKey->key);
+        }
+        else
+        {
+            return $invitationKey;
+        }
+
     }
 
     /**
@@ -97,30 +96,6 @@ class InvitationController extends Controller
         return Validator::make($data, [
             'invitation-key' => 'required|string|regex:/[A-Za-z0-9]{18}/'
         ]);
-    }
-
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
-    public function checkKey(Request $request)
-    {
-
-        $requestData = $request->All();
-
-        if($requestData != NULL &&
-            self::getInvitationByCode($requestData['invitation-key']) != NULL)
-        {
-//            $invitationKey['is_used'] = 1;
-
-            $request->session()->put('invitation_key', $requestData['invitation-key']);
-            $request->session()->put('id', self::getInvitationIdByCode($requestData['invitation-key']));
-            return view('auth.register');
-        }
-        else
-        {
-            return view('auth.invitation-key');
-        }
     }
 
     public static function setKeyIsUsed($key)

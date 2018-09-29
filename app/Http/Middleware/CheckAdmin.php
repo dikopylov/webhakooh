@@ -19,7 +19,7 @@ class CheckAdmin
     {
         $user = User::all()->count();
         if (!($user == 1)) {
-            if (!Auth::user()->is_admin)
+            if (!Auth::user()['is_admin'])
             { //Сделать норм обработчик.
                 abort('401', 'NO ACCESS');
             }

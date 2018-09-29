@@ -21,7 +21,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::whereNull('is_delete')->get();
+        $users = User::whereNull('is_delete')->where('id', '<>', \Auth::id())->get();
         return view('users.index')->with('users', $users);
     }
 
@@ -90,17 +90,23 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id)
     {
         $user = User::findOrFail($id);
         $roles = Role::get();
 
-        return view('users.edit', compact('user', 'roles')); //pass user and roles data to view
+        if ($user->hasRole('Администратор'))
+        { //Сделать норм обработчик.
+            abort('401', 'THERE ISN\'T ACCESS TO ADMIN EDIT');
+        }
+        else
+        {
+            return view('users.edit', compact('user', 'roles'));
+        }
+
     }
 
     /**
