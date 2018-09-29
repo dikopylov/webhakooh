@@ -82,7 +82,7 @@ class EditController extends Controller
             $user->save();
         }
 
-        return view('/home');
+        return view('administration.home')->with('user', $user);
     }
 
 

@@ -6,7 +6,6 @@ use App\User;
 use Illuminate\Http\Request;
 
 use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 
 class UserController extends Controller
 {
@@ -35,48 +34,6 @@ class UserController extends Controller
         $roles = Role::get();
         return view('users.create', ['roles'=>$roles]);
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-//    public function store(Request $request)
-//    {
-//        $this->validate($request, [
-//            'login' => 'required|string|max:255',
-//            'email' => 'required|string|email|max:255|unique:users',
-//            'password' => 'required|string|min:6|confirmed',
-//            'first_name' => 'required|string|max:255',
-//            'patronymic' => 'string|max:255',
-//            'second_name' => 'required|string|max:255',
-//            'phone' => 'required|regex:/[0-9]{5,11}/|unique:users',
-//        ]);
-//
-//        $user = User::create([
-//            'login' => $request['login'],
-//            'email' => $request['email'],
-//            'password' => \Hash::make($request['password']),
-//            'first_name' => $request['first_name'],
-//            'patronymic' => $request['patronymic'],
-//            'second_name' => $request['second_name'],
-//            'phone' => $request['phone'],
-//            'invitation_key' => 0,
-//        ]);
-//
-//        $roles = $request['roles'];
-//
-//        if (isset($roles)) {
-//
-//            foreach ($roles as $role) {
-//                $role_r = Role::findById($role);
-//                $user->assignRole($role_r);
-//            }
-//        }
-//
-//        return redirect()->route('users.index');
-//    }
 
     /**
      * Display the specified resource.

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App;
 use App\InvitationKey;
+use Mockery\Generator\Method;
 
 class InvitationController extends Controller
 {
@@ -46,7 +47,7 @@ class InvitationController extends Controller
 
         $invitationKey->save();
 
-        if (\Request::method() == 'POST')
+        if (\Request::isMethod('POST'))
         {
             return $this->showNewInvitationKeyForm($invitationKey->key);
         }
