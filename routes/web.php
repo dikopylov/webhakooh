@@ -26,10 +26,8 @@ Route::get('/edit/password', 'EditController@showPasswordForm')->name('edit/pass
 Route::post('edit/password', 'EditController@updatePassword')->name('edit/password');
 
 Route::get('/invitation-key', 'InvitationController@showInvitationKeyForm')->name('invitation-key');
+
 Route::post('/invitation-key', 'InvitationController@checkKey')->name('check-invitation-key');
 
 Route::resource('users', 'UserController');
 
-Route::resource('roles', 'RoleController');
-
-Route::resource('permissions', 'PermissionController');

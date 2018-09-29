@@ -19,7 +19,7 @@ class UsersTableSeeder extends Seeder
             'patronymic' => 'Ivanovich',
             'second_name' => 'Ivanov',
             'phone' => '8982211',
-            'is_admin' => 1,
+            'is_admin' => true,
             'invitation_key' => '0',
         ]);
     }

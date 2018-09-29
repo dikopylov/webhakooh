@@ -14,7 +14,7 @@ class AddRowInvitationKeyToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('invitation_key')->unique();
+
         });
     }
 

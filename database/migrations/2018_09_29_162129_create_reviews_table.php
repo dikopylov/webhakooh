@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddRowIsUsedToInvitationKeysTable extends Migration
+class CreateReviewsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class AddRowIsUsedToInvitationKeysTable extends Migration
      */
     public function up()
     {
-        Schema::table('invitation_keys', function (Blueprint $table) {
-            $table->boolean('is_used')->nullable();
+        Schema::create('reviews', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('client_id');
+            $table->text('content');
+            $table->boolean('is_delete')->default(false);
+            $table->timestamps();
         });
     }
 
@@ -25,8 +29,6 @@ class AddRowIsUsedToInvitationKeysTable extends Migration
      */
     public function down()
     {
-        Schema::table('invitation_keys', function (Blueprint $table) {
-            $table->dropColumn('is_used');
-        });
+        Schema::dropIfExists('reviews');
     }
 }

@@ -51,7 +51,7 @@ class InvitationController extends Controller
         $invitationKey = new InvitationKey();
 
         $invitationKey->key = bin2hex(random_bytes(16));
-        $invitationKey->created_by_user_id = \Auth::id();
+        $invitationKey->author_id = \Auth::id();
 
         $invitationKey->save();
 
@@ -89,7 +89,8 @@ class InvitationController extends Controller
      * @return mixed
      */
     public static function getInvitationIdByCode($id) {
-        return InvitationKey::find($id)->whereNull('is_used')->first()['id'];
+
+        return InvitationKey::find($id)->where('is_used', false)->first()['id'];
     }
 
     protected function validateKey(array $data)
