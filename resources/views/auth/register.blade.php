@@ -117,7 +117,7 @@
                             </div>
                         </div>
 
-                        <input type="hidden" name="invitation_key" value="{{ session('invitation_key') }}">
+                        <input type="hidden" name="invitation_key" value="{{ session('invitation-key') }}">
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">

@@ -2,16 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\Http\Models\Role\RoleType;
+use App\Http\Models\User\UserRepository;
+use App\Http\Models\User\User;
 use Illuminate\Http\Request;
+use App\Http\Models\Role\RoleRepository;
 
-use Spatie\Permission\Models\Role;
-
-class UserController extends Controller
+class UsersManagementSystemController extends Controller
 {
-    public function __construct() {
+    /**
+     * @var UserRepository
+     */
+    private $userRepository;
+
+    /**
+     * @var RoleRepository
+     */
+    private $roleRepository;
+
+    public function __construct(UserRepository $userRepository, RoleRepository $roleRepository) {
+        $this->roleRepository = $roleRepository;
+        $this->userRepository = $userRepository;
         $this->middleware(['auth', 'check.delete', 'check.admin' ]); //isAdmin middleware lets only users with a //specific permission permission to access these resources
     }
+
 
     /**
      * Display a listing of the resource.
@@ -20,20 +34,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::where('is_delete', false)->where('id', '<>', \Auth::id())->get();
+        $users = $this->userRepository->getAllWithoutUser(\Auth::id());
         return view('users.index')->with('users', $users);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $roles = Role::get();
-        return view('users.create', ['roles'=>$roles]);
-    }
 
     /**
      * Display the specified resource.
@@ -49,14 +53,16 @@ class UserController extends Controller
     /**
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @TODO Сделать норм обработчик.
      */
     public function edit($id)
     {
-        $user = User::findOrFail($id);
-        $roles = Role::get();
 
-        if ($user->hasRole('Администратор'))
-        { //Сделать норм обработчик.
+        $user = $this->userRepository->findOrFail($id);
+        $roles = $this->roleRepository->get();
+
+        if ($this->roleRepository->hasRole($user,RoleType::ADMINISTRATOR))
+        {
             abort('401', 'THERE ISN\'T ACCESS TO ADMIN EDIT');
         }
         else
@@ -75,7 +81,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::findOrFail($id);
+        $user = $this->userRepository->findOrFail($id);
 
         $roles = $request['roles'];
 
@@ -96,9 +102,10 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::findOrFail($id);
+        $user = $this->userRepository->findOrFail($id);
         $user->is_delete = 1;
         $user->save();
+
         if(\Auth::user()->id === $user->id)
         {
             \Auth::logout();

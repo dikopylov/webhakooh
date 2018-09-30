@@ -1,4 +1,8 @@
 {{-- \resources\views\users\index.blade.php --}}
+
+<?php
+use \App\Http\Models\Role\RoleType;
+?>
 @extends('layouts.app')
 
 @section('title', '| Users')
@@ -39,7 +43,7 @@
                         <td>{{ $user->created_at }}</td>
                         <td>{{ $user->roles()->pluck('name')->implode(' ') }}</td>{{-- Retrieve array of roles associated to a user and convert to string --}}
                         <td>
-                            @if(!$user->hasRole('Администратор'))
+                            @if(!$user->hasRole(RoleType::ADMINISTRATOR))
                                 <p><a href="{{ route('users.edit', $user->id) }}" class="btn btn-info pull-left" style="margin-right: 3px;">Редактировать</a></p>
 
                                 {!! Form::open(['method' => 'DELETE', 'route' => ['users.destroy', $user->id] ]) !!}

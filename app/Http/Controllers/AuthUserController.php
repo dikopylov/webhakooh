@@ -4,15 +4,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
-use App\User;
+use App\Http\Models\User\User;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
-class EditController extends Controller
+class AuthUserController extends Controller
 {
     /**
-     * EditController constructor.
+     * AuthUserController constructor.
      */
     public function __construct()
     {
@@ -36,17 +36,18 @@ class EditController extends Controller
     }
 
     /**
+     * @TODO исправить баг, что пользователь может вводит УЖЕ имеющие в базе телефон и имеил
      * @param array $data
      * @return \Illuminate\Contracts\Validation\Validator|\Illuminate\Validation\Validator
      */
     protected function validateProfile(array $data)
     {
         return Validator::make($data, [
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => 'required|string|email|max:255',
             'first_name' => 'required|string|max:255',
             'patronymic' => 'string|max:255',
             'second_name' => 'required|string|max:255',
-            'phone' => 'required|regex:/[0-9]{5,11}/|unique:users',
+            'phone' => 'required|regex:/[0-9]{5,11}/',
         ]);
     }
 
@@ -100,7 +101,7 @@ class EditController extends Controller
                 $user = User::find($userId);
                 $user->password = \Hash::make($requestData['password']);;
                 $user->save();
-                return view('/home');
+                return view('administration.home')->with('user', $user);
             } else {
                 $error = array('current_password' => 'Please enter correct current password');
                 return response()->json(array('error' => $error), 400);

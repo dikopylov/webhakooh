@@ -4,7 +4,7 @@ use Illuminate\Database\Seeder;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
-
+use App\Http\Models\User;
 class UsersTableSeeder extends Seeder
 {
     /**
@@ -26,7 +26,7 @@ class UsersTableSeeder extends Seeder
             'invitation_key' => '0',
         ]);
 
-        \App\User::find(DB::getPdo()->lastInsertId())->assignRole('Администратор');
+        User::find(DB::getPdo()->lastInsertId())->assignRole('Администратор');
 
 
     }

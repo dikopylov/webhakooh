@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Models\Role\RoleType;
+
 class HomeController extends Controller
 {
     /**
@@ -22,7 +24,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $user = \Auth::user();
-        return view('administration.home')->with('user', $user);
+        return view('administration.home')->with('user', \Auth::user());
     }
 }

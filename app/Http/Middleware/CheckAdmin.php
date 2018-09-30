@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
-use App\User;
+use App\Http\Models\User\User;
 use Spatie\Permission\Traits\HasRoles;
 class CheckAdmin
 {

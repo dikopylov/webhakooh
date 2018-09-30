@@ -20,7 +20,7 @@
                         @endif
 
                         <form method="POST" action="{{ URL::route('users.update', $user->id) }}">
-                            <input name="_method" type="hidden" value="PUT">
+                            {{ method_field('PUT') }}
                             @csrf
 
                             <div class="form-group row">

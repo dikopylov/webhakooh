@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Http\Models\InvitationKey;
 
 use Illuminate\Database\Eloquent\Model;
 

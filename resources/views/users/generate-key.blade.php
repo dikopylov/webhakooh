@@ -17,7 +17,7 @@
 
                 <div class="card-body">
 
-                    <form method="POST" action="{{ route('invitation-key') }}">
+                    <form method="POST" action="{{ route('create-key') }}">
                         @csrf
 
                         <div class="form-group row">

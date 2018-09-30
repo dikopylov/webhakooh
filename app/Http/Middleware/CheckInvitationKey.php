@@ -4,9 +4,18 @@ namespace App\Http\Middleware;
 
 use App\Http\Controllers\InvitationController;
 use Closure;
+use App\Http\Models\InvitationKey\InvitationKeyRepository;
 
 class CheckInvitationKey
 {
+
+    private $invitationKeyRepository;
+
+    public function __construct(InvitationKeyRepository $invitationKeyRepository)
+    {
+        $this->invitationKeyRepository = $invitationKeyRepository;
+    }
+
     /**
      * Handle an incoming request.
      *
@@ -17,7 +26,7 @@ class CheckInvitationKey
     public function handle($request, Closure $next)
     {
         if (session('invitation-key') !== NULL &&
-            InvitationController::getInvitationIdByCode(session('invitation-key')) != NULL)
+            $this->invitationKeyRepository->getIdByCode(session('invitation-key')) != NULL)
         {
             return $next($request);
         }
