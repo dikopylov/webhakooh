@@ -15,7 +15,7 @@ class CreateReservationsTable extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('platen_id');
+            $table->unsignedInteger('platen_id');
             $table->date('date');
             $table->unsignedSmallInteger('start_hour');
             $table->boolean('is_confirm')->default(false);

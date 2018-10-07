@@ -20,11 +20,10 @@ class CreateUsersTable extends Migration
             $table->string('first_name');
             $table->string('patronymic');
             $table->string('second_name');
-            $table->string('invitation_key')->unique();
+            $table->unsignedInteger('invitation_key')->unique();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('phone')->unique();
-            $table->boolean('is_admin')->default(false);
             $table->boolean('is_delete')->default(false);
             $table->rememberToken();
             $table->timestamps();

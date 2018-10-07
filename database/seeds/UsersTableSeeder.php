@@ -1,10 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Spatie\Permission\Traits\HasRoles;
-use App\Http\Models\User;
+use \App\Http\Models\Role\RoleType;
+use App\Http\Models\User\User;
 class UsersTableSeeder extends Seeder
 {
     /**
@@ -22,12 +20,9 @@ class UsersTableSeeder extends Seeder
             'patronymic' => 'Ivanovich',
             'second_name' => 'Ivanov',
             'phone' => '8982211',
-            'is_admin' => true,
-            'invitation_key' => '0',
+            'invitation_key_id' => 0,
         ]);
 
-        User::find(DB::getPdo()->lastInsertId())->assignRole('Администратор');
-
-
+        User::find(DB::getPdo()->lastInsertId())->assignRole(RoleType::ADMINISTRATOR);
     }
 }

@@ -16,7 +16,7 @@ class CreatePlatensTable extends Migration
         Schema::create('platens', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->unsignedSmallInteger('capacity');
+            $table->unsignedTinyInteger('capacity');
             $table->boolean('is_delete')->default(false);
             $table->timestamps();
         });

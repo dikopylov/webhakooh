@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Http\Controllers\InvitationController;
+use \Illuminate\Http\Request;
 use Closure;
 use App\Http\Models\InvitationKey\InvitationKeyRepository;
 
@@ -23,10 +23,10 @@ class CheckInvitationKey
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
-        if (session('invitation-key') !== NULL &&
-            $this->invitationKeyRepository->getIdByCode(session('invitation-key')) != NULL)
+        if ($request['invitation-key'] !== null &&
+            $this->invitationKeyRepository->getIdByCode($request['invitation-key']) !== null)
         {
             return $next($request);
         }

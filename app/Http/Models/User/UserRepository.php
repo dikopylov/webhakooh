@@ -4,18 +4,28 @@
 namespace App\Http\Models\User;
 
 
+use App\Http\AuthSession;
+use App\Http\Models\InvitationKey\InvitationKeyRepository;
 use App\Http\Models\Role\RoleRepository;
 use App\Http\Models\Role\RoleType;
 use Illuminate\Database\Eloquent\Collection;
 
 class UserRepository
 {
-
+    /**
+     * @var RoleRepository
+     */
     private $roleRepository;
 
-    public function __construct(RoleRepository $roleRepository)
+    /**
+     * @var InvitationKeyRepository
+     */
+    private $invitationKeyRepository;
+
+    public function __construct(RoleRepository $roleRepository, InvitationKeyRepository $invitationKeyRepository)
     {
         $this->roleRepository = $roleRepository;
+        $this->invitationKeyRepository = $invitationKeyRepository;
     }
 
     /**
@@ -43,6 +53,8 @@ class UserRepository
      */
     public function create(array $data)
     {
+        $inviteKeyId = $this->invitationKeyRepository->getIdByCode($data['invitation-key']);
+
         $user = User::create([
             'login' => $data['login'],
             'email' => $data['email'],
@@ -51,9 +63,10 @@ class UserRepository
             'patronymic' => $data['patronymic'],
             'second_name' => $data['second_name'],
             'phone' => $data['phone'],
-            'invitation_key' => session('invitation-key'),
+            'invitation_key_id' => $inviteKeyId,
         ]);
 
+        $this->invitationKeyRepository->setKeyIsUsed($data['invitation-key']);
         $this->roleRepository->assignRole($user, RoleType::MANAGER);
 
         return $user;

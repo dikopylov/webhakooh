@@ -16,7 +16,7 @@ class CreateInvitationKeysTable extends Migration
         Schema::create('invitation_keys', function (Blueprint $table) {
             $table->increments('id');
             $table->string('key')->unique();
-            $table->integer('author_id');
+            $table->unsignedInteger('author_id');
             $table->boolean('is_delete')->default(false);
             $table->boolean('is_used')->default(false);
             $table->timestamps();

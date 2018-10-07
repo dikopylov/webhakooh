@@ -61,9 +61,7 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        if($this->invitationKeyRepository->getIdByCode(session('invitation-key')) !== NULL
-            &&
-            $this->invitationKeyRepository->setKeyIsUsed(session('invitation-key')))
+        if($this->invitationKeyRepository->getIdByCode($data['invitation-key']) !== null)
         {
             return Validator::make($data, [
                 'login' => 'required|string|max:255',

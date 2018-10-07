@@ -7,6 +7,7 @@ use App;
 use App\Http\Models\InvitationKey\InvitationKeyRepository;
 use Illuminate\Http\Request;
 use Mockery\Generator\Method;
+use App\Http\AuthSession;
 
 class InvitationController extends Controller
 {
@@ -24,7 +25,7 @@ class InvitationController extends Controller
      */
     private function getKey()
     {
-        if ($this->invitationKeyRepository->getUnusedKey() == NULL)
+        if ($this->invitationKeyRepository->getUnusedKey() == null)
         {
             $invitationKey = $this->invitationKeyRepository->getUnusedKey();
         }
@@ -42,17 +43,17 @@ class InvitationController extends Controller
      */
     public function createKey()
     {
-        $invitationKey = $this->invitationKeyRepository->createKey();
+        if (\Auth::check() && \Auth::user()->hasRole(App\Http\Models\Role\RoleType::ADMINISTRATOR)) {
+            $invitationKey = $this->invitationKeyRepository->createKey();
 
-        if (\Request::isMethod('POST'))
-        {
-            return $this->showNewInvitationKeyForm($invitationKey->key);
+            if (\Request::isMethod('POST')) {
+                return $this->showNewInvitationKeyForm($invitationKey->key);
+            } else {
+                return $invitationKey;
+            }
+        } else {
+            return redirect('home');
         }
-        else
-        {
-            return $invitationKey;
-        }
-
     }
 
     /**
@@ -61,17 +62,16 @@ class InvitationController extends Controller
      */
     public function showInvitationKeyForm()
     {
-        if (\Auth::check())
-        {
-            $invitationKey = $this->getKey();
-            return view('users.generate-key', ['invitationKey' => $invitationKey['key']]);
-        }
-        else
-        {
-
+        if (\Auth::check()) {
+            if (\Auth::user()->hasRole(App\Http\Models\Role\RoleType::ADMINISTRATOR)) {
+                $invitationKey = $this->getKey();
+                return view('users.generate-key', ['invitationKey' => $invitationKey['key']]);
+            } else {
+                return redirect('home');
+            }
+        } else {
             return view('auth.invitation-key');
         }
-
     }
 
     /**
@@ -89,17 +89,17 @@ class InvitationController extends Controller
      */
     public function verify(Request $request)
     {
-
         $validator = \Validator::make($request->all(), [
             'invitation-key' => 'required|string|regex:/[A-Za-z0-9]{18}/'
         ]);
 
-        if (!$validator->fails()) {
-            return redirect('register')->with('invitation-key', $request['invitation-key']);
+        if ($validator->fails())
+        {
+            return redirect('invitation-key');
         }
         else
         {
-            return redirect('invitation-key');
+            return redirect()->route('register', ['invitation-key' => $request['invitation-key']]);
         }
     }
 }
