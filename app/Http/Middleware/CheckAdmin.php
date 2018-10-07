@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Models\Role\RoleType;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Models\User\User;
@@ -21,7 +22,7 @@ class CheckAdmin
          * @TODO сделать норм обработчик
          */
         if (User::all()->count() > 1) {
-            if (Auth::user()->hasRole('Менеджер'))
+            if (Auth::user()->hasRole(RoleType::MANAGER))
             {
                 abort('401', 'NO ACCESS');
             }

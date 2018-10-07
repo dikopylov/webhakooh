@@ -6,13 +6,8 @@
         <div class="col-md-8">
             <div class="card">
                 <p>
-                    <div class="card-header">{{ Auth::user()->first_name }} {{ Auth::user()->second_name }} авторизован как
-                        @if (Auth::user()->is_admin)
-                            администратор
-                        @else
-                            сотрудник
-                        @endif
-                    </div>
+                <div class="card-header">{{ $user->first_name }} {{ $user->second_name }} авторизован
+                    как {{ $user->roles()->pluck('name')->implode(' ') }}</div>
                 </p>
 
                 <div class="card-body">

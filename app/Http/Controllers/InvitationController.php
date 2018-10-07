@@ -47,7 +47,7 @@ class InvitationController extends Controller
             $invitationKey = $this->invitationKeyRepository->createKey();
 
             if (\Request::isMethod('POST')) {
-                return $this->showNewInvitationKeyForm($invitationKey->key);
+                return $this->refreshInvitationKey($invitationKey->key);
             } else {
                 return $invitationKey;
             }
@@ -65,7 +65,7 @@ class InvitationController extends Controller
         if (\Auth::check()) {
             if (\Auth::user()->hasRole(App\Http\Models\Role\RoleType::ADMINISTRATOR)) {
                 $invitationKey = $this->getKey();
-                return view('users.generate-key', ['invitationKey' => $invitationKey['key']]);
+                return view('users.generate-key', ['invitationKey' => $invitationKey['key'], 'user' => \Auth::user()]);
             } else {
                 return redirect('home');
             }
@@ -78,9 +78,9 @@ class InvitationController extends Controller
      * @param $invitationKey
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function showNewInvitationKeyForm($invitationKey)
+    public function refreshInvitationKey($invitationKey)
     {
-        return view('users.generate-key', ['invitationKey' => $invitationKey]);
+        return view('users.generate-key', ['invitationKey' => $invitationKey, 'user' => \Auth::user()]);
     }
 
     /**
