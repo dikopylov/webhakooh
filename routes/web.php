@@ -22,4 +22,4 @@ Route::get('/invitation-key', 'InvitationController@showInvitationKeyForm')->nam
 Route::post('/create-key', 'InvitationController@createKey')->name('create-key');
 
 Route::resource('users', 'UsersManagementSystemController');
-
+Route::resource('platen', 'PlatenController');
