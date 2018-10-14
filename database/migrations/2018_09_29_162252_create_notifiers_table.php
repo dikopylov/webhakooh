@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddIsDeleteToUsersTable extends Migration
+class CreateNotifiersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class AddIsDeleteToUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->boolean('is_delete')->nullable();
+        Schema::create('notifiers', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('title');
+            $table->string('type');
+            $table->boolean('is_delete')->default(false);
+            $table->timestamps();
         });
     }
 
@@ -25,8 +29,6 @@ class AddIsDeleteToUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            Schema::drop('is_delete');
-        });
+        Schema::dropIfExists('notifiers');
     }
 }

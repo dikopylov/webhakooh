@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddRowIsDeleteToInvitationKeysTable extends Migration
+class CreatePlatensTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class AddRowIsDeleteToInvitationKeysTable extends Migration
      */
     public function up()
     {
-        Schema::table('invitation_keys', function (Blueprint $table) {
-            $table->boolean('is_delete')->nullable();
+        Schema::create('platens', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('title');
+            $table->unsignedTinyInteger('capacity');
+            $table->boolean('is_delete')->default(false);
+            $table->timestamps();
         });
     }
 
@@ -25,8 +29,6 @@ class AddRowIsDeleteToInvitationKeysTable extends Migration
      */
     public function down()
     {
-        Schema::table('invitation_keys', function (Blueprint $table) {
-            $table->dropColumn('is_delete');
-        });
+        Schema::dropIfExists('platens');
     }
 }

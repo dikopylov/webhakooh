@@ -17,6 +17,7 @@
                         @endif
 
                         @if ($user->hasRole('Администратор'))
+
                             <p><a href="{{ URL::route('users.index') }}" class="btn btn-success"> Управление
                                     пользователями </a></p>
                         @endif

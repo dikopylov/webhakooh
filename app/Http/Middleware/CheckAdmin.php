@@ -2,10 +2,11 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Models\Role\RoleType;
 use Closure;
 use Illuminate\Support\Facades\Auth;
-use App\User;
-
+use App\Http\Models\User\User;
+use Spatie\Permission\Traits\HasRoles;
 class CheckAdmin
 {
     /**
@@ -17,10 +18,12 @@ class CheckAdmin
      */
     public function handle($request, Closure $next)
     {
-        $user = User::all()->count();
-        if (!($user == 1)) {
-            if (!Auth::user()['is_admin'])
-            { //Сделать норм обработчик.
+        /**
+         * @TODO сделать норм обработчик
+         */
+        if (User::all()->count() > 1) {
+            if (Auth::user()->hasRole(RoleType::MANAGER))
+            {
                 abort('401', 'NO ACCESS');
             }
         }

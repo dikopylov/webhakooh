@@ -4,71 +4,32 @@
 namespace App\Http\Controllers;
 
 use App;
-use App\InvitationKey;
+use App\Http\Models\InvitationKey\InvitationKeyRepository;
+use Illuminate\Http\Request;
 use Mockery\Generator\Method;
+use App\Http\AuthSession;
 
 class InvitationController extends Controller
 {
+    private $invitationKeyRepository;
 
-    public function __construct()
+    public function __construct(InvitationKeyRepository $invitationKeyRepository)
     {
-        $this->middleware('check.admin');
+        $this->invitationKeyRepository = $invitationKeyRepository;
     }
 
+
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return App\Http\Models\InvitationKey\InvitationKey|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * @throws \Exception
      */
-    public function showInvitationKeyForm()
+    private function getKey()
     {
-        $invitationKey = $this->getKey();
-        return view('users.generate-key', ['invitationKey' => $invitationKey['key']]);
-    }
-
-    /**
-     * @param $invitationKey
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function showNewInvitationKeyForm($invitationKey)
-    {
-        return view('users.generate-key', ['invitationKey' => $invitationKey]);
-    }
-
-    /**
-     * @return InvitationKey|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     * @throws \Exception
-     */
-    protected function createKey()
-    {
-        $invitationKey = new InvitationKey();
-
-        $invitationKey->key = bin2hex(random_bytes(16));
-        $invitationKey->created_by_user_id = \Auth::id();
-
-        $invitationKey->save();
-
-        if (\Request::isMethod('POST'))
+        if ($this->invitationKeyRepository->getUnusedKey() == null)
         {
-            return $this->showNewInvitationKeyForm($invitationKey->key);
+            $invitationKey = $this->invitationKeyRepository->getUnusedKey();
         }
         else
-        {
-            return $invitationKey;
-        }
-
-    }
-
-    /**
-     * @return InvitationKey
-     * @throws \Exception
-     */
-    protected function getKey()
-    {
-        try
-        {
-            $invitationKey = InvitationKey::whereNull('is_used')->firstOrFail();
-        }
-        catch (\Exception $modelNotFoundException) // нужно поймать именно это исключение Illuminate\Database\Eloquent\ModelNotFoundException
         {
             $invitationKey = $this->createKey();
         }
@@ -77,41 +38,68 @@ class InvitationController extends Controller
     }
 
     /**
-     * @param string $key
-     * @return InvitationKey
+     * @return App\Http\Models\InvitationKey\InvitationKey|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \Exception
      */
-    public static function getInvitationByCode($key) {
-        return InvitationKey::where('key', $key)->whereNull('is_used')->first();
+    public function createKey()
+    {
+        if (\Auth::check() && \Auth::user()->hasRole(App\Http\Models\Role\RoleType::ADMINISTRATOR)) {
+            $invitationKey = $this->invitationKeyRepository->createKey();
+
+            if (\Request::isMethod('POST')) {
+                return $this->refreshInvitationKey($invitationKey->key);
+            } else {
+                return $invitationKey;
+            }
+        } else {
+            return redirect('home');
+        }
     }
 
     /**
-     * @param $id
-     * @return mixed
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \Exception
      */
-    public static function getInvitationIdByCode($id) {
-        return InvitationKey::find($id)->whereNull('is_used')->first()['id'];
+    public function showInvitationKeyForm()
+    {
+        if (\Auth::check()) {
+            if (\Auth::user()->hasRole(App\Http\Models\Role\RoleType::ADMINISTRATOR)) {
+                $invitationKey = $this->getKey();
+                return view('users.generate-key', ['invitationKey' => $invitationKey['key'], 'user' => \Auth::user()]);
+            } else {
+                return redirect('home');
+            }
+        } else {
+            return view('auth.invitation-key');
+        }
     }
 
-    protected function validateKey(array $data)
+    /**
+     * @param $invitationKey
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function refreshInvitationKey($invitationKey)
     {
-        return Validator::make($data, [
+        return view('users.generate-key', ['invitationKey' => $invitationKey, 'user' => \Auth::user()]);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function verify(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
             'invitation-key' => 'required|string|regex:/[A-Za-z0-9]{18}/'
         ]);
-    }
 
-    public static function setKeyIsUsed($key)
-    {
-        if($invitationKey = InvitationKey::where('key', $key)->first())
+        if ($validator->fails())
         {
-            $invitationKey->is_used = 1;
-            $invitationKey->save();
-
-            return true;
+            return redirect('invitation-key');
         }
         else
         {
-            return false;
+            return redirect()->route('register', ['invitation-key' => $request['invitation-key']]);
         }
-
     }
 }

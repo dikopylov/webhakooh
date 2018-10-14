@@ -63,5 +63,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'check.key' => \App\Http\Middleware\CheckInvitationKey::class,
         'check.admin' => \App\Http\Middleware\CheckAdmin::class,
+        'check.delete' => \App\Http\Middleware\CheckDelete::class,
     ];
 }

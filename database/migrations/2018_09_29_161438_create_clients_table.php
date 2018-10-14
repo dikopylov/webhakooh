@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateInvitationKeysTable extends Migration
+class CreateClientsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateInvitationKeysTable extends Migration
      */
     public function up()
     {
-        Schema::create('invitation_keys', function (Blueprint $table) {
+        Schema::create('clients', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('key')->unique();
-            $table->unsignedInteger('author_id');
+            $table->string('name');
+            $table->string('phone')->nullable();
+            $table->unsignedInteger('chat_id');
             $table->boolean('is_delete')->default(false);
-            $table->boolean('is_used')->default(false);
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateInvitationKeysTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('invitation_keys');
+        Schema::dropIfExists('clients');
     }
 }
