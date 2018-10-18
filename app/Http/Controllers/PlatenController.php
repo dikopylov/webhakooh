@@ -26,7 +26,7 @@ class PlatenController extends Controller
     public function index()
     {
         $platens = $this->platenRepository->getAll();
-        return view('administration.platen.index')->with('platens', $platens);
+        return view('administration.platens.index')->with('platens', $platens);
     }
 
     /**
@@ -36,7 +36,7 @@ class PlatenController extends Controller
      */
     public function create()
     {
-        return view('administration.platen.create');
+        return view('administration.platens.create');
     }
 
     /**
@@ -55,7 +55,7 @@ class PlatenController extends Controller
         $this->platenRepository->create($request->only('title', 'capacity'));
         $platens = $this->platenRepository->getAll();
 
-        return redirect()->route('platen.index')
+        return redirect()->route('platens.index')
             ->with('platens', $platens);
     }
 
@@ -69,7 +69,7 @@ class PlatenController extends Controller
     {
         $platen = $this->platenRepository->findOrFail($id); //Find post of id = $id
 
-        return view ('administration.platen.show', compact('platen'));
+        return view ('administration.platens.show', compact('platen'));
     }
 
     /**
@@ -82,7 +82,7 @@ class PlatenController extends Controller
     {
         $platen = $this->platenRepository->findOrFail($id);
 
-        return view('administration.platen.edit', compact('platen'));
+        return view('administration.platens.edit', compact('platen'));
     }
 
     /**
@@ -104,7 +104,7 @@ class PlatenController extends Controller
         $platen->capacity = $request->input('capacity');
         $platen->save();
 
-        return redirect()->route('administration.platen.show',
+        return redirect()->route('administration.platens.show',
             $platen->id);
     }
 
@@ -120,6 +120,6 @@ class PlatenController extends Controller
         $platen->is_delete = true;
         $platen->save();
 
-        return redirect()->route('platen.index');
+        return redirect()->route('platens.index');
     }
 }

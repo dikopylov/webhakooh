@@ -1,17 +1,14 @@
-{{-- \resources\views\users\index.blade.php --}}
+{{-- \resources\views\platens\index.blade.php --}}
 
-<?php
-use \App\Http\Models\Role\RoleType;
-?>
 @extends('layouts.app')
 
-@section('title', '| Users')
+@section('title', '| Platens')
 
 @section('content')
 
     <div class="col-lg-10 col-lg-offset-1">
         <h1><i class="fa fa-users"></i> Столы
-        </h1>
+        <a href="{{ route('platens.create') }}" class="btn btn-success">Добавить новый стол</a></h1>
         <hr>
         <div class="table-responsive">
             <table class="table table-bordered table-striped">
@@ -31,23 +28,17 @@ use \App\Http\Models\Role\RoleType;
                         <td>{{ $platen->title }}</td>
                         <td>{{ $platen->capacity }}</td>
                         <td>
-                            @if(!$user->hasRole(RoleType::ADMINISTRATOR))
-                                <p><a href="{{ route('users.edit', $user->id) }}" class="btn btn-info pull-left" style="margin-right: 3px;">Редактировать</a></p>
+                            <p><a href="{{ route('platens.edit', $platen->id) }}" class="btn btn-info pull-left" style="margin-right: 3px;">Редактировать</a></p>
 
-                                {!! Form::open(['method' => 'DELETE', 'route' => ['users.destroy', $user->id] ]) !!}
-                                {!! Form::submit('Удалить', ['class' => 'btn btn-danger']) !!}
-                                {!! Form::close() !!}
-                            @endif
-
+                            {!! Form::open(['method' => 'DELETE', 'route' => ['platens.destroy', $platen->id] ]) !!}
+                            {!! Form::submit('Удалить', ['class' => 'btn btn-danger']) !!}
+                            {!! Form::close() !!}
                         </td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
         </div>
-
-        <p><a href="{{ route('invitation-key') }}" class="btn btn-success"> Пригласительный ключ для регистрации </a></p>
-
     </div>
 
 @endsection
