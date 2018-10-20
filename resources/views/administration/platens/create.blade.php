@@ -1,7 +1,7 @@
 {{-- \resources\views\platens\create.blade.php --}}
 @extends('layouts.app')
 
-@section('title', '| Add Platen')
+@section('title', '| Create New Platen')
 
 @section('content')
 
@@ -9,19 +9,18 @@
 
         <h1><i class='fa fa-user-plus'></i>Добавить новый стол</h1>
         <hr>
-
-        <form method="GET" action="{{ route('platens.create') }}">
+        <form method="POST" action="{{ route('platens.store') }}">
             @csrf
             <div class="form-group row">
-                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Название') }}</label>
+                <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('Название') }}</label>
 
                 <div class="col-md-6">
-                    <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
+                    <input id="title" type="text" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" name="title" value="{{ old('title') }}" required autofocus>
 
                     @if ($errors->has('name'))
                         <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('name') }}</strong>
-                                        </span>
+                                            <strong>{{ $errors->first('title') }}</strong>
+                        </span>
                     @endif
                 </div>
             </div>
@@ -48,23 +47,6 @@
                 </div>
             </div>
         </form>
-
-        {{--{{ Form::open(array('url' => 'platens')) }}--}}
-
-        {{--<div class="form-group">--}}
-            {{--{{ Form::label('name', 'Название') }}--}}
-            {{--{{ Form::text('name', '', array('class' => 'form-control')) }}--}}
-        {{--</div>--}}
-
-        {{--<div class="form-group">--}}
-            {{--{{ Form::label('capacity', 'Количество мест') }}--}}
-            {{--{{ Form::text('capacity', '', array('class' => 'form-control')) }}--}}
-        {{--</div>--}}
-
-        {{--{{ Form::submit('Добавить', array('class' => 'btn btn-primary')) }}--}}
-
-        {{--{{ Form::close() }}--}}
-
     </div>
 
 @endsection

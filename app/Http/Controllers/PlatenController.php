@@ -53,6 +53,7 @@ class PlatenController extends Controller
         ]);
 
         $this->platenRepository->create($request->only('title', 'capacity'));
+
         $platens = $this->platenRepository->getAll();
 
         return redirect()->route('platens.index')
@@ -60,6 +61,7 @@ class PlatenController extends Controller
     }
 
     /**
+     * @TODO не используется - выпилить
      * Display the specified resource.
      *
      * @param  int  $id
@@ -104,8 +106,9 @@ class PlatenController extends Controller
         $platen->capacity = $request->input('capacity');
         $platen->save();
 
-        return redirect()->route('administration.platens.show',
-            $platen->id);
+        $platens = $this->platenRepository->getAll();
+        return view('administration.platens.index')->with('platens', $platens);
+
     }
 
     /**
