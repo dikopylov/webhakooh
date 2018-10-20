@@ -49,29 +49,15 @@ class PlatenController extends Controller
     {
         $this->validate($request, [
             'title'=>'required|max:255',
-            'capacity' =>'required|numeric',
+            'platen_capacity' =>'required|integer|between:1,255',
         ]);
 
-        $this->platenRepository->create($request->only('title', 'capacity'));
+        $this->platenRepository->create($request->only('title', 'platen_capacity'));
 
         $platens = $this->platenRepository->getAll();
 
         return redirect()->route('platens.index')
             ->with('platens', $platens);
-    }
-
-    /**
-     * @TODO не используется - выпилить
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $platen = $this->platenRepository->findOrFail($id); //Find post of id = $id
-
-        return view ('administration.platens.show', compact('platen'));
     }
 
     /**
@@ -82,7 +68,7 @@ class PlatenController extends Controller
      */
     public function edit($id)
     {
-        $platen = $this->platenRepository->findOrFail($id);
+        $platen = $this->platenRepository->find($id);
 
         return view('administration.platens.edit', compact('platen'));
     }
@@ -98,13 +84,15 @@ class PlatenController extends Controller
     {
         $this->validate($request, [
             'title'=>'required|max:255',
-            'capacity' =>'required|numeric',
+            'platen_capacity' =>'required|integer|between:1,255',
         ]);
 
-        $platen = $this->platenRepository->findOrFail($id);
-        $platen->title = $request->input('title');
-        $platen->capacity = $request->input('capacity');
-        $platen->save();
+        $this->platenRepository->update(
+            $id,
+            $request->input('title'),
+            $request->input('platen_capacity')
+        );
+
 
         $platens = $this->platenRepository->getAll();
         return view('administration.platens.index')->with('platens', $platens);
@@ -119,10 +107,9 @@ class PlatenController extends Controller
      */
     public function destroy($id)
     {
-        $platen = $this->platenRepository->findOrFail($id);
-        $platen->is_delete = true;
-        $platen->save();
+        $this->platenRepository->delete($id);
+        $platens = $this->platenRepository->getAll();
 
-        return redirect()->route('platens.index');
+        return redirect()->route('platens.index')->with('platens', $platens);
     }
 }

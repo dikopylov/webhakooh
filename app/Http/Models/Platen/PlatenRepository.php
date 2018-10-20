@@ -14,15 +14,28 @@ class PlatenRepository
     {
         return Platen::create([
             'title' => $data['title'],
-            'capacity' => $data['capacity'],
+            'capacity' => $data['platen_capacity'],
             'is_delete' => false,
         ]);
     }
 
-    public function findOrFail($id)
+    public function find($id)
     {
-        return Platen::findOrFail($id);
+        return Platen::find($id);
     }
 
+    public function update($id, $title, $capacity)
+    {
+        $platen = $this->find($id);
+        $platen->title = $title;
+        $platen->capacity = $capacity;
+        $platen->save();
+    }
 
+    public function delete($id)
+    {
+        $platen = $this->find($id);
+        $platen->is_delete = true;
+        $platen->save();
+    }
 }

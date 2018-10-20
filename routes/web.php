@@ -21,5 +21,9 @@ Route::post('edit/password', 'AuthUserController@updatePassword');
 Route::get('/invitation-key', 'InvitationController@showInvitationKeyForm')->name('invitation-key');
 Route::post('/create-key', 'InvitationController@createKey')->name('create-key');
 
-Route::resource('users', 'UsersManagementSystemController');
-Route::resource('platens', 'PlatenController');
+Route::resources(
+    [
+        'users' => 'UsersManagementSystemController',
+        'platens' => 'PlatenController'
+    ]
+);
