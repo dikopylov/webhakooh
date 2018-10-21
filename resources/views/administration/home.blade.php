@@ -18,8 +18,10 @@
 
                         @if ($user->hasRole('Администратор'))
 
-                            <p><a href="{{ URL::route('users.index') }}" class="btn btn-success"> Управление
-                                    пользователями </a></p>
+                            <p><a href="{{ URL::route('users.index') }}" class="btn btn-success">
+                                    Управление пользователями </a></p>
+                            <p><a href="{{ URL::route('platens.index') }}" class="btn btn-success">
+                                    Управление столами </a></p>
                         @endif
                         <p>Something written...</p>
                     </div>
