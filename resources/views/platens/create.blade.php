@@ -1,4 +1,3 @@
-{{-- \resources\views\platens\create.blade.php --}}
 @extends('layouts.app')
 
 @section('title', '| Create New Platen')

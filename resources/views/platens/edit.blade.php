@@ -1,5 +1,3 @@
-{{-- \resources\views\platens\edit.blade.php --}}
-
 @extends('layouts.app')
 
 @section('title', '| Edit Platen')

@@ -26,7 +26,7 @@ class PlatenController extends Controller
     public function index()
     {
         $platens = $this->platenRepository->getAll();
-        return view('administration.platens.index')->with('platens', $platens);
+        return view('platens.index')->with('platens', $platens);
     }
 
     /**
@@ -36,7 +36,7 @@ class PlatenController extends Controller
      */
     public function create()
     {
-        return view('administration.platens.create');
+        return view('platens.create');
     }
 
     /**
@@ -70,7 +70,7 @@ class PlatenController extends Controller
     {
         $platen = $this->platenRepository->find($id);
 
-        return view('administration.platens.edit', compact('platen'));
+        return view('platens.edit', compact('platen'));
     }
 
     /**
@@ -95,7 +95,7 @@ class PlatenController extends Controller
 
 
         $platens = $this->platenRepository->getAll();
-        return view('administration.platens.index')->with('platens', $platens);
+        return view('platens.index')->with('platens', $platens);
 
     }
 
