@@ -13,10 +13,13 @@ Route::get('/edit/password', 'AuthUserController@showPasswordForm')->name('edit/
 Route::post('edit/password', 'AuthUserController@updatePassword');
 Route::get('/invitation-key', 'InvitationController@showInvitationKeyForm')->name('invitation-key');
 Route::post('/create-key', 'InvitationController@createKey')->name('create-key');
+
 Route::resources(
     [
         'users' => 'UsersManagementSystemController',
+        'platens' => 'PlatenController',
         'reservation' => 'ReservationController'
+
     ]
 );
 
