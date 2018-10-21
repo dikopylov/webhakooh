@@ -20,7 +20,7 @@ class UsersTableSeeder extends Seeder
             'patronymic' => 'Ivanovich',
             'second_name' => 'Ivanov',
             'phone' => '8982211',
-            'invitation_key_id' => 0,
+            'invitation_key' => 0,
         ]);
 
         User::find(DB::getPdo()->lastInsertId())->assignRole(RoleType::ADMINISTRATOR);

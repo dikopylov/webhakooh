@@ -20,7 +20,8 @@ class UsersManagementSystemController extends Controller
      */
     private $roleRepository;
 
-    public function __construct(UserRepository $userRepository, RoleRepository $roleRepository) {
+    public function __construct(UserRepository $userRepository, RoleRepository $roleRepository)
+    {
         $this->roleRepository = $roleRepository;
         $this->userRepository = $userRepository;
         $this->middleware(['auth', 'check.delete', 'check.admin' ]); //isAdmin middleware lets only users with a //specific permission permission to access these resources

@@ -16,13 +16,13 @@ class CreateReservationsTable extends Migration
         Schema::create('reservations', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('platen_id');
-            $table->date('date');
-            $table->unsignedSmallInteger('start_hour');
+            $table->dateTime('date');
             $table->boolean('is_confirm')->default(false);
             $table->boolean('is_new')->default(true);
-            $table->unsignedInteger('client_id');
+            $table->unsignedInteger('client_id')->nullable();
             $table->unsignedSmallInteger('count_persons');
-            $table->unsignedSmallInteger('notify_id');
+            $table->text('comment')->nullable();
+            $table->unsignedSmallInteger('notify_id')->nullable();
             $table->boolean('is_delete')->default(false);
             $table->timestamps();
         });
