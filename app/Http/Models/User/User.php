@@ -2,14 +2,16 @@
 
 namespace App\Http\Models\User;
 
+use App\Http\Models\Translate\RuEvent;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use Notifiable, HasRoles;
+    use Notifiable, HasRoles, LogsActivity;
 
     /**
      * The attributes that are mass assignable.
@@ -29,4 +31,13 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    protected static $logName = 'users';
+
+    public function getDescriptionForEvent(string $eventName): string
+    {
+        $eventName = RuEvent::ruEvent[$eventName];
+        return "Пользователь {$eventName}";
+    }
+
 }

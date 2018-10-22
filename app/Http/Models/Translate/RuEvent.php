@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Http\Models\ActivityLog;
+namespace App\Http\Models\Translate;
 
 
 abstract class RuEvent

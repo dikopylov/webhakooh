@@ -44,7 +44,7 @@ class InvitationController extends Controller
     public function createKey()
     {
         if (\Auth::check() && \Auth::user()->hasRole(App\Http\Models\Role\RoleType::ADMINISTRATOR)) {
-            $invitationKey = $this->invitationKeyRepository->createKey();
+            $invitationKey = $this->invitationKeyRepository->create();
 
             if (\Request::isMethod('POST')) {
                 return $this->refreshInvitationKey($invitationKey->key);

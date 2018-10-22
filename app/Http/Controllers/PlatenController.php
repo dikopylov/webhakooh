@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Models\ActivityLog\Platen\PlatenActivityRepository;
-use App\Http\Models\Platen\Platen;
 use App\Http\Models\Platen\PlatenRepository;
 use Illuminate\Http\Request;
 
@@ -20,9 +18,8 @@ class PlatenController extends Controller
      */
     private $platenActivityRepository;
 
-    public function __construct(PlatenRepository $platenRepository, PlatenActivityRepository $platenActivityRepository) {
+    public function __construct(PlatenRepository $platenRepository) {
         $this->platenRepository = $platenRepository;
-        $this->platenActivityRepository = $platenActivityRepository;
         $this->middleware(['auth', 'check.admin' ]);
     }
 
@@ -62,8 +59,6 @@ class PlatenController extends Controller
 
         $this->platenRepository->create($request->only('title', 'platen_capacity'));
 
-        $this->platenActivityRepository->create($request->only('title', 'platen_capacity'));
-
         $platens = $this->platenRepository->getAll();
 
         return redirect()->route('platens.index')
@@ -99,11 +94,6 @@ class PlatenController extends Controller
 
         $this->platenRepository->update(
             $id,
-            $request->input('title'),
-            $request->input('platen_capacity')
-        );
-
-        $this->platenActivityRepository->create(
             $request->input('title'),
             $request->input('platen_capacity')
         );

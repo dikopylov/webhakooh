@@ -46,19 +46,17 @@ class InvitationKeyRepository
     }
 
     /**
-     * @return InvitationKey|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return mixed
      * @throws \Exception
      */
-    public function createKey()
+    public function create()
     {
-        $invitationKey = new InvitationKey();
-
-        $invitationKey->key = bin2hex(random_bytes(16));
-        $invitationKey->author_id = \Auth::user()->id;
-
-        $invitationKey->save();
-
-        return $invitationKey;
+        return InvitationKey::create([
+            'key' => bin2hex(random_bytes(16)),
+            'author_id' => \Auth::id(),
+            'is_delete' => false,
+            'is_used' => false
+        ]);
 
     }
 }
