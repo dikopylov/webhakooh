@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Reservation extends Model
 {
     protected $fillable = array(
-        'platen_id', 'date', 'start_hour', 'client_id', 'count_persons'
+        'platen_id', 'date', 'status_id', 'count_persons'
     );
 
     public function platen()

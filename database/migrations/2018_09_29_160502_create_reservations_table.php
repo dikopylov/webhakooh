@@ -17,8 +17,7 @@ class CreateReservationsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('platen_id');
             $table->dateTime('date');
-            $table->boolean('is_confirm')->default(false);
-            $table->boolean('is_new')->default(true);
+            $table->unsignedInteger('status_id');
             $table->unsignedInteger('client_id')->nullable();
             $table->unsignedSmallInteger('count_persons');
             $table->text('comment')->nullable();
