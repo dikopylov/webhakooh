@@ -18,7 +18,7 @@ class InvitationKey extends Model
         'key', 'author_id', 'is_delete', 'is_used'
     );
 
-    protected static $logName = 'invite';
+    protected static $logName = 'ключ';
 
     public function getDescriptionForEvent(string $eventName): string
     {

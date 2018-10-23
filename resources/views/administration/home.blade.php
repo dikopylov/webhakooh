@@ -22,6 +22,8 @@
                                     Управление пользователями </a></p>
                             <p><a href="{{ URL::route('platens.index') }}" class="btn btn-success">
                                     Управление столами </a></p>
+                            <p><a href="{{ URL::route('logs') }}" class="btn btn-success">
+                                    Посмотреть логи </a></p>
                         @endif
                         <p>Something written...</p>
                     </div>

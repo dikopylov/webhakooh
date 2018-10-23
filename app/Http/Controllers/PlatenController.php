@@ -13,11 +13,6 @@ class PlatenController extends Controller
      */
     private $platenRepository;
 
-    /**
-     * @var PlatenActivityRepository
-     */
-    private $platenActivityRepository;
-
     public function __construct(PlatenRepository $platenRepository) {
         $this->platenRepository = $platenRepository;
         $this->middleware(['auth', 'check.admin' ]);

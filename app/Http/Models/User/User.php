@@ -32,7 +32,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    protected static $logName = 'users';
+    protected static $logName = 'пользователь';
 
     public function getDescriptionForEvent(string $eventName): string
     {
@@ -40,4 +40,8 @@ class User extends Authenticatable
         return "Пользователь {$eventName}";
     }
 
+    public function log()
+    {
+        return $this->hasMany('App\Http\Models\ActivityLog\Activity', 'causer_id');
+    }
 }

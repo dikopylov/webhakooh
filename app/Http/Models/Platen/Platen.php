@@ -14,7 +14,7 @@ class Platen extends Model
         'title', 'capacity', 'is_delete'
     );
 
-    protected static $logName = 'platens';
+    protected static $logName = 'стол';
 
     public function getDescriptionForEvent(string $eventName): string
     {
