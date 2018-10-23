@@ -63,7 +63,7 @@ class UserRepository
             'patronymic' => $data['patronymic'],
             'second_name' => $data['second_name'],
             'phone' => $data['phone'],
-            'invitation_key_id' => $inviteKeyId,
+            'invitation_key' => $inviteKeyId,
         ]);
 
         $this->invitationKeyRepository->setKeyIsUsed($data['invitation-key']);
