@@ -25,7 +25,6 @@
                             <p><a href="{{ URL::route('logs') }}" class="btn btn-success">
                                     Посмотреть логи </a></p>
                         @endif
-                        <p>Something written...</p>
                     </div>
                 </div>
             </div>
