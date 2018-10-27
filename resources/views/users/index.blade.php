@@ -20,6 +20,7 @@ use \App\Http\Models\Role\RoleType;
 
                 <thead>
                 <tr>
+                    <th>ID</th>
                     <th>Логин</th>
                     <th>Имя</th>
                     <th>Фамилия</th>
@@ -35,6 +36,7 @@ use \App\Http\Models\Role\RoleType;
                 @foreach ($users as $user)
                     <tr>
 
+                        <td>{{ $user->id }}</td>
                         <td>{{ $user->login }}</td>
                         <td>{{ $user->first_name }}</td>
                         <td>{{ $user->second_name }}</td>
@@ -43,6 +45,7 @@ use \App\Http\Models\Role\RoleType;
                         <td>{{ $user->created_at }}</td>
                         <td>{{ $user->roles()->pluck('name')->implode(' ') }}</td>{{-- Retrieve array of roles associated to a user and convert to string --}}
                         <td>
+                            <p><a href="{{ route('log.changes.by.user', $user->id) }}" class="btn btn-info pull-left" style="margin-right: 3px;">Посмотреть действия</a></p>
                             @if(!$user->hasRole(RoleType::ADMINISTRATOR))
                                 <p><a href="{{ route('users.edit', $user->id) }}" class="btn btn-info pull-left" style="margin-right: 3px;">Редактировать</a></p>
 

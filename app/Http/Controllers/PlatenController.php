@@ -93,7 +93,6 @@ class PlatenController extends Controller
             $request->input('platen_capacity')
         );
 
-
         $platens = $this->platenRepository->getAll();
         return view('platens.index')->with('platens', $platens);
 

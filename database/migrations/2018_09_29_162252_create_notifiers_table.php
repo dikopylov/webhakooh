@@ -17,7 +17,7 @@ class CreateNotifiersTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('type');
-            $table->boolean('is_delete')->default(false);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

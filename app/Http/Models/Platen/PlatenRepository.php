@@ -5,11 +5,18 @@ namespace App\Http\Models\Platen;
 
 class PlatenRepository
 {
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
     public function getAll()
     {
-        return Platen::where('is_delete', false)->get();
+        return Platen::all();
     }
 
+    /**
+     * @param array $data
+     * @return mixed
+     */
     public function create(array $data)
     {
         return Platen::create([
@@ -19,11 +26,20 @@ class PlatenRepository
         ]);
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function find($id)
     {
         return Platen::find($id);
     }
 
+    /**
+     * @param $id
+     * @param $title
+     * @param $capacity
+     */
     public function update($id, $title, $capacity)
     {
         $platen = $this->find($id);
@@ -32,10 +48,12 @@ class PlatenRepository
         $platen->save();
     }
 
+    /**
+     * @param $id
+     * @return int
+     */
     public function delete($id)
     {
-        $platen = $this->find($id);
-        $platen->is_delete = true;
-        $platen->save();
+        return Platen::destroy($id);
     }
 }

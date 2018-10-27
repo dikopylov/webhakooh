@@ -20,11 +20,11 @@ class CreateUsersTable extends Migration
             $table->string('first_name');
             $table->string('patronymic');
             $table->string('second_name');
-            $table->unsignedInteger('invitation_key')->unique();
+            $table->unsignedInteger('invitation_key_id')->unique();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('phone')->unique();
-            $table->boolean('is_delete')->default(false);
+            $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
         });

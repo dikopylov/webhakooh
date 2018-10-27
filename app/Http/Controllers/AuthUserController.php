@@ -3,19 +3,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Models\User\UserRepository;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Models\User\User;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 class AuthUserController extends Controller
 {
     /**
-     * AuthUserController constructor.
+     * @var UserRepository
      */
-    public function __construct()
+    private $userRepository;
+
+    public function __construct(UserRepository $userRepository)
     {
+        $this->userRepository = $userRepository;
         $this->middleware('auth');
     }
 
@@ -64,6 +66,10 @@ class AuthUserController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @return $this|\Illuminate\Http\JsonResponse
+     */
     public function updateProfile(Request $request)
     {
         $requestData = $request->All();
@@ -72,7 +78,7 @@ class AuthUserController extends Controller
         if ($validator->fails()) {
             return response()->json(array('error' => $validator->getMessageBag()->toArray()), 400);
         } else {
-            $user = User::find(Auth::id());
+            $user = $this->userRepository->find(Auth::id());
 
             $user->email = $requestData['email'];
             $user->first_name = $requestData['first_name'];
@@ -86,7 +92,10 @@ class AuthUserController extends Controller
         return view('administration.home')->with('user', $user);
     }
 
-
+    /**
+     * @param Request $request
+     * @return $this|\Illuminate\Http\JsonResponse
+     */
     public function updatePassword(Request $request)
     {
         $requestData = $request->All();
@@ -97,8 +106,7 @@ class AuthUserController extends Controller
         } else {
             $currentPassword = Auth::User()->password;
             if (\Hash::check($requestData['current_password'], $currentPassword)) {
-                $userId = Auth::User()->id;
-                $user = User::find($userId);
+                $user = $this->userRepository->find(Auth::User()->id);
                 $user->password = \Hash::make($requestData['password']);;
                 $user->save();
                 return view('administration.home')->with('user', $user);
@@ -117,13 +125,7 @@ class AuthUserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::findOrFail($id);
-        $user->is_delete = 1;
-        $user->save();
-        if(\Auth::user()->id === $user->id)
-        {
-            \Auth::logout();
-        }
+        $this->userRepository->delete($id);
         return redirect()->route('users.index');
     }
 }
