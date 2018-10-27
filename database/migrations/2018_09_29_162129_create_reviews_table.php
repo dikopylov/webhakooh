@@ -17,7 +17,7 @@ class CreateReviewsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('client_id');
             $table->text('content');
-            $table->boolean('is_delete')->default(false);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

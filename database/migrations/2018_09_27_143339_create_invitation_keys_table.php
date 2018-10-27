@@ -17,8 +17,7 @@ class CreateInvitationKeysTable extends Migration
             $table->increments('id');
             $table->string('key')->unique();
             $table->unsignedInteger('author_id');
-            $table->boolean('is_delete')->default(false);
-            $table->boolean('is_used')->default(false);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

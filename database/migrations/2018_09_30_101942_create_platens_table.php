@@ -17,7 +17,7 @@ class CreatePlatensTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->unsignedTinyInteger('capacity');
-            $table->boolean('is_delete')->default(false);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
