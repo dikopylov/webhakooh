@@ -7,6 +7,7 @@ use App\Http\Models\User\UserRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class AuthUserController extends Controller
 {
@@ -91,23 +92,29 @@ class AuthUserController extends Controller
 
     public function updatePassword(Request $request)
     {
-        $requestData = $request->All();
-        $validator = $this->validatePassword($requestData);
+        $validator = $this->validate($request, [
+            'current_password' => 'required',
+            'password' => 'required|string|min:6|confirmed',
+            'password_confirmation' => 'required|string|min:6',
+        ]);
 
-        if ($validator->fails()) {
-            return response()->json(array('error' => $validator->getMessageBag()->toArray()), 400);
-        } else {
-            $currentPassword = Auth::User()->password;
-            if (\Hash::check($requestData['current_password'], $currentPassword)) {
-                $user = $this->userRepository->find(Auth::User()->id);
-                $user->password = \Hash::make($requestData['password']);;
-                $user->save();
-                return view('administration.home')->with('user', $user);
-            } else {
-                $error = array('current_password' => 'Please enter correct current password');
-                return response()->json(array('error' => $error), 400);
-            }
-        }
+//        if ($validator->fails()) {
+////            return response()->json(array('error' => $validator->getMessageBag()->toArray()), 400);
+//        } else {
+//            $currentPassword = Auth::User()->password;
+//            if (\Hash::check($requestData['current_password'], $currentPassword)) {
+//                $user = $this->userRepository->find(Auth::User()->id);
+//                $user->password = \Hash::make($requestData['password']);;
+//                $user->save();
+//                return view('administration.home')->with('user', $user);
+//            } else {
+//                $error = array('current_password' => 'Please enter correct current password');
+//                return response()->json(array('error' => $error), 400);
+//            }
+//        }
+
+//        dd($validator);
+        return redirect()->route('edit/password')->withErrors(['error' => 'current_password']);
     }
 
     /**

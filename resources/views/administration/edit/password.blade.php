@@ -22,7 +22,6 @@
 
                                 <div class="col-md-6">
                                     <input id="current_password" type="password" class="form-control{{ $errors->has('current_password') ? ' is-invalid' : '' }}" name="current_password" required>
-
                                     @if ($errors->has('current_password'))
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('current_password') }}</strong>
