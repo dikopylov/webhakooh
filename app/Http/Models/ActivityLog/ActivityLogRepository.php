@@ -3,13 +3,9 @@
 
 namespace App\Http\Models\ActivityLog;
 
-use Illuminate\Database\Eloquent\Model;
-use Spatie\Activitylog\Traits\LogsActivity;
 
-class ActivityLogRepository extends Model
+class ActivityLogRepository
 {
-    use LogsActivity;
-
     public function getAll()
     {
         return Activity::all();
@@ -18,6 +14,11 @@ class ActivityLogRepository extends Model
     public function last()
     {
         return Activity::all()->last();
+    }
+
+    public function findById($id)
+    {
+        return Activity::where('id', $id)->get();
     }
 
 }

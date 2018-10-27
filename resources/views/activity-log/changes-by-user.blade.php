@@ -8,7 +8,7 @@ use \App\Http\Models\Role\RoleType;
 @section('content')
 
     <div class="col-lg-10 col-lg-offset-1">
-        <h1><i class="fa fa-users"></i>Логи
+        <h1><i class="fa fa-users"></i>Просмотр действий пользователя {{ $user->login }}
         </h1>
         <hr>
         <div class="table-responsive">
@@ -25,7 +25,7 @@ use \App\Http\Models\Role\RoleType;
                 </thead>
 
                 <tbody>
-                @foreach ($logs as $log)
+                @foreach ($user->activity as $log)
                     <tr>
                         <td>{{ $log->log_name }}</td>
                         <td>{{ $log->description }}</td>

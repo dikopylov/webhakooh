@@ -22,6 +22,9 @@ Route::get('/invitation-key', 'InvitationController@showInvitationKeyForm')->nam
 Route::post('/create-key', 'InvitationController@createKey')->name('create-key');
 
 Route::get('/logs', 'ActivityLogController@index')->name('logs');
+Route::get('/logs/{id}', 'ActivityLogController@showChanges')->name('log.changes');
+Route::get('/logs/user/{id}', 'ActivityLogController@showChangesByUser')->name('log.changes.by.user');
+
 
 Route::resources(
     [
