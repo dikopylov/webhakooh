@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use \App\Http\Models\InvitationKey\InvitationKey;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,6 +14,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(RoleTableSeeder::class);
         $this->call(UsersTableSeeder::class);
+        $this->call(InvitationKeysTableSeeder::class);
 
     }
 }
