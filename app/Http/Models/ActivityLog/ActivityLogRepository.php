@@ -11,15 +11,7 @@ class ActivityLogRepository
      */
     public function getAll()
     {
-        return Activity::all();
-    }
-
-    /**
-     * @return mixed
-     */
-    public function last()
-    {
-        return Activity::all()->last();
+        return Activity::all()->sortByDesc('created_at');
     }
 
     /**
@@ -28,7 +20,7 @@ class ActivityLogRepository
      */
     public function findById($id)
     {
-        return Activity::where('id', $id)->get();
+        return Activity::where('id', $id)->get()->sortByDesc('created_at');
     }
 
 }
