@@ -40,7 +40,7 @@ class ActivityLogController extends Controller
 
     public function showChangesByUser($id)
     {
-        $user = $this->userRepository->findOrFail($id);
+        $user = $this->userRepository->find($id);
 
         return view('activity-log.changes-by-user')->with('user', $user);
     }

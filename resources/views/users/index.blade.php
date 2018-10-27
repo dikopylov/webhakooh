@@ -20,6 +20,7 @@ use \App\Http\Models\Role\RoleType;
 
                 <thead>
                 <tr>
+                    <th>ID</th>
                     <th>Логин</th>
                     <th>Имя</th>
                     <th>Фамилия</th>
@@ -35,6 +36,7 @@ use \App\Http\Models\Role\RoleType;
                 @foreach ($users as $user)
                     <tr>
 
+                        <td>{{ $user->id }}</td>
                         <td>{{ $user->login }}</td>
                         <td>{{ $user->first_name }}</td>
                         <td>{{ $user->second_name }}</td>

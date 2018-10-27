@@ -34,7 +34,7 @@ class UsersManagementSystemController extends Controller
      */
     public function index()
     {
-        $users = $this->userRepository->getAllWithoutUser(\Auth::id());
+        $users = $this->userRepository->getAll(\Auth::id());
         return view('users.index')->with('users', $users);
     }
 
@@ -58,7 +58,7 @@ class UsersManagementSystemController extends Controller
     public function edit($id)
     {
 
-        $user = $this->userRepository->findOrFail($id);
+        $user = $this->userRepository->find($id);
         $roles = $this->roleRepository->get();
 
         if ($this->roleRepository->hasRole($user,RoleType::ADMINISTRATOR))
@@ -81,7 +81,7 @@ class UsersManagementSystemController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = $this->userRepository->findOrFail($id);
+        $user = $this->userRepository->find($id);
 
         $roles = $request['roles'];
 
@@ -102,14 +102,12 @@ class UsersManagementSystemController extends Controller
      */
     public function destroy($id)
     {
-        $user = $this->userRepository->findOrFail($id);
-        $user->is_delete = 1;
-        $user->save();
+        $this->userRepository->delete($id);
 
-        if(\Auth::user()->id === $user->id)
-        {
-            \Auth::logout();
-        }
+//        if(\Auth::user()->id === $user->id)
+//        {
+//            \Auth::logout();
+//        }
         return redirect()->route('users.index');
     }
 }

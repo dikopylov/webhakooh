@@ -4,20 +4,22 @@ namespace App\Http\Models\Platen;
 
 use App\Http\Models\TranslateActivityLog\RuEvent;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class Platen extends Model
 {
-    use LogsActivity;
+    use LogsActivity, SoftDeletes;
+
+    protected $dates = ['deleted_at'];
 
     protected $fillable = array(
-        'title', 'capacity', 'is_delete'
+        'title', 'capacity'
     );
 
     protected static $logAttributes = [
         'title',
         'capacity',
-        'is_delete'
     ];
 
     protected static $logName = 'Столы';

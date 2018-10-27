@@ -4,6 +4,7 @@ namespace App\Http\Models\User;
 
 use App\Http\Models\ActivityLog\Activity;
 use App\Http\Models\TranslateActivityLog\RuEvent;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -13,9 +14,9 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use Notifiable, HasRoles, LogsActivity, CausesActivity;
+    use Notifiable, SoftDeletes, HasRoles, LogsActivity, CausesActivity;
 
-
+    protected $dates = ['deleted_at'];
     /**
      * The attributes that are mass assignable.
      *

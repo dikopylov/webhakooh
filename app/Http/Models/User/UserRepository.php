@@ -32,18 +32,18 @@ class UserRepository
      * @param int $id
      * @return Collection
      */
-    public function getAllWithoutUser(int $id) : Collection
+    public function getAll(int $id) : Collection
     {
-        return User::where('is_delete', false)->where('id', '<>', $id)->get();
+        return User::where('id', '<>', $id)->get();
     }
 
     /**
      * @param int $id
      * @return mixed
      */
-    public function findOrFail(int $id)
+    public function find(int $id)
     {
-        return User::findOrFail($id);
+        return User::find($id);
     }
 
     /**
@@ -66,9 +66,14 @@ class UserRepository
             'invitation_key_id' => $inviteKeyId,
         ]);
 
-        $this->invitationKeyRepository->setKeyIsUsed($data['invitation-key']);
+        $this->invitationKeyRepository->delete($inviteKeyId);
         $this->roleRepository->assignRole($user, RoleType::MANAGER);
 
         return $user;
+    }
+
+    public function delete($id)
+    {
+        return User::destroy($id);
     }
 }

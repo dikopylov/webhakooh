@@ -7,7 +7,7 @@ class PlatenRepository
 {
     public function getAll()
     {
-        return Platen::where('is_delete', false)->get();
+        return Platen::all();
     }
 
     public function create(array $data)
@@ -34,8 +34,6 @@ class PlatenRepository
 
     public function delete($id)
     {
-        $platen = $this->find($id);
-        $platen->is_delete = true;
-        $platen->save();
+        return Platen::destroy($id);
     }
 }
