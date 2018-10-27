@@ -25,7 +25,7 @@ class InvitationController extends Controller
      */
     private function getKey()
     {
-        if (empty($this->invitationKeyRepository->getUnusedKey()))
+        if ($this->invitationKeyRepository->getUnusedKey() === null)
         {
             $invitationKey = $this->createKey();
 
