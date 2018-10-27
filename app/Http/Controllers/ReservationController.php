@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Models\Platen\PlatenRepository;
 use App\Http\Models\Reservation\ReservationRepository;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ReservationController extends Controller
@@ -31,7 +32,8 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        dd(23);
+        $reservations = $this->reservationRepository->getAll();
+        return view('reservation.index')->with('reservations', $reservations);
     }
 
     /**
@@ -41,7 +43,10 @@ class ReservationController extends Controller
      */
     public function create()
     {
-        dd(23);
+        $platens = $this->platenRepository->getAll();
+        return view('reservation.create', [
+            'platens' => $platens,
+        ]);
     }
 
     /**
@@ -51,8 +56,13 @@ class ReservationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   $minDate = Carbon::now()->toDateString();
+        $this->validate($request, [
+            'platen-id' => 'required|integer',
+            'visit-date' => "required|min:{$minDate}",
+            'persons-count' => 'required|max:65535'
+        ]);
+        dd(34);
     }
 
     /**

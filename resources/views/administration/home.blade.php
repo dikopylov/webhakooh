@@ -23,6 +23,8 @@
                             <p><a href="{{ URL::route('platens.index') }}" class="btn btn-success">
                                     Управление столами </a></p>
                         @endif
+                            <p><a href="{{ URL::route('reservation.index') }}" class="btn btn-success">
+                                    Все брони </a></p>
                     </div>
                 </div>
             </div>
