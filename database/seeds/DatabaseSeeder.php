@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use \App\Http\Models\InvitationKey\InvitationKey;
 
 class DatabaseSeeder extends Seeder
 {
