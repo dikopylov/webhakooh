@@ -2,6 +2,7 @@
 
 namespace App\Http\Models\User;
 
+use App\Http\Models\ActivityLog\Activity;
 use App\Http\Models\Translate\RuEvent;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -40,8 +41,8 @@ class User extends Authenticatable
         return "Пользователь {$eventName}";
     }
 
-    public function log()
+    public function activity()
     {
-        return $this->hasMany('App\Http\Models\ActivityLog\Activity', 'causer_id');
+        return $this->hasMany(Activity::class, 'causer_id');
     }
 }

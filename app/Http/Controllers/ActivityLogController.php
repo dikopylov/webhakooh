@@ -28,8 +28,7 @@ class ActivityLogController extends Controller
         $logs = $this->activityLogRepository->getAll();
 
         $last = $this->activityLogRepository->last();
-        dd($last->user);
-        dd($logs->user);
+        dd($last->user());
         return view('activity-log.index')->with('logs', $logs);
     }
 }
