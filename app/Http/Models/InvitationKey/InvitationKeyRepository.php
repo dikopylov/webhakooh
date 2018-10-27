@@ -14,11 +14,18 @@ class InvitationKeyRepository
         return InvitationKey::where('key', $key)->first()['id'];
     }
 
+    /**
+     * @return mixed
+     */
     public function getUnusedKey()
     {
         return InvitationKey::first();
     }
 
+    /**
+     * @param $id
+     * @return int
+     */
     public function delete($id)
     {
         return InvitationKey::destroy($id);

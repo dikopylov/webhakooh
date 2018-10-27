@@ -4,9 +4,9 @@
 namespace App\Http\Models\TranslateActivityLog;
 
 
-abstract class RuEvent
+abstract class EventsTranslator
 {
-    const ruEvent = [
+    const ru = [
         'created' => 'Создан',
         'updated' => 'Обновлен',
         'deleted' => 'Удален'

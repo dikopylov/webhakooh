@@ -47,7 +47,6 @@ class UserRepository
     }
 
     /**
-     * @TODO Class 'SplEnum' not found 57 str
      * @param array $data
      * @return User
      */
@@ -72,6 +71,10 @@ class UserRepository
         return $user;
     }
 
+    /**
+     * @param $id
+     * @return int
+     */
     public function delete($id)
     {
         return User::destroy($id);

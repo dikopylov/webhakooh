@@ -3,7 +3,7 @@
 namespace App\Http\Models\User;
 
 use App\Http\Models\ActivityLog\Activity;
-use App\Http\Models\TranslateActivityLog\RuEvent;
+use App\Http\Models\TranslateActivityLog\EventsTranslator;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -43,12 +43,19 @@ class User extends Authenticatable
 
     protected static $logName = 'Пользователи';
 
+    /**
+     * @param string $eventName
+     * @return string
+     */
     public function getDescriptionForEvent(string $eventName): string
     {
-        $eventName = RuEvent::ruEvent[$eventName];
+        $eventName = EventsTranslator::ru[$eventName];
         return "{$eventName} :causer.login";
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function activity()
     {
         return $this->hasMany(Activity::class, 'causer_id');

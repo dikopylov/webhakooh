@@ -103,11 +103,6 @@ class UsersManagementSystemController extends Controller
     public function destroy($id)
     {
         $this->userRepository->delete($id);
-
-//        if(\Auth::user()->id === $user->id)
-//        {
-//            \Auth::logout();
-//        }
         return redirect()->route('users.index');
     }
 }

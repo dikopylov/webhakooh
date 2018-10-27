@@ -66,6 +66,10 @@ class AuthUserController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @return $this|\Illuminate\Http\JsonResponse
+     */
     public function updateProfile(Request $request)
     {
         $requestData = $request->All();
@@ -88,7 +92,10 @@ class AuthUserController extends Controller
         return view('administration.home')->with('user', $user);
     }
 
-
+    /**
+     * @param Request $request
+     * @return $this|\Illuminate\Http\JsonResponse
+     */
     public function updatePassword(Request $request)
     {
         $requestData = $request->All();
