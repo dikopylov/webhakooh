@@ -23,7 +23,6 @@
                             <p><a href="{{ URL::route('platens.index') }}" class="btn btn-success">
                                     Управление столами </a></p>
                         @endif
-                        <p>Something written...</p>
                     </div>
                 </div>
             </div>

@@ -25,13 +25,14 @@ class InvitationController extends Controller
      */
     private function getKey()
     {
-        if ($this->invitationKeyRepository->getUnusedKey() == null)
+        if ($this->invitationKeyRepository->getUnusedKey() === null)
         {
-            $invitationKey = $this->invitationKeyRepository->getUnusedKey();
+            $invitationKey = $this->createKey();
+
         }
         else
         {
-            $invitationKey = $this->createKey();
+            $invitationKey = $this->invitationKeyRepository->getUnusedKey();
         }
 
         return $invitationKey;
