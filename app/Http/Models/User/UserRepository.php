@@ -46,6 +46,26 @@ class UserRepository
         return User::find($id);
     }
 
+    public function updatePassword(int $id, string $password)
+    {
+        $user = $this->find($id);
+        $user->password = \Hash::make($password);;
+        $user->save();
+    }
+
+    public function updateProfile(int $id, array $data)
+    {
+        $user = $this->find($id);
+
+        $user->email = $data['email'];
+        $user->first_name = $data['first_name'];
+        $user->patronymic = $data['patronymic'];
+        $user->second_name = $data['second_name'];
+        $user->phone = $data['phone'];
+
+        $user->save();
+    }
+
     /**
      * @TODO Class 'SplEnum' not found 57 str
      * @param array $data
