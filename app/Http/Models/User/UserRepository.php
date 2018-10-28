@@ -32,22 +32,21 @@ class UserRepository
      * @param int $id
      * @return Collection
      */
-    public function getAllWithoutUser(int $id) : Collection
+    public function getAll(int $id) : Collection
     {
-        return User::where('is_delete', false)->where('id', '<>', $id)->get();
+        return User::where('id', '<>', $id)->get();
     }
 
     /**
      * @param int $id
      * @return mixed
      */
-    public function findOrFail(int $id)
+    public function find(int $id)
     {
-        return User::findOrFail($id);
+        return User::find($id);
     }
 
     /**
-     * @TODO Class 'SplEnum' not found 57 str
      * @param array $data
      * @return User
      */
@@ -66,9 +65,18 @@ class UserRepository
             'invitation_key' => $inviteKeyId,
         ]);
 
-        $this->invitationKeyRepository->setKeyIsUsed($data['invitation-key']);
+        $this->invitationKeyRepository->delete($inviteKeyId);
         $this->roleRepository->assignRole($user, RoleType::MANAGER);
 
         return $user;
+    }
+
+    /**
+     * @param $id
+     * @return int
+     */
+    public function delete($id)
+    {
+        return User::destroy($id);
     }
 }

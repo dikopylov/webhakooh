@@ -21,8 +21,8 @@ class CreateReservationsTable extends Migration
             $table->unsignedInteger('client_id')->nullable();
             $table->unsignedSmallInteger('count_persons');
             $table->text('comment')->nullable();
-            $table->unsignedSmallInteger('notify_id')->nullable();
-            $table->boolean('is_delete')->default(false);
+            $table->unsignedSmallInteger('notify_id');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

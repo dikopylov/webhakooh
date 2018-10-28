@@ -11,54 +11,36 @@ class InvitationKeyRepository
      */
     public function getIdByCode(string $key)
     {
-        return InvitationKey::where('key', $key)->where('is_used', false)->first()['id'];
-    }
-
-    public function getInvitationById(int $id)
-    {
-        return InvitationKey::find($id)->where('is_used', false)->first();
-    }
-
-    public function getFirst(string $key)
-    {
-        return InvitationKey::where('key', $key)->first();
-    }
-
-    public function getUnusedKey()
-    {
-        return InvitationKey::where('is_used', false)->first();
-    }
-
-    public function setKeyIsUsed($key)
-    {
-        if($invitationKey = $this->getFirst($key))
-        {
-            $invitationKey->is_used = 1;
-            $invitationKey->save();
-
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-
+        return InvitationKey::where('key', $key)->first()['id'];
     }
 
     /**
-     * @return InvitationKey|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return mixed
+     */
+    public function getUnusedKey()
+    {
+        return InvitationKey::first();
+    }
+
+    /**
+     * @param $id
+     * @return int
+     */
+    public function delete($id)
+    {
+        return InvitationKey::destroy($id);
+    }
+
+    /**
+     * @return mixed
      * @throws \Exception
      */
-    public function createKey()
+    public function create()
     {
-        $invitationKey = new InvitationKey();
-
-        $invitationKey->key = bin2hex(random_bytes(16));
-        $invitationKey->author_id = \Auth::user()->id;
-
-        $invitationKey->save();
-
-        return $invitationKey;
+        return InvitationKey::create([
+            'key' => bin2hex(random_bytes(16)),
+            'author_id' => \Auth::id(),
+        ]);
 
     }
 }

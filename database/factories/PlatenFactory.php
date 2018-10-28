@@ -1,7 +1,7 @@
 <?php
 
 use Faker\Generator as Faker;
-use App\Http\Models\User\User;
+use App\Http\Models\Platen\Platen;
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -13,15 +13,9 @@ use App\Http\Models\User\User;
 |
 */
 
-$factory->define(User::class, function (Faker $faker) {
+$factory->define(Platen::class, function (Faker $faker) {
     return [
-        'login' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'password' => Hash::make('qwerty'), // secret
-        'first_name' => $faker->name,
-        'patronymic' => $faker->name,
-        'second_name' => $faker->name,
-        'invitation_key_id' => $faker->unique()->numberBetween(1),
-        'phone' => $faker->phoneNumber,
+        'title' => $faker->title,
+        'capacity' => $faker->numberBetween(1, 50)
     ];
 });

@@ -13,6 +13,7 @@
 
                 <thead>
                 <tr>
+                    <th>ID</th>
                     <th>Название</th>
                     <th>Количество мест</th>
                     <th>Действия</th>
@@ -23,6 +24,7 @@
                 @foreach ($platens as $platen)
                     <tr>
 
+                        <td>{{ $platen->id }}</td>
                         <td>{{ $platen->title }}</td>
                         <td>{{ $platen->capacity }}</td>
                         <td>
