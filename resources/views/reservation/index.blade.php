@@ -18,11 +18,12 @@
                 </tr>
                 </thead>
                 <tbody>
+                <?php /** @var \App\Http\Models\Reservation\Reservation $reservation */  ?>
                 @foreach ($reservations as $reservation)
                     <tr>
                         <td><a href="{{ route('reservation.show', $reservation->id) }}">#{{ $reservation->id }}</a></td>
                         <td>{{ $reservation->platen->title }}</td>
-                        <td>{{ $reservation->countPersons }}</td>
+                        <td>{{ $reservation->count_persons }}</td>
                         <td>{{ $reservation->date }}</td>
                         <td>{{ $reservation->reservationStatus->title }}</td>
                         <td>

@@ -4,6 +4,7 @@
 namespace App\Http\Models\Reservation;
 
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 
 class ReservationRepository
@@ -14,17 +15,12 @@ class ReservationRepository
      */
     public function getAll() : Collection
     {
-        return Reservation::where('is_delete', false)->get();
+        return Reservation::all();
     }
 
-    public function create(array $data)
+    public function save(Reservation $reservation)
     {
-        return Reservation::create([
-            'platen_id' => $data['platen-id'],
-            'date' => $data['date'],
-            'status_id' => $data['status-id'],
-            'count_persons' => $data['status-id']
-        ]);
+        return $reservation->save();
     }
 
     /**
@@ -45,8 +41,6 @@ class ReservationRepository
 
     public function delete($id)
     {
-        $reservation = $this->find($id);
-        $reservation->is_delete = true;
-        $reservation->save();
+        return Reservation::destroy($id);
     }
 }

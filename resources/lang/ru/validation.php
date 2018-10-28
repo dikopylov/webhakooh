@@ -136,6 +136,9 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'visit-date' => [
+            'min'   => 'Посещение не может быть в прошлом.'
+        ]
     ],
 
     /*

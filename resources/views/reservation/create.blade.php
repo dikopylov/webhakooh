@@ -33,7 +33,7 @@
                                 <div class="form-group row">
                                     <label for="persons-count" class="col-md-4 col-form-label text-md-right">{{ __('Количество гостей') }}</label>
                                     <div class="col-md-6">
-                                        <input id="persons-count" type="number" class="form-control{{ $errors->has('persons-count') ? ' is-invalid' : '' }}" name="persons-count" value="{{ old('persons-count') }}" required>
+                                        <input id="persons-count" type="number" min="1" class="form-control{{ $errors->has('persons-count') ? ' is-invalid' : '' }}" name="persons-count" value="{{ old('persons-count') }}" required>
                                         @if ($errors->has('persons-count'))
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $errors->first('persons-count') }}</strong>
