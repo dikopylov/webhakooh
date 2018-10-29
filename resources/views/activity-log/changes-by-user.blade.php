@@ -1,6 +1,3 @@
-<?php
-use \App\Http\Models\Role\RoleType;
-?>
 @extends('layouts.app')
 
 @section('title', '| Activity log')

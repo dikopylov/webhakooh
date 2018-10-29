@@ -4,11 +4,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Models\User\UserRepository;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class AuthUserController extends Controller
 {
@@ -48,15 +45,19 @@ class AuthUserController extends Controller
         $requestData = $request->request->all();
 
         $validator = \Validator::make($requestData, [
-            'email' => //[
-                'required|string|email|max:255',
-//                Rule::unique('users')->ignore($request->user()->id)
-//            ],
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                Rule::unique('users')->ignore($request->user()->id)
+            ],
             'first_name' => 'required|string|max:255',
             'patronymic' => 'string|max:255',
             'second_name' => 'required|string|max:255',
             'phone' => [
-                'required|regex:/[0-9]{5,11}/',
+                'required',
+                'regex:/[0-9]{5,11}/',
                 Rule::unique('users')->ignore($request->user()->id)
             ],
         ]);
@@ -64,12 +65,12 @@ class AuthUserController extends Controller
 
         if ($validator->fails())
         {
-            return redirect()->route('edit/profile')->with('errors', $validator->errors());
+            return redirect('edit/profile')->withErrors($validator);
         }
 
         $this->userRepository->updateProfile($request->user()->id, $requestData);
 
-        return view('administration.home')->with('user', $request->user());
+        return view('administration.home')->with('user', $this->userRepository->find($request->user()->id));
     }
 
     /**
@@ -90,15 +91,15 @@ class AuthUserController extends Controller
 
         if ($validator->fails())
         {
-            return redirect()->route('edit/password')->with('errors', $validator->errors());
+            return redirect('edit/password')->withErrors($validator);
         }
 
         if (\Hash::check($requestData['current_password'], $currentPassword)) {
             $this->userRepository->updatePassword($request->user()->id, $requestData['password']);
             return view('administration.home')->with('user', $request->user());
         } else {
-            $error = $validator->errors()->add('current_password', 'Указан неверный пароль');
-            return redirect()->route('edit/password')->with('errors', $error);
+            $validator->errors()->add('current_password', 'Указан неверный пароль');
+            return redirect('edit/password')->withErrors($validator);
         }
     }
 
