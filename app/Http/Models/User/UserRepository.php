@@ -62,7 +62,7 @@ class UserRepository
             'patronymic' => $data['patronymic'],
             'second_name' => $data['second_name'],
             'phone' => $data['phone'],
-            'invitation_key' => $inviteKeyId,
+            'invitation_key_id' => $inviteKeyId,
         ]);
 
         $this->invitationKeyRepository->delete($inviteKeyId);
