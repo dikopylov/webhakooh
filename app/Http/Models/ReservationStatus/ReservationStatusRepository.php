@@ -14,4 +14,9 @@ class ReservationStatusRepository
     {
         return ReservationStatus::where('title', $title)->first()['id'];
     }
+
+    public function getAll()
+    {
+        return ReservationStatus::all();
+    }
 }

@@ -105,9 +105,12 @@ class ReservationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(int $id)
     {
-        dd(23);
+        $platens = $this->platenRepository->getAll();
+        $statuses = $this->reservationStatusRepository->getAll();
+        $reservation = $this->reservationRepository->find($id);
+        return view('reservation.edit', compact(['platens', 'statuses', 'reservation']));
     }
 
     /**
@@ -117,9 +120,26 @@ class ReservationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     {
-        dd(23);
+        $minDate = Carbon::now()->timestamp;
+        $request['visit-date'] = Carbon::parse($request['visit-date'])->timestamp;
+        $this->validate($request, [
+            'platen-id' => 'required|integer',
+            'visit-date' => "required|numeric|min:{$minDate}",
+            'persons-count' => 'required|max:65535'
+        ]);
+
+        $reservation = $this->reservationRepository->find($id);
+        $reservation->platen_id = $request['platen-id'];
+        $reservation->date = Carbon::createFromTimestamp($request['visit-date'])->toDateTimeString();
+        $reservation->status_id = $request['status-id'];
+        $reservation->count_persons = $request['persons-count'];
+        $this->reservationRepository->save($reservation);
+        $reservations = $this->reservationRepository->getAll();
+
+        return redirect()->route('reservation.index')
+            ->with('reservations', $reservations);
     }
 
     /**
@@ -128,8 +148,12 @@ class ReservationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
-        dd(23);
+        $this->reservationRepository->delete($id);
+        $reservations = $this->platenRepository->getAll();
+
+        return redirect()->route('reservation.index')
+            ->with('reservations', $reservations);
     }
 }

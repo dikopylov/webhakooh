@@ -32,13 +32,6 @@ class ReservationRepository
         return Reservation::find($id);
     }
 
-
-    public function update($id, array $data)
-    {
-        $reservation = $this->find($id);
-        dd($reservation);
-    }
-
     public function delete($id)
     {
         return Reservation::destroy($id);
