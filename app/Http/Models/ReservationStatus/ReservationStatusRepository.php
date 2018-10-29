@@ -2,6 +2,7 @@
 
 namespace App\Http\Models\ReservationStatus;
 
+use \Illuminate\Database\Eloquent\Collection;
 
 class ReservationStatusRepository
 {
@@ -15,6 +16,9 @@ class ReservationStatusRepository
         return ReservationStatus::where('title', $title)->first()['id'];
     }
 
+    /**
+     * @return Collection
+     */
     public function getAll()
     {
         return ReservationStatus::all();

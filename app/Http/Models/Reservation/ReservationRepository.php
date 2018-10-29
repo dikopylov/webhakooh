@@ -18,6 +18,10 @@ class ReservationRepository
         return Reservation::all();
     }
 
+    /**
+     * @param Reservation $reservation
+     * @return bool
+     */
     public function save(Reservation $reservation)
     {
         return $reservation->save();
@@ -32,6 +36,10 @@ class ReservationRepository
         return Reservation::find($id);
     }
 
+    /**
+     * @param $id
+     * @return int
+     */
     public function delete($id)
     {
         return Reservation::destroy($id);

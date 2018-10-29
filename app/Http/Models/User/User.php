@@ -24,7 +24,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'login', 'password', 'first_name', 'patronymic',
-        'second_name', 'email', 'phone', 'invitation_key'
+        'second_name', 'email', 'phone', 'invitation_key_id'
     ];
 
     protected static $logAttributes = [
