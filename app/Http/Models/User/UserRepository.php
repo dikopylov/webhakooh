@@ -24,21 +24,23 @@ class UserRepository
 
     public function __construct(RoleRepository $roleRepository, InvitationKeyRepository $invitationKeyRepository)
     {
-        $this->roleRepository = $roleRepository;
+        $this->roleRepository          = $roleRepository;
         $this->invitationKeyRepository = $invitationKeyRepository;
     }
 
     /**
      * @param int $id
+     *
      * @return Collection
      */
-    public function getAll(int $id) : Collection
+    public function getAll(int $id): Collection
     {
         return User::where('id', '<>', $id)->get();
     }
 
     /**
      * @param int $id
+     *
      * @return mixed
      */
     public function find(int $id)
@@ -46,29 +48,37 @@ class UserRepository
         return User::find($id);
     }
 
+    /**
+     * @param int    $id
+     * @param string $password
+     */
     public function updatePassword(int $id, string $password)
     {
-        $user = $this->find($id);
+        $user           = $this->find($id);
         $user->password = \Hash::make($password);;
         $user->save();
     }
 
+    /**
+     * @param int   $id
+     * @param array $data
+     */
     public function updateProfile(int $id, array $data)
     {
         $user = $this->find($id);
 
-        $user->email = $data['email'];
-        $user->first_name = $data['first_name'];
-        $user->patronymic = $data['patronymic'];
+        $user->email       = $data['email'];
+        $user->first_name  = $data['first_name'];
+        $user->patronymic  = $data['patronymic'];
         $user->second_name = $data['second_name'];
-        $user->phone = $data['phone'];
+        $user->phone       = $data['phone'];
 
         $user->save();
     }
 
     /**
-     * @TODO Class 'SplEnum' not found 57 str
      * @param array $data
+     *
      * @return User
      */
     public function create(array $data)
@@ -76,13 +86,13 @@ class UserRepository
         $inviteKeyId = $this->invitationKeyRepository->getIdByCode($data['invitation-key']);
 
         $user = User::create([
-            'login' => $data['login'],
-            'email' => $data['email'],
-            'password' => \Hash::make($data['password']),
-            'first_name' => $data['first_name'],
-            'patronymic' => $data['patronymic'],
-            'second_name' => $data['second_name'],
-            'phone' => $data['phone'],
+            'login'             => $data['login'],
+            'email'             => $data['email'],
+            'password'          => \Hash::make($data['password']),
+            'first_name'        => $data['first_name'],
+            'patronymic'        => $data['patronymic'],
+            'second_name'       => $data['second_name'],
+            'phone'             => $data['phone'],
             'invitation_key_id' => $inviteKeyId,
         ]);
 
@@ -92,6 +102,11 @@ class UserRepository
         return $user;
     }
 
+    /**
+     * @param $id
+     *
+     * @return int
+     */
     public function delete($id)
     {
         return User::destroy($id);

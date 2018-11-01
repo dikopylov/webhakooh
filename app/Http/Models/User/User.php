@@ -43,12 +43,20 @@ class User extends Authenticatable
 
     protected static $logName = 'Пользователи';
 
+    /**
+     * @param string $eventName
+     *
+     * @return string
+     */
     public function getDescriptionForEvent(string $eventName): string
     {
         $eventName = RuEvent::ruEvent[$eventName];
         return "{$eventName} :causer.login";
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function activity()
     {
         return $this->hasMany(Activity::class, 'causer_id');

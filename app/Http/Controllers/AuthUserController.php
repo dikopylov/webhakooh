@@ -38,6 +38,7 @@ class AuthUserController extends Controller
 
     /**
      * @param Request $request
+     *
      * @return $this|\Illuminate\Http\RedirectResponse
      */
     public function updateProfile(Request $request)
@@ -45,26 +46,25 @@ class AuthUserController extends Controller
         $requestData = $request->request->all();
 
         $validator = \Validator::make($requestData, [
-            'email' => [
+            'email'       => [
                 'required',
                 'string',
                 'email',
                 'max:255',
-                Rule::unique('users')->ignore($request->user()->id)
+                Rule::unique('users')->ignore($request->user()->id),
             ],
-            'first_name' => 'required|string|max:255',
-            'patronymic' => 'string|max:255',
+            'first_name'  => 'required|string|max:255',
+            'patronymic'  => 'string|max:255',
             'second_name' => 'required|string|max:255',
-            'phone' => [
+            'phone'       => [
                 'required',
                 'regex:/[0-9]{5,11}/',
-                Rule::unique('users')->ignore($request->user()->id)
+                Rule::unique('users')->ignore($request->user()->id),
             ],
         ]);
 
 
-        if ($validator->fails())
-        {
+        if ($validator->fails()) {
             return redirect('edit/profile')->withErrors($validator);
         }
 
@@ -75,6 +75,7 @@ class AuthUserController extends Controller
 
     /**
      * @param Request $request
+     *
      * @return $this|\Illuminate\Http\RedirectResponse
      */
     public function updatePassword(Request $request)
@@ -82,23 +83,25 @@ class AuthUserController extends Controller
         $requestData = $request->request->all();
 
         $validator = \Validator::make($requestData, [
-            'current_password' => 'required',
-            'password' => 'required|string|min:6|confirmed',
+            'current_password'      => 'required',
+            'password'              => 'required|string|min:6|confirmed',
             'password_confirmation' => 'required|string|min:6',
         ]);
 
         $currentPassword = $request->user()->password;
 
-        if ($validator->fails())
-        {
+        if ($validator->fails()) {
             return redirect('edit/password')->withErrors($validator);
         }
 
         if (\Hash::check($requestData['current_password'], $currentPassword)) {
             $this->userRepository->updatePassword($request->user()->id, $requestData['password']);
+
             return view('administration.home')->with('user', $request->user());
-        } else {
+        }
+        else {
             $validator->errors()->add('current_password', 'Указан неверный пароль');
+
             return redirect('edit/password')->withErrors($validator);
         }
     }
@@ -106,12 +109,14 @@ class AuthUserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         $this->userRepository->delete($id);
+
         return redirect()->route('users.index');
     }
 }
