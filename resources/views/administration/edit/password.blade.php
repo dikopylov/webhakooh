@@ -17,12 +17,17 @@
                         <form method="POST" action="{{ URL::route('edit/password') }}">
                             @csrf
 
+                            @if ($errors->has('current_password'))
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('current_password') }}</strong>
+                                    </span>
+                            @endif
+
                             <div class="form-group row">
                                 <label for="current_password" class="col-md-4 col-form-label text-md-right">{{ __('Текущий пароль') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="current_password" type="password" class="form-control{{ $errors->has('current_password') ? ' is-invalid' : '' }}" name="current_password" required>
-
                                     @if ($errors->has('current_password'))
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('current_password') }}</strong>

@@ -4,9 +4,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Models\User\UserRepository;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class AuthUserController extends Controller
 {
@@ -38,94 +37,87 @@ class AuthUserController extends Controller
     }
 
     /**
-     * @TODO исправить баг, что пользователь может вводит УЖЕ имеющие в базе телефон и имеил
-     * @param array $data
-     * @return \Illuminate\Contracts\Validation\Validator|\Illuminate\Validation\Validator
-     */
-    protected function validateProfile(array $data)
-    {
-        return Validator::make($data, [
-            'email' => 'required|string|email|max:255',
-            'first_name' => 'required|string|max:255',
-            'patronymic' => 'string|max:255',
-            'second_name' => 'required|string|max:255',
-            'phone' => 'required|regex:/[0-9]{5,11}/',
-        ]);
-    }
-
-    /**
-     * @param array $data
-     * @return \Illuminate\Contracts\Validation\Validator|\Illuminate\Validation\Validator
-     */
-    protected function validatePassword(array $data)
-    {
-        return Validator::make($data, [
-            'current_password' => 'required',
-            'password' => 'required|string|min:6|confirmed',
-            'password_confirmation' => 'required|string|min:6',
-        ]);
-    }
-
-    /**
      * @param Request $request
-     * @return $this|\Illuminate\Http\JsonResponse
+     *
+     * @return $this|\Illuminate\Http\RedirectResponse
      */
     public function updateProfile(Request $request)
     {
-        $requestData = $request->All();
-        $validator = $this->validateProfile($requestData);
+        $requestData = $request->request->all();
+
+        $validator = \Validator::make($requestData, [
+            'email'       => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                Rule::unique('users')->ignore($request->user()->id),
+            ],
+            'first_name'  => 'required|string|max:255',
+            'patronymic'  => 'string|max:255',
+            'second_name' => 'required|string|max:255',
+            'phone'       => [
+                'required',
+                'regex:/[0-9]{5,11}/',
+                Rule::unique('users')->ignore($request->user()->id),
+            ],
+        ]);
+
 
         if ($validator->fails()) {
-            return response()->json(array('error' => $validator->getMessageBag()->toArray()), 400);
-        } else {
-            $user = $this->userRepository->find(Auth::id());
-
-            $user->email = $requestData['email'];
-            $user->first_name = $requestData['first_name'];
-            $user->patronymic = $requestData['patronymic'];
-            $user->second_name = $requestData['second_name'];
-            $user->phone = $requestData['phone'];
-
-            $user->save();
+            return redirect('edit/profile')->withErrors($validator);
         }
 
-        return view('administration.home')->with('user', $user);
+        $this->userRepository->updateProfile($request->user()->id, $requestData);
+
+        return view('administration.home')->with('user', $this->userRepository->find($request->user()->id));
     }
 
     /**
      * @param Request $request
-     * @return $this|\Illuminate\Http\JsonResponse
+     *
+     * @return $this|\Illuminate\Http\RedirectResponse
      */
     public function updatePassword(Request $request)
     {
-        $requestData = $request->All();
-        $validator = $this->validatePassword($requestData);
+        $requestData = $request->request->all();
+
+        $validator = \Validator::make($requestData, [
+            'current_password'      => 'required',
+            'password'              => 'required|string|min:6|confirmed',
+            'password_confirmation' => 'required|string|min:6',
+        ]);
+
+        $currentPassword = $request->user()->password;
 
         if ($validator->fails()) {
-            return response()->json(array('error' => $validator->getMessageBag()->toArray()), 400);
-        } else {
-            $currentPassword = Auth::User()->password;
-            if (\Hash::check($requestData['current_password'], $currentPassword)) {
-                $user = $this->userRepository->find(Auth::User()->id);
-                $user->password = \Hash::make($requestData['password']);;
-                $user->save();
-                return view('administration.home')->with('user', $user);
-            } else {
-                $error = array('current_password' => 'Please enter correct current password');
-                return response()->json(array('error' => $error), 400);
-            }
+            return redirect('edit/password')->withErrors($validator);
+        }
+
+        if (\Hash::check($requestData['current_password'], $currentPassword)) {
+            $this->userRepository->updatePassword($request->user()->id, $requestData['password']);
+
+            return view('administration.home')->with('user', $request->user());
+        }
+        else {
+            $validator->errors()->add('current_password', 'Указан неверный пароль');
+
+
+            return redirect('edit/password')->withErrors($validator);
         }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         $this->userRepository->delete($id);
+
         return redirect()->route('users.index');
     }
 }

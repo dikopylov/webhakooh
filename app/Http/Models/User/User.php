@@ -45,6 +45,7 @@ class User extends Authenticatable
 
     /**
      * @param string $eventName
+     *
      * @return string
      */
     public function getDescriptionForEvent(string $eventName): string

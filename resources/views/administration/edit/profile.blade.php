@@ -10,8 +10,6 @@
                         <div class="col-md-10">
                     <h3>Редактирование данных</h3>
                         </div>
-                        {{--<form action="{PS"></form>--}}
-
                     {!! Form::open(['method' => 'POST', 'route' => ['delete-myself', Auth::user()->id] ]) !!}
                     {!! Form::submit('Удалить себя', ['class' => 'float-right btn btn-danger']) !!}
                     {!! Form::close() !!}
