@@ -102,6 +102,7 @@ class AuthUserController extends Controller
         else {
             $validator->errors()->add('current_password', 'Указан неверный пароль');
 
+
             return redirect('edit/password')->withErrors($validator);
         }
     }

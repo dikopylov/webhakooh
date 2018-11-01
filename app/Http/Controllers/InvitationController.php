@@ -11,6 +11,9 @@ use App\Http\AuthSession;
 
 class InvitationController extends Controller
 {
+    /**
+     * @var InvitationKeyRepository
+     */
     private $invitationKeyRepository;
 
     public function __construct(InvitationKeyRepository $invitationKeyRepository)

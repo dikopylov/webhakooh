@@ -13,6 +13,9 @@ class Activity extends \Spatie\Activitylog\Models\Activity
 {
     use CausesActivity, LogsActivity;
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user()
     {
         return $this->belongsTo(User::class, 'id');

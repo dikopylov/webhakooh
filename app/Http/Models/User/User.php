@@ -3,7 +3,7 @@
 namespace App\Http\Models\User;
 
 use App\Http\Models\ActivityLog\Activity;
-use App\Http\Models\TranslateActivityLog\RuEvent;
+use App\Http\Models\TranslateActivityLog\EventsTranslator;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -50,7 +50,7 @@ class User extends Authenticatable
      */
     public function getDescriptionForEvent(string $eventName): string
     {
-        $eventName = RuEvent::ruEvent[$eventName];
+        $eventName = EventsTranslator::ru[$eventName];
         return "{$eventName} :causer.login";
     }
 

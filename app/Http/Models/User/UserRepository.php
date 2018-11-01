@@ -61,6 +61,7 @@ class UserRepository
 
     /**
      * @param int   $id
+     *
      * @param array $data
      */
     public function updateProfile(int $id, array $data)
