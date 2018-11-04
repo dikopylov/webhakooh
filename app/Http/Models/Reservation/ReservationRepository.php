@@ -4,7 +4,6 @@
 namespace App\Http\Models\Reservation;
 
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 
 class ReservationRepository
@@ -50,7 +49,7 @@ class ReservationRepository
      *
      * @return Collection
      */
-    public function findByStatus(int $status_id) : Collection
+    public function findByStatusId(int $status_id): Collection
     {
         return Reservation::all()->where('status_id', $status_id)->sortByDesc('created_at');
     }

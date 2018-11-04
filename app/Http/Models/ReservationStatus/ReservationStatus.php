@@ -2,6 +2,7 @@
 
 namespace App\Http\Models\ReservationStatus;
 
+use App\Http\Frontend\Reservations\Options;
 use Illuminate\Database\Eloquent\Model;
 
 class ReservationStatus extends Model
@@ -10,9 +11,10 @@ class ReservationStatus extends Model
     public const CONFIRMED = 'подтвержден';
     public const REJECTED  = 'отклонен';
 
-    public const STATUSES = [
-        'new'       => self::NEW,
-        'confirmed' => self::CONFIRMED,
-        'rejected'  => self::REJECTED,
+    public const STATUSES_OPTIONS = [
+        Options::NEW_KEY       => self::NEW,
+        Options::CONFIRMED_KEY => self::CONFIRMED,
+        Options::REJECTED_KEY  => self::REJECTED,
     ];
+
 }

@@ -7,10 +7,10 @@
 
             <form method="POST" action="{{ route('reservation.filter') }}">
                 {{ csrf_field() }}
-                <select name="filter">
-                        <option selected value="all">{{__('Все брони')}}</option>
-                        <option value="new">{{__('Новые брони')}}</option>
-                        <option value="confirmed">{{__('Подтвержденные брони')}}</option>
+                <select name="filterKey">
+                    @foreach($statusOptions as $key => $value)
+                        <option {{ $currentKey === $key ? 'selected' : '' }}  value="{{ $key }}">{{__($value)}}</option>
+                    @endforeach
                 </select>
                 <button type="submit" class="btn btn-primary">
                     {{ __('Показать') }}
@@ -34,16 +34,22 @@
                 <?php /** @var \App\Http\Models\Reservation\Reservation $reservation */  ?>
                 @foreach ($reservations as $reservation)
                     <tr>
-                        <td><a href="{{ route('reservation.show', $reservation->id) }}">#{{ $reservation->id }}</a></td>
+                        <td>{{ $reservation->id }}</td>
                         <td>{{ $reservation->platen->title }}</td>
                         <td>{{ $reservation->count_persons }}</td>
                         <td>{{ $reservation->date }}</td>
                         <td>{{ $reservation->reservationStatus->title }}</td>
                         <td>
-                            <p><a href="{{ route('reservation.edit', $reservation->id) }}" class="btn btn-info pull-left" style="margin-right: 3px;">Редактировать</a></p>
-                            {!! Form::open(['method' => 'DELETE', 'route' => ['reservation.destroy', $reservation->id] ]) !!}
-                            {!! Form::submit('Удалить', ['class' => 'btn btn-danger']) !!}
-                            {!! Form::close() !!}
+                            <p>
+                                <a href="{{ route('reservation.show', $reservation->id) }}"
+                                   class="btn btn-info pull-left" style="margin-right: 3px;">Посмотреть детали</a>
+                                <a href="{{ route('reservation.edit', $reservation->id) }}"
+                                   class="btn btn-info pull-left" style="margin-right: 3px;">Редактировать</a>
+
+                                {!! Form::open(['method' => 'DELETE', 'route' => ['reservation.destroy', $reservation->id] ]) !!}
+                                {!! Form::submit('Удалить', ['class' => 'btn btn-danger']) !!}
+                                {!! Form::close() !!}
+                            </p>
                         </td>
                     </tr>
                 @endforeach

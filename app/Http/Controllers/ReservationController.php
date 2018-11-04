@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Frontend\Reservations\Options;
 use App\Http\Models\Platen\PlatenRepository;
 use App\Http\Models\Reservation\Reservation;
 use App\Http\Models\Reservation\ReservationRepository;
@@ -9,7 +10,6 @@ use App\Http\Models\ReservationStatus\ReservationStatus;
 use App\Http\Models\ReservationStatus\ReservationStatusRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use \Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class ReservationController extends Controller
@@ -46,7 +46,11 @@ class ReservationController extends Controller
     {
         $reservations = $this->reservationRepository->getAll();
 
-        return view('reservation.index')->with('reservations', $reservations);
+        return view('reservation.index', [
+            'reservations'  => $reservations,
+            'statusOptions' => Options::STATUSES_OPTIONS,
+            'currentKey'    => Options::ALL_KEY,
+        ]);
     }
 
     /**
@@ -85,7 +89,11 @@ class ReservationController extends Controller
         $this->reservationRepository->save($reservation);
         $reservations = $this->reservationRepository->getAll();
 
-        return view('reservation.index')->with('reservations', $reservations);
+        return view('reservation.index', [
+            'reservations'  => $reservations,
+            'statusOptions' => Options::STATUSES_OPTIONS,
+            'currentKey'    => Options::ALL_KEY,
+        ]);
     }
 
     /**
@@ -147,7 +155,11 @@ class ReservationController extends Controller
         $this->reservationRepository->save($reservation);
         $reservations = $this->reservationRepository->getAll();
 
-        return view('reservation.index')->with('reservations', $reservations);
+        return view('reservation.index', [
+            'reservations'  => $reservations,
+            'statusOptions' => Options::STATUSES_OPTIONS,
+            'currentKey'    => Options::ALL_KEY,
+        ]);
     }
 
     /**
@@ -172,13 +184,17 @@ class ReservationController extends Controller
      */
     public function filter(Request $request)
     {
-        $filter = $request->only('filter')['filter'];
+        $filterKey = $request->input('filterKey');
 
-        if (isset(ReservationStatus::STATUSES[$filter])) {
-            $statusId     = $this->reservationStatusRepository->getIdByTitle(ReservationStatus::STATUSES[$filter]);
-            $reservations = $this->reservationRepository->findByStatus($statusId);
+        if (isset(ReservationStatus::STATUSES_OPTIONS[$filterKey])) {
+            $statusId     = $this->reservationStatusRepository->getIdByTitle(ReservationStatus::STATUSES_OPTIONS[$filterKey]);
+            $reservations = $this->reservationRepository->findByStatusId($statusId);
 
-            return view('reservation.index')->with('reservations', $reservations);
+            return view('reservation.index', [
+                'reservations'  => $reservations,
+                'statusOptions' => Options::STATUSES_OPTIONS,
+                'currentKey'    => $filterKey,
+            ]);
         }
 
         return $this->index();
