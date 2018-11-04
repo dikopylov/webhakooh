@@ -28,11 +28,12 @@ class ReservationController extends Controller
      */
     private $reservationStatusRepository;
 
-    public function __construct(PlatenRepository $platenRepository, ReservationRepository $reservationRepository, ReservationStatusRepository $reservationStatusRepository) {
-        $this->platenRepository      = $platenRepository;
-        $this->reservationRepository = $reservationRepository;
+    public function __construct(PlatenRepository $platenRepository, ReservationRepository $reservationRepository, ReservationStatusRepository $reservationStatusRepository)
+    {
+        $this->platenRepository            = $platenRepository;
+        $this->reservationRepository       = $reservationRepository;
         $this->reservationStatusRepository = $reservationStatusRepository;
-        $this->middleware(['auth' ]);
+        $this->middleware(['auth']);
     }
 
     /**
@@ -43,6 +44,7 @@ class ReservationController extends Controller
     public function index()
     {
         $reservations = $this->reservationRepository->getAll();
+
         return view('reservation.index')->with('reservations', $reservations);
     }
 
@@ -54,98 +56,106 @@ class ReservationController extends Controller
     public function create()
     {
         $platens = $this->platenRepository->getAll();
-        return view('reservation.create', [
-            'platens' => $platens,
-        ]);
+
+        return view('reservation.create')->with('platens', $platens);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
+     *
      * @return RedirectResponse
      */
-    public function store(Request $request) : RedirectResponse
-    {   $minDate = Carbon::now()->timestamp;
-        $request['visit-date'] = Carbon::parse($request['visit-date'])->timestamp;
+    public function store(Request $request): RedirectResponse
+    {
+        $minDate               = Carbon::now();
+        $request['visit-date'] = Carbon::parse($request['visit-date']);
         $this->validate($request, [
-            'platen-id' => 'required|integer',
-            'visit-date' => "required|numeric|min:{$minDate}",
-            'persons-count' => 'required|max:65535'
+            'platen-id'     => 'required|integer',
+            'visit-date'    => "required|after:{$minDate}",
+            'persons-count' => 'required|max:65535',
         ]);
 
-        $reservation = new Reservation();
-        $reservation->platen_id = $request['platen-id'];
-        $reservation->date = Carbon::createFromTimestamp($request['visit-date'])->toDateTimeString();
-        $reservation->status_id = $this->reservationStatusRepository->getIdByTitle(ReservationStatus::NEW);
+        $reservation                = new Reservation();
+        $reservation->platen_id     = $request['platen-id'];
+        $reservation->date          = $request['visit-date'];
+        $reservation->status_id     = $this->reservationStatusRepository->getIdByTitle(ReservationStatus::NEW);
         $reservation->count_persons = $request['persons-count'];
         $this->reservationRepository->save($reservation);
         $reservations = $this->reservationRepository->getAll();
 
-        return redirect()->route('reservation.index')
-            ->with('reservations', $reservations);
+        return redirect()->route('reservation.index')->with('reservations', $reservations);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(int $id)
     {
         $reservation = $this->reservationRepository->find($id);
 
-        return view('reservation.show', compact('reservation'));
+        return view('reservation.show')->with('reservation', $reservation);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(int $id)
     {
-        $platens = $this->platenRepository->getAll();
-        $statuses = $this->reservationStatusRepository->getAll();
+        $platens     = $this->platenRepository->getAll();
+        $statuses    = $this->reservationStatusRepository->getAll();
         $reservation = $this->reservationRepository->find($id);
-        return view('reservation.edit', compact(['platens', 'statuses', 'reservation']));
+
+        return view('reservation.edit', [
+            'platens' => $platens,
+            'statuses' => $statuses,
+            'reservation' => $reservation]
+        );
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, int $id)
     {
-        $minDate = Carbon::now()->timestamp;
+        $minDate               = Carbon::now()->timestamp;
         $request['visit-date'] = Carbon::parse($request['visit-date'])->timestamp;
         $this->validate($request, [
-            'platen-id' => 'required|integer',
-            'visit-date' => "required|numeric|min:{$minDate}",
-            'persons-count' => 'required|max:65535'
+            'platen-id'     => 'required|integer',
+            'visit-date'    => "required|numeric|after:{$minDate}",
+            'persons-count' => 'required|max:65535',
         ]);
 
-        $reservation = $this->reservationRepository->find($id);
-        $reservation->platen_id = $request['platen-id'];
-        $reservation->date = Carbon::createFromTimestamp($request['visit-date'])->toDateTimeString();
-        $reservation->status_id = $request['status-id'];
+        $reservation                = $this->reservationRepository->find($id);
+        $reservation->platen_id     = $request['platen-id'];
+        $reservation->date          = Carbon::createFromTimestamp($request['visit-date'])->toDateTimeString();
+        $reservation->status_id     = $request['status-id'];
         $reservation->count_persons = $request['persons-count'];
         $this->reservationRepository->save($reservation);
         $reservations = $this->reservationRepository->getAll();
 
-        return redirect()->route('reservation.index')
-            ->with('reservations', $reservations);
+        return redirect()->route('reservation.index')->with('reservations', $reservations);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(int $id)
@@ -153,7 +163,6 @@ class ReservationController extends Controller
         $this->reservationRepository->delete($id);
         $reservations = $this->platenRepository->getAll();
 
-        return redirect()->route('reservation.index')
-            ->with('reservations', $reservations);
+        return redirect()->route('reservation.index')->with('reservations', $reservations);
     }
 }
