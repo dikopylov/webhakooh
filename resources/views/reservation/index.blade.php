@@ -42,14 +42,17 @@
                         <td>
                             <p>
                                 <a href="{{ route('reservation.show', $reservation->id) }}"
-                                   class="btn btn-info pull-left" style="margin-right: 3px;">Посмотреть детали</a>
+                                   class="btn btn-success pull-left" style="margin-right: 3px;">Посмотреть детали</a>
+                            </p>
+                            <p>
                                 <a href="{{ route('reservation.edit', $reservation->id) }}"
                                    class="btn btn-info pull-left" style="margin-right: 3px;">Редактировать</a>
+                            </p>
 
                                 {!! Form::open(['method' => 'DELETE', 'route' => ['reservation.destroy', $reservation->id] ]) !!}
                                 {!! Form::submit('Удалить', ['class' => 'btn btn-danger']) !!}
                                 {!! Form::close() !!}
-                            </p>
+
                         </td>
                     </tr>
                 @endforeach

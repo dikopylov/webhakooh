@@ -153,13 +153,8 @@ class ReservationController extends Controller
         $reservation->status_id     = $request['status-id'];
         $reservation->count_persons = $request['persons-count'];
         $this->reservationRepository->save($reservation);
-        $reservations = $this->reservationRepository->getAll();
 
-        return view('reservation.index', [
-            'reservations'  => $reservations,
-            'statusOptions' => Options::STATUSES_OPTIONS,
-            'currentKey'    => Options::ALL_KEY,
-        ]);
+        return $this->index();
     }
 
     /**
@@ -172,9 +167,8 @@ class ReservationController extends Controller
     public function destroy(int $id)
     {
         $this->reservationRepository->delete($id);
-        $reservations = $this->reservationRepository->getAll();
 
-        return view('reservation.index')->with('reservations', $reservations);
+        return $this->index();
     }
 
     /**
