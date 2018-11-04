@@ -15,7 +15,7 @@ use App\Http\Models\Platen\Platen;
 
 $factory->define(Platen::class, function (Faker $faker) {
     return [
-        'title' => $faker->title,
+        'title' => $faker->lastName,
         'capacity' => $faker->numberBetween(1, 50)
     ];
 });
