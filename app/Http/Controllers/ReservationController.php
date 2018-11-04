@@ -164,4 +164,23 @@ class ReservationController extends Controller
 
         return view('reservation.index')->with('reservations', $reservations);
     }
+
+    public function filter(Request $request)
+    {
+        $filter = $request->only('filter')['filter'];
+
+        if ($filter === 'new')
+        {
+            $reservations = $this->reservationRepository->showNew();
+            return view('reservation.index')->with('reservations', $reservations);
+        }
+
+        if ($filter === 'confirm')
+        {
+            $reservations = $this->reservationRepository->showConfirm();
+            return view('reservation.index')->with('reservations', $reservations);
+        }
+
+        return $this->index();
+    }
 }

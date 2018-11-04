@@ -15,7 +15,7 @@ class ReservationRepository
      */
     public function getAll() : Collection
     {
-        return Reservation::all();
+        return Reservation::all()->sortByDesc('created_at');
     }
 
     /**
@@ -44,4 +44,19 @@ class ReservationRepository
     {
         return Reservation::destroy($id);
     }
+
+    /**
+     * @return Collection
+     */
+    public function showNew() : Collection
+    {
+        return Reservation::all()->where('status_id', 1)->sortByDesc('created_at');
+    }
+
+    public function showConfirm() : Collection
+    {
+        return Reservation::all()->where('status_id', 2)->sortByDesc('created_at');
+    }
+
+
 }

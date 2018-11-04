@@ -4,6 +4,18 @@
     <div class="col-lg-10 col-lg-offset-1">
         <h1><i class="fa fa-users"></i> {{__('Заказы на бронирование')}}
             <a href="{{ route('reservation.create') }}" class="btn btn-success">{{__('Добавить новый заказ')}}</a></h1>
+
+            <form method="POST" action="{{ route('reservation.filter') }}">
+                {{ csrf_field() }}
+                <input type="radio" name="filter" value="date" checked> {{__('Все брони')}}
+                <input type="radio" name="filter" value="new"> {{__('Новые брони')}}
+                <input type="radio" name="filter" value="confirm"> {{__('Подтвержденные брони')}}
+
+                <button type="submit" class="btn btn-primary">
+                    {{ __('Показать') }}
+                </button>
+
+            </form>
         <hr>
         <div class="table-responsive">
             <table class="table table-bordered table-striped">
