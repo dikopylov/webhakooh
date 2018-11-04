@@ -7,10 +7,11 @@
 
             <form method="POST" action="{{ route('reservation.filter') }}">
                 {{ csrf_field() }}
-                <input type="radio" name="filter" value="date" checked> {{__('Все брони')}}
-                <input type="radio" name="filter" value="new"> {{__('Новые брони')}}
-                <input type="radio" name="filter" value="confirm"> {{__('Подтвержденные брони')}}
-
+                <select name="filter">
+                        <option selected value="all">{{__('Все брони')}}</option>
+                        <option value="new">{{__('Новые брони')}}</option>
+                        <option value="confirmed">{{__('Подтвержденные брони')}}</option>
+                </select>
                 <button type="submit" class="btn btn-primary">
                     {{ __('Показать') }}
                 </button>

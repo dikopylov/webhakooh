@@ -6,7 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class ReservationStatus extends Model
 {
-    public const NEW = 'Новый';
-    public const CONFIRMED = 'Подтвержден';
-    public const REJECTED = 'Отклонен';
+    public const NEW       = 'новый';
+    public const CONFIRMED = 'подтвержден';
+    public const REJECTED  = 'отклонен';
+
+    public const STATUSES = [
+        'new'       => self::NEW,
+        'confirmed' => self::CONFIRMED,
+        'rejected'  => self::REJECTED,
+    ];
 }

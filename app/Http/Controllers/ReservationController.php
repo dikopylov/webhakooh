@@ -68,9 +68,9 @@ class ReservationController extends Controller
      *
      * @return View
      */
-    public function store(Request $request) : View
+    public function store(Request $request): View
     {
-        $minDate               = Carbon::now();
+        $minDate = Carbon::now();
         $this->validate($request, [
             'platen-id'     => 'required|integer',
             'visit-date'    => "required|after:{$minDate}",
@@ -132,7 +132,7 @@ class ReservationController extends Controller
      */
     public function update(Request $request, int $id)
     {
-        $minDate               = Carbon::now();
+        $minDate = Carbon::now();
         $this->validate($request, [
             'platen-id'     => 'required|integer',
             'visit-date'    => "required|after:{$minDate}",
@@ -165,19 +165,19 @@ class ReservationController extends Controller
         return view('reservation.index')->with('reservations', $reservations);
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return $this|\Illuminate\Http\Response
+     */
     public function filter(Request $request)
     {
         $filter = $request->only('filter')['filter'];
 
-        if ($filter === 'new')
-        {
-            $reservations = $this->reservationRepository->showNew();
-            return view('reservation.index')->with('reservations', $reservations);
-        }
+        if (isset(ReservationStatus::STATUSES[$filter])) {
+            $statusId     = $this->reservationStatusRepository->getIdByTitle(ReservationStatus::STATUSES[$filter]);
+            $reservations = $this->reservationRepository->findByStatus($statusId);
 
-        if ($filter === 'confirm')
-        {
-            $reservations = $this->reservationRepository->showConfirm();
             return view('reservation.index')->with('reservations', $reservations);
         }
 

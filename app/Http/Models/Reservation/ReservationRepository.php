@@ -46,17 +46,12 @@ class ReservationRepository
     }
 
     /**
+     * @param int $status_id
+     *
      * @return Collection
      */
-    public function showNew() : Collection
+    public function findByStatus(int $status_id) : Collection
     {
-        return Reservation::all()->where('status_id', 1)->sortByDesc('created_at');
+        return Reservation::all()->where('status_id', $status_id)->sortByDesc('created_at');
     }
-
-    public function showConfirm() : Collection
-    {
-        return Reservation::all()->where('status_id', 2)->sortByDesc('created_at');
-    }
-
-
 }
