@@ -10,6 +10,7 @@ use App\Http\Models\ReservationStatus\ReservationStatusRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use \Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class ReservationController extends Controller
 {
@@ -65,12 +66,11 @@ class ReservationController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      *
-     * @return RedirectResponse
+     * @return View
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request) : View
     {
         $minDate               = Carbon::now();
-        $request['visit-date'] = Carbon::parse($request['visit-date']);
         $this->validate($request, [
             'platen-id'     => 'required|integer',
             'visit-date'    => "required|after:{$minDate}",
@@ -85,7 +85,7 @@ class ReservationController extends Controller
         $this->reservationRepository->save($reservation);
         $reservations = $this->reservationRepository->getAll();
 
-        return redirect()->route('reservation.index')->with('reservations', $reservations);
+        return view('reservation.index')->with('reservations', $reservations);
     }
 
     /**
@@ -116,9 +116,9 @@ class ReservationController extends Controller
         $reservation = $this->reservationRepository->find($id);
 
         return view('reservation.edit', [
-            'platens' => $platens,
-            'statuses' => $statuses,
-            'reservation' => $reservation]
+                'platens'     => $platens,
+                'statuses'    => $statuses,
+                'reservation' => $reservation]
         );
     }
 
@@ -132,23 +132,22 @@ class ReservationController extends Controller
      */
     public function update(Request $request, int $id)
     {
-        $minDate               = Carbon::now()->timestamp;
-        $request['visit-date'] = Carbon::parse($request['visit-date'])->timestamp;
+        $minDate               = Carbon::now();
         $this->validate($request, [
             'platen-id'     => 'required|integer',
-            'visit-date'    => "required|numeric|after:{$minDate}",
+            'visit-date'    => "required|after:{$minDate}",
             'persons-count' => 'required|max:65535',
         ]);
 
         $reservation                = $this->reservationRepository->find($id);
         $reservation->platen_id     = $request['platen-id'];
-        $reservation->date          = Carbon::createFromTimestamp($request['visit-date'])->toDateTimeString();
+        $reservation->date          = $request['visit-date'];
         $reservation->status_id     = $request['status-id'];
         $reservation->count_persons = $request['persons-count'];
         $this->reservationRepository->save($reservation);
         $reservations = $this->reservationRepository->getAll();
 
-        return redirect()->route('reservation.index')->with('reservations', $reservations);
+        return view('reservation.index')->with('reservations', $reservations);
     }
 
     /**
@@ -161,8 +160,8 @@ class ReservationController extends Controller
     public function destroy(int $id)
     {
         $this->reservationRepository->delete($id);
-        $reservations = $this->platenRepository->getAll();
+        $reservations = $this->reservationRepository->getAll();
 
-        return redirect()->route('reservation.index')->with('reservations', $reservations);
+        return view('reservation.index')->with('reservations', $reservations);
     }
 }
