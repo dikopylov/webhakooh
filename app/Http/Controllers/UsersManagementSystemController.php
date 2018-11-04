@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Models\Role\RoleRepository;
 use App\Http\Models\Role\RoleType;
 use App\Http\Models\User\UserRepository;
-use App\Http\Models\User\User;
 use Illuminate\Http\Request;
-use App\Http\Models\Role\RoleRepository;
 
 class UsersManagementSystemController extends Controller
 {
@@ -36,6 +35,7 @@ class UsersManagementSystemController extends Controller
     public function index()
     {
         $users = $this->userRepository->getAll(\Auth::id());
+
         return view('users.index')->with('users', $users);
     }
 
@@ -43,7 +43,7 @@ class UsersManagementSystemController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -59,15 +59,13 @@ class UsersManagementSystemController extends Controller
     public function edit($id)
     {
 
-        $user = $this->userRepository->find($id);
+        $user  = $this->userRepository->find($id);
         $roles = $this->roleRepository->get();
 
-        if ($this->roleRepository->hasRole($user,RoleType::ADMINISTRATOR))
-        {
+        if ($this->roleRepository->hasRole($user,RoleType::ADMINISTRATOR)) {
             abort('401', 'THERE ISN\'T ACCESS TO ADMIN EDIT');
         }
-        else
-        {
+        else {
             return view('users.edit', compact('user', 'roles'));
         }
 
@@ -76,8 +74,8 @@ class UsersManagementSystemController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int                      $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -92,18 +90,20 @@ class UsersManagementSystemController extends Controller
         else {
             $user->roles()->detach(); //If no role is selected remove exisiting role associated to a user
         }
+
         return redirect()->route('users.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         $this->userRepository->delete($id);
-        return redirect()->route('users.index');
+
+        return $this->index();
     }
 }

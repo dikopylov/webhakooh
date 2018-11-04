@@ -1,7 +1,6 @@
 {{-- \resources\views\users\index.blade.php --}}
 
 <?php
-use \App\Http\Models\Role\RoleType;
 ?>
 @extends('layouts.app')
 
@@ -45,13 +44,21 @@ use \App\Http\Models\Role\RoleType;
                         <td>{{ $user->created_at }}</td>
                         <td>{{ $user->roles()->pluck('name')->implode(' ') }}</td>{{-- Retrieve array of roles associated to a user and convert to string --}}
                         <td>
-                            <p><a href="{{ route('log.changes.by.user', $user->id) }}" class="btn btn-info pull-left" style="margin-right: 3px;">Посмотреть действия</a></p>
+                            <p><a href="{{ route('log.changes.by.user', $user->id) }}" class="btn btn-info pull-left"
+                                  style="margin-right: 3px;">Посмотреть действия</a></p>
                             @if(!$user->hasRole(RoleType::ADMINISTRATOR))
-                                <p><a href="{{ route('users.edit', $user->id) }}" class="btn btn-info pull-left" style="margin-right: 3px;">Редактировать</a></p>
+                                <p><a href="{{ route('users.edit', $user->id) }}" class="btn btn-info pull-left"
+                                      style="margin-right: 3px;">Редактировать</a></p>
 
-                                {!! Form::open(['method' => 'DELETE', 'route' => ['users.destroy', $user->id] ]) !!}
-                                {!! Form::submit('Удалить', ['class' => 'btn btn-danger']) !!}
-                                {!! Form::close() !!}
+
+                                <p><a href="javascript:void(0);"
+                                      onclick="deleteUser({{ $user->id }})"
+                                      class="btn btn-danger" style="margin-right: 3px;">Удалить</a></p>
+
+                                <script type="text/javascript" src="{{ asset('js/confirm-delete.js') }}">
+
+                                </script>
+
                             @endif
 
                         </td>
@@ -61,7 +68,8 @@ use \App\Http\Models\Role\RoleType;
             </table>
         </div>
 
-        <p><a href="{{ route('invitation-key') }}" class="btn btn-success"> Пригласительный ключ для регистрации </a></p>
+        <p><a href="{{ route('invitation-key') }}" class="btn btn-success"> Пригласительный ключ для регистрации </a>
+        </p>
 
     </div>
 
