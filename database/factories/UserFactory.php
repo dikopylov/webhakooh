@@ -15,7 +15,7 @@ use App\Http\Models\User\User;
 
 $factory->define(User::class, function (Faker $faker) {
     return [
-        'login' => $faker->name,
+        'login' => $faker->userName,
         'email' => $faker->unique()->safeEmail,
         'password' => Hash::make('qwerty'), // secret
         'first_name' => $faker->name,

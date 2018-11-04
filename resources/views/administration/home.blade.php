@@ -25,6 +25,8 @@
                             <p><a href="{{ URL::route('logs') }}" class="btn btn-success">
                                     Посмотреть логи </a></p>
                         @endif
+                            <p><a href="{{ URL::route('reservation.index') }}" class="btn btn-success">
+                                    Все брони </a></p>
                     </div>
                 </div>
             </div>
