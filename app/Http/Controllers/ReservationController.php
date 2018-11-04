@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Frontend\Reservations\Options;
 use App\Http\Models\Platen\PlatenRepository;
 use App\Http\Models\Reservation\Reservation;
 use App\Http\Models\Reservation\ReservationRepository;
@@ -9,7 +10,6 @@ use App\Http\Models\ReservationStatus\ReservationStatus;
 use App\Http\Models\ReservationStatus\ReservationStatusRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use \Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class ReservationController extends Controller
@@ -46,7 +46,11 @@ class ReservationController extends Controller
     {
         $reservations = $this->reservationRepository->getAll();
 
-        return view('reservation.index')->with('reservations', $reservations);
+        return view('reservation.index', [
+            'reservations'  => $reservations,
+            'statusOptions' => Options::STATUSES_OPTIONS,
+            'currentKey'    => Options::ALL_KEY,
+        ]);
     }
 
     /**
@@ -68,9 +72,9 @@ class ReservationController extends Controller
      *
      * @return View
      */
-    public function store(Request $request) : View
+    public function store(Request $request): View
     {
-        $minDate               = Carbon::now();
+        $minDate = Carbon::now();
         $this->validate($request, [
             'platen-id'     => 'required|integer',
             'visit-date'    => "required|after:{$minDate}",
@@ -85,7 +89,11 @@ class ReservationController extends Controller
         $this->reservationRepository->save($reservation);
         $reservations = $this->reservationRepository->getAll();
 
-        return view('reservation.index')->with('reservations', $reservations);
+        return view('reservation.index', [
+            'reservations'  => $reservations,
+            'statusOptions' => Options::STATUSES_OPTIONS,
+            'currentKey'    => Options::ALL_KEY,
+        ]);
     }
 
     /**
@@ -132,7 +140,7 @@ class ReservationController extends Controller
      */
     public function update(Request $request, int $id)
     {
-        $minDate               = Carbon::now();
+        $minDate = Carbon::now();
         $this->validate($request, [
             'platen-id'     => 'required|integer',
             'visit-date'    => "required|after:{$minDate}",
@@ -147,7 +155,11 @@ class ReservationController extends Controller
         $this->reservationRepository->save($reservation);
         $reservations = $this->reservationRepository->getAll();
 
-        return view('reservation.index')->with('reservations', $reservations);
+        return view('reservation.index', [
+            'reservations'  => $reservations,
+            'statusOptions' => Options::STATUSES_OPTIONS,
+            'currentKey'    => Options::ALL_KEY,
+        ]);
     }
 
     /**
@@ -163,5 +175,28 @@ class ReservationController extends Controller
         $reservations = $this->reservationRepository->getAll();
 
         return view('reservation.index')->with('reservations', $reservations);
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return $this|\Illuminate\Http\Response
+     */
+    public function filter(Request $request)
+    {
+        $filterKey = $request->input('filterKey');
+
+        if (isset(ReservationStatus::STATUSES_OPTIONS[$filterKey])) {
+            $statusId     = $this->reservationStatusRepository->getIdByTitle(ReservationStatus::STATUSES_OPTIONS[$filterKey]);
+            $reservations = $this->reservationRepository->findByStatusId($statusId);
+
+            return view('reservation.index', [
+                'reservations'  => $reservations,
+                'statusOptions' => Options::STATUSES_OPTIONS,
+                'currentKey'    => $filterKey,
+            ]);
+        }
+
+        return $this->index();
     }
 }

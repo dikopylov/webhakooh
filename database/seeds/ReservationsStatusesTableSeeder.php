@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Models\ReservationStatus\ReservationStatus;
 use Illuminate\Database\Seeder;
 
 class ReservationsStatusesTableSeeder extends Seeder
@@ -12,9 +13,9 @@ class ReservationsStatusesTableSeeder extends Seeder
     public function run()
     {
         DB::table('reservation_statuses')->insert([
-            ['title' => 'Новый'],
-            ['title' => 'Подтвержден'],
-            ['title' => 'Отклонен'],
+            ['title' => ReservationStatus::NEW],
+            ['title' => ReservationStatus::CONFIRMED],
+            ['title' => ReservationStatus::REJECTED],
         ]);
     }
 }
