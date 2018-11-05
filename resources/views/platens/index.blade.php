@@ -30,9 +30,9 @@
                         <td>
                             <p><a href="{{ route('platens.edit', $platen->id) }}" class="btn btn-info pull-left" style="margin-right: 3px;">Редактировать</a></p>
 
-                            {!! Form::open(['method' => 'DELETE', 'route' => ['platens.destroy', $platen->id] ]) !!}
-                            {!! Form::submit('Удалить', ['class' => 'btn btn-danger']) !!}
-                            {!! Form::close() !!}
+                            <p><a href="javascript:void(0);"
+                                  onclick="deleteItem({{ $platen->id . ', \'' . route('platens.destroy', [$platen->id]) . '\''}})"
+                                  class="btn btn-danger" style="margin-right: 3px;">Удалить</a></p>
                         </td>
                     </tr>
                 @endforeach

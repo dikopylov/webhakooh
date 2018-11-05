@@ -10,8 +10,6 @@
 
     <div class="col-lg-10 col-lg-offset-1">
         <h1><i class="fa fa-users"></i> Пользователи
-            {{--<a href="{{ route('roles.index') }}" class="btn btn-default pull-right">Роли</a>--}}
-            {{--<a href="{{ route('permissions.index') }}" class="btn btn-default pull-right">Операции</a>--}}
         </h1>
         <hr>
         <div class="table-responsive">
@@ -52,12 +50,8 @@
 
 
                                 <p><a href="javascript:void(0);"
-                                      onclick="deleteUser({{ $user->id }})"
+                                      onclick="deleteItem({{ $user->id . ', \'' . route('users.destroy', [$user->id]) . '\''}})"
                                       class="btn btn-danger" style="margin-right: 3px;">Удалить</a></p>
-
-                                <script type="text/javascript" src="{{ asset('js/confirm-delete.js') }}">
-
-                                </script>
 
                             @endif
 

@@ -91,4 +91,5 @@
         </main>
     </div>
 </body>
+<script type="text/javascript" src="{{ asset('js/confirm-delete.js') }}"></script>
 </html>

@@ -107,8 +107,7 @@ class PlatenController extends Controller
     public function destroy($id)
     {
         $this->platenRepository->delete($id);
-        $platens = $this->platenRepository->getAll();
 
-        return redirect()->route('platens.index')->with('platens', $platens);
+        return $this->index();
     }
 }
