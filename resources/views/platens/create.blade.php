@@ -30,7 +30,9 @@
                                     <label for="platen_capacity" class="col-md-4 col-form-label text-md-right">{{ __('Количество мест') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="platen_capacity" type="number" class="form-control{{ $errors->has('capacity') ? ' is-invalid' : '' }}" name="platen_capacity" value="{{ old('platen_capacity') }}" required>
+                                        <input id="platen_capacity" type="number"
+                                               class="form-control{{ $errors->has('platen_capacity') ? ' is-invalid' : '' }}"
+                                               name="platen_capacity" value="{{ old('platen_capacity') }}" required>
 
                                         @if ($errors->has('platen_capacity'))
                                             <span class="invalid-feedback" role="alert">
