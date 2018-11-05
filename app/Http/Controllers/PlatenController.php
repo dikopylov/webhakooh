@@ -57,7 +57,7 @@ class PlatenController extends Controller
         $platens = $this->platenRepository->getAll();
 
         return redirect()->route('platens.index')
-            ->with('platens', $platens);
+            ->with('platens', $platens)->with('success', 'Стол успешно создан!');
     }
 
     /**
@@ -94,20 +94,21 @@ class PlatenController extends Controller
         );
 
         $platens = $this->platenRepository->getAll();
-        return view('platens.index')->with('platens', $platens);
 
+        return redirect()->route('platens.index')
+            ->with('platens', $platens)
+            ->with('success', 'Стол успешно отредактирован!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  int $id
+     *
+     * @return void
      */
     public function destroy($id)
     {
         $this->platenRepository->delete($id);
-
-        return $this->index();
     }
 }

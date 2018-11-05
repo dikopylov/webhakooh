@@ -31,7 +31,7 @@
 
                 <tbody>
                 @foreach ($users as $user)
-                    <tr>
+                    <tr id="{{ $user->id }}">
 
                         <td>{{ $user->id }}</td>
                         <td>{{ $user->login }}</td>

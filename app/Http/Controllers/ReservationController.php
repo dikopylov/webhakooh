@@ -162,13 +162,11 @@ class ReservationController extends Controller
      *
      * @param  int $id
      *
-     * @return \Illuminate\Http\Response
+     * @return void
      */
     public function destroy(int $id)
     {
         $this->reservationRepository->delete($id);
-
-        return $this->index();
     }
 
     /**

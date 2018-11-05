@@ -22,7 +22,7 @@
 
                 <tbody>
                 @foreach ($platens as $platen)
-                    <tr>
+                    <tr id="{{ $platen->id }}">
 
                         <td>{{ $platen->id }}</td>
                         <td>{{ $platen->title }}</td>

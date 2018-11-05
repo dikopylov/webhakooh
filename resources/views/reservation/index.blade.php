@@ -33,7 +33,7 @@
                 <tbody>
                 <?php /** @var \App\Http\Models\Reservation\Reservation $reservation */  ?>
                 @foreach ($reservations as $reservation)
-                    <tr>
+                    <tr id="{{ $reservation->id }}">
                         <td>{{ $reservation->id }}</td>
                         <td>{{ $reservation->platen->title }}</td>
                         <td>{{ $reservation->count_persons }}</td>

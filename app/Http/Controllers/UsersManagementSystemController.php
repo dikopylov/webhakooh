@@ -98,12 +98,11 @@ class UsersManagementSystemController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     *
+     * @return void
      */
     public function destroy($id)
     {
         $this->userRepository->delete($id);
-
-        return $this->index();
     }
 }
