@@ -101,7 +101,7 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                    <a href="{{ URL::route('edit/profile') }}" class="btn btn-default btn-flat">{{__('Профиль')}}</a>
                                 </div>
                                 <div class="pull-right">
                                     <a href="#" class="btn btn-default btn-flat">Sign out</a>
@@ -151,20 +151,21 @@
                  * @TODO реализовать активацию пунктов меню через jquery
                  */
                 ?>
+
                 @if ($user->hasRole(RoleType::ADMINISTRATOR))
                 <li class="active">
-                    <a href="{{ URL::route('users.index') }}" class="btn btn-success">
+                    <a href="{{ URL::route('users.index') }}" >
                         <i class="glyphicon-glyphicon-user"></i> <span> Управление пользователями</span> </a>
                 </li>
-
-
-                        <p><a href="{{ URL::route('users.index') }}" class="btn btn-success">
-                                Управление пользователями </a></p>
-                        <p><a href="{{ URL::route('platens.index') }}" class="btn btn-success">
-                                Управление столами </a></p>
-                        <p><a href="{{ URL::route('logs') }}" class="btn btn-success">
-                                Посмотреть логи </a></p>
-                    @endif
+                @endif
+                <li>
+                    <a href="{{ URL::route('platens.index') }}" >
+                        <i class="glyphicon-glyphicon-user"></i> <span> Управление столами</span> </a>
+                </li>
+                <li>
+                    <a href="{{ URL::route('logs') }}" >
+                        <i class="glyphicon-glyphicon-user"></i> <span> Посмотреть логи</span> </a>
+                </li>
             </ul>
         </section>
     @endguest
@@ -197,10 +198,9 @@
     <!-- /.content-wrapper -->
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
-            <b>Version</b> 2.4.0
+            <b>IC </b> studio
         </div>
-        <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
-        reserved.
+        <strong>Incredible Code</strong>
     </footer>
 
     <!-- Control Sidebar -->
