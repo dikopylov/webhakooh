@@ -166,6 +166,10 @@
                     <a href="{{ URL::route('logs') }}" >
                         <i class="glyphicon-glyphicon-user"></i> <span> Посмотреть логи</span> </a>
                 </li>
+                <li>
+                    <a href="{{ URL::route('reservation.index') }}" >
+                        <i class="glyphicon-glyphicon-user"></i> <span> Брони</span> </a>
+                </li>
             </ul>
         </section>
     @endguest
