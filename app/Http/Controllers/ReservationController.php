@@ -10,7 +10,6 @@ use App\Http\Models\ReservationStatus\ReservationStatus;
 use App\Http\Models\ReservationStatus\ReservationStatusRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
 
 class ReservationController extends Controller
 {
@@ -68,18 +67,24 @@ class ReservationController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param Request $request
      *
-     * @return View
+     * @return $this|\Illuminate\Http\Response
      */
-    public function store(Request $request): View
+    public function store(Request $request)
     {
-        $minDate = Carbon::now();
-        $this->validate($request, [
+        $minDate     = Carbon::now();
+        $requestData = $request->request->all();
+
+        $validator = \Validator::make($requestData, [
             'platen-id'     => 'required|integer',
             'visit-date'    => "required|after:{$minDate}",
-            'persons-count' => 'required|max:65535',
+            'persons-count' => 'required|integer|max:65535',
         ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator);
+        }
 
         $reservation                = new Reservation();
         $reservation->platen_id     = $request['platen-id'];
@@ -87,13 +92,9 @@ class ReservationController extends Controller
         $reservation->status_id     = $this->reservationStatusRepository->getIdByTitle(ReservationStatus::NEW);
         $reservation->count_persons = $request['persons-count'];
         $this->reservationRepository->save($reservation);
-        $reservations = $this->reservationRepository->getAll();
 
-        return view('reservation.index', [
-            'reservations'  => $reservations,
-            'statusOptions' => Options::STATUSES_OPTIONS,
-            'currentKey'    => Options::ALL_KEY,
-        ]);
+        return $this->index();
+
     }
 
     /**
@@ -141,11 +142,18 @@ class ReservationController extends Controller
     public function update(Request $request, int $id)
     {
         $minDate = Carbon::now();
-        $this->validate($request, [
+
+        $requestData = $request->request->all();
+
+        $validator = \Validator::make($requestData, [
             'platen-id'     => 'required|integer',
             'visit-date'    => "required|after:{$minDate}",
-            'persons-count' => 'required|max:65535',
+            'persons-count' => 'required|integer|max:65535',
         ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator);
+        }
 
         $reservation                = $this->reservationRepository->find($id);
         $reservation->platen_id     = $request['platen-id'];
