@@ -2,7 +2,7 @@
 
 
 namespace App\Http\Models\Role;
-use SplEnum;
+
 
 class RoleType
 {
