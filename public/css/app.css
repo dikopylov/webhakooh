@@ -22,3 +22,11 @@
 .auth-login-remember-checkbox {
     padding-left: 20px;
 }
+
+.dropdown-menu .user-body:hover {
+    background-color: lightgrey;
+}
+
+.dropdown-menu .user-body a:hover {
+    background-color: lightgrey;
+}

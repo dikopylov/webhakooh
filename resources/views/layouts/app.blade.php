@@ -65,49 +65,47 @@
                     @guest
                     <li class="dropdown user user-menu">
                         @if (Route::has('invitation-key'))
-                            <a href="{{ route('invitation-key') }}" >{{ __('Регистрация') }}</a>
+                            @if (Request::is('invitation-key') || Request::is('register'))
+                                <a href="{{ url('/') }}" >{{ __('Авторизация') }}</a>
+                            @else
+                                <a href="{{ route('invitation-key') }}" >{{ __('Регистрация') }}</a>
+                            @endif
                         @endif
                     </li>
                     @else
                     <li class="dropdown user user-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                        <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
                         </a>
                         <ul class="dropdown-menu">
-                            <!-- User image -->
-                            <li class="user-header">
-                                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
-                                <p>
-                                    Alexander Pierce - Web Developer
-                                    <small>Member since Nov. 2012</small>
-                                </p>
-                            </li>
-                            <!-- Menu Body -->
                             <li class="user-body">
-                                <div class="row">
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Followers</a>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Sales</a>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Friends</a>
-                                    </div>
-                                </div>
-                                <!-- /.row -->
+                                <a href="{{ route('home') }}">
+                                    {{ __('Личный кабинет') }}
+                                </a>
                             </li>
-                            <!-- Menu Footer-->
-                            <li class="user-footer">
-                                <div class="pull-left">
-                                    <a href="{{ URL::route('edit/profile') }}" class="btn btn-default btn-flat">{{__('Профиль')}}</a>
-                                </div>
-                                <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                                </div>
+                            <li class="user-body">
+                                <a href="{{ route('edit/profile') }}">
+                                    {{ __('Редактировать данные') }}
+                                </a>
+                            </li>
+                            <li class="user-body">
+                                <a href="{{ route('edit/password') }}">
+                                    {{ __('Изменить пароль') }}
+                                </a>
+                            </li>
+                            <li class="user-body">
+                                <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                    {{ __('Выход из системы') }}
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
                             </li>
                         </ul>
+
+
+
+
+
                     </li>
                     @endguest
                 </ul>
@@ -146,12 +144,6 @@
 
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu" data-widget="tree">
-                <?php
-                /**
-                 * @TODO реализовать активацию пунктов меню через jquery
-                 */
-                ?>
-
                 @if ($user->hasRole(RoleType::ADMINISTRATOR))
                 <li>
                     <a href="{{ URL::route('users.index') }}" >
@@ -178,20 +170,12 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <section class="content-header">
+       <!-- <section class="content-header">
             <h1>
                 @yield('title')
             </h1>
-            <?php
-            /**
-             * @TODO реализовать хлебные крошки
-             */
-            ?>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Тут</a></li>
-                <li class="active">Реализовать хлебные крошки</li>
-            </ol>
-        </section>
+
+        </section> -->
 
         <!-- Main content -->
         <section class="content">
