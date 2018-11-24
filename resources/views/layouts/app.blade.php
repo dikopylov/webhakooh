@@ -65,7 +65,11 @@
                     @guest
                     <li class="dropdown user user-menu">
                         @if (Route::has('invitation-key'))
-                            <a href="{{ route('invitation-key') }}" >{{ __('Регистрация') }}</a>
+                            @if (Request::is('invitation-key') || Request::is('register'))
+                                <a href="{{ url('/') }}" >{{ __('Авторизация') }}</a>
+                            @else
+                                <a href="{{ route('invitation-key') }}" >{{ __('Регистрация') }}</a>
+                            @endif
                         @endif
                     </li>
                     @else
@@ -140,12 +144,6 @@
 
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu" data-widget="tree">
-                <?php
-                /**
-                 * @TODO реализовать активацию пунктов меню через jquery
-                 */
-                ?>
-
                 @if ($user->hasRole(RoleType::ADMINISTRATOR))
                 <li>
                     <a href="{{ URL::route('users.index') }}" >
