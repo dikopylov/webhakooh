@@ -39,6 +39,7 @@
                 </tbody>
             </table>
         </div>
+        {{$platens->links()}}
     </div>
 
 @endsection

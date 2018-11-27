@@ -33,9 +33,9 @@ class UserRepository
      *
      * @return Collection
      */
-    public function getAll(int $id): Collection
+    public function getAll(int $id)
     {
-        return User::where('id', '<>', $id)->get();
+        return User::where('id', '<>', $id)->paginate(3);
     }
 
     /**

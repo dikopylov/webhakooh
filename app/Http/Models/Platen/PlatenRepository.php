@@ -10,7 +10,7 @@ class PlatenRepository
      */
     public function getAll()
     {
-        return Platen::all();
+        return Platen::paginate(5);
     }
 
     /**

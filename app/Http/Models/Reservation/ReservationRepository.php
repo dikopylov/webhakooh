@@ -12,9 +12,9 @@ class ReservationRepository
     /**
      * @return Collection
      */
-    public function getAll() : Collection
+    public function getAll()
     {
-        return Reservation::all()->sortByDesc('created_at');
+        return Reservation::orderByDesc('created_at')->paginate(4);
     }
 
     /**
@@ -49,8 +49,8 @@ class ReservationRepository
      *
      * @return Collection
      */
-    public function findByStatusId(int $statusId): Collection
+    public function findByStatusId(int $statusId)
     {
-        return Reservation::all()->where('status_id', $statusId)->sortByDesc('created_at');
+        return Reservation::where('status_id', $statusId)->orderByDesc('created_at')->paginate(4);
     }
 }

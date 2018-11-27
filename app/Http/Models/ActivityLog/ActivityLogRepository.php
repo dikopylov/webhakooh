@@ -11,7 +11,7 @@ class ActivityLogRepository
      */
     public function getAll()
     {
-        return Activity::all()->sortByDesc('created_at');
+        return Activity::orderByDesc('created_at')->paginate(7);
     }
 
     /**

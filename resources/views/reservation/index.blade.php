@@ -59,5 +59,6 @@
                 </tbody>
             </table>
         </div>
+        {{$reservations->links()}}
     </div>
 @endsection
