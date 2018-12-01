@@ -47,7 +47,7 @@ class ReservationController extends Controller
     {
         $filterKey = $request->input('filter-key', Options::ALL_KEY);
 
-        if (isset(ReservationStatus::STATUSES_OPTIONS[$filterKey])) {
+        if (ReservationStatus::isKeyValid($filterKey)) {
             $statusId     = $this->reservationStatusRepository->getIdByTitle(ReservationStatus::STATUSES_OPTIONS[$filterKey]);
             $reservations = $this->reservationRepository->findByStatusId($statusId);
 

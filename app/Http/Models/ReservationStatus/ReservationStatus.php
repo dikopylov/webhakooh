@@ -24,4 +24,9 @@ class ReservationStatus extends Model
         return $status === self::ALL;
     }
 
+    public static function isKeyValid(string $key)
+    {
+        return array_key_exists($key, self::STATUSES_OPTIONS);
+    }
+
 }

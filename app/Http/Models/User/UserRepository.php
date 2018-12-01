@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\Collection;
 
 class UserRepository
 {
+    const MAX_ITEMS_ON_ACTIVITY_LOG_PAGE = 3;
+
     /**
      * @var RoleRepository
      */
@@ -35,7 +37,7 @@ class UserRepository
      */
     public function getAll(int $id)
     {
-        return User::where('id', '<>', $id)->paginate(3);
+        return User::where('id', '<>', $id)->paginate(self::MAX_ITEMS_ON_ACTIVITY_LOG_PAGE);
     }
 
     /**

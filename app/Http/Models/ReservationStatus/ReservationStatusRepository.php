@@ -8,7 +8,8 @@ class ReservationStatusRepository
 {
     /**
      * @param string $title
-     * @see ReservationStatus
+     * @see ReservationStatus::STATUSES_OPTIONS
+     *
      * @return int
      */
     public function getIdByTitle(string $title) : ?int

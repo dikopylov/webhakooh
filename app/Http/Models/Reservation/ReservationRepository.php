@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Collection;
 
 class ReservationRepository
 {
+    const MAX_ITEMS_ON_RESERVATION_PAGE = 2;
+
     /**
      * @param Reservation $reservation
      * @return bool
@@ -49,6 +51,6 @@ class ReservationRepository
             $builder = Reservation::orderByDesc('created_at');
         }
 
-        return $builder->paginate(2);
+        return $builder->paginate(self::MAX_ITEMS_ON_RESERVATION_PAGE);
     }
 }
