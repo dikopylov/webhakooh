@@ -5,9 +5,9 @@
         <h1><i class="fa fa-users"></i> {{__('Заказы на бронирование')}}
             <a href="{{ route('reservation.create') }}" class="btn btn-success">{{__('Добавить новый заказ')}}</a></h1>
 
-            <form method="POST" action="{{ route('reservation.filter') }}">
+            <form method="GET" action="{{ route('reservation.index') }}">
                 {{ csrf_field() }}
-                <select name="filterKey">
+                <select name="filter-key">
                     @foreach($statusOptions as $key => $value)
                         <option {{ $currentKey === $key ? 'selected' : '' }}  value="{{ $key }}">{{__($value)}}</option>
                     @endforeach
@@ -46,7 +46,7 @@
                             </p>
                             <p>
                                 <a href="{{ route('reservation.edit', $reservation->id) }}"
-                                   class="btn btn-info pull-left" style="margin-right: 3px;">Редактировать</a>
+                                   class="btn btn-info pull-left" style="margin-right: 20px;">Редактировать</a>
                             </p>
 
                                 {!! Form::open(['method' => 'DELETE', 'route' => ['reservation.destroy', $reservation->id] ]) !!}
@@ -59,6 +59,6 @@
                 </tbody>
             </table>
         </div>
-        {{$reservations->links()}}
+        {{$reservations->appends(['filter-key' => $currentKey])->links()}}
     </div>
 @endsection

@@ -11,8 +11,12 @@ class ReservationStatusRepository
      * @see ReservationStatus
      * @return int
      */
-    public function getIdByTitle(string $title) : int
+    public function getIdByTitle(string $title) : ?int
     {
+        if (ReservationStatus::isAll($title)) {
+            return null;
+        }
+
         return ReservationStatus::where('title', $title)->first()['id'];
     }
 

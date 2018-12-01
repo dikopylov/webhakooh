@@ -4,19 +4,11 @@
 namespace App\Http\Models\Reservation;
 
 
+use App\Http\Frontend\Reservations\Options;
 use Illuminate\Database\Eloquent\Collection;
 
 class ReservationRepository
 {
-
-    /**
-     * @return Collection
-     */
-    public function getAll()
-    {
-        return Reservation::orderByDesc('created_at')->paginate(4);
-    }
-
     /**
      * @param Reservation $reservation
      * @return bool
@@ -49,8 +41,14 @@ class ReservationRepository
      *
      * @return Collection
      */
-    public function findByStatusId(int $statusId)
+    public function findByStatusId($statusId = null)
     {
-        return Reservation::where('status_id', $statusId)->orderByDesc('created_at')->paginate(4);
+        if ($statusId) {
+            $builder = Reservation::where('status_id', $statusId)->orderByDesc('created_at');
+        } else {
+            $builder = Reservation::orderByDesc('created_at');
+        }
+
+        return $builder->paginate(2);
     }
 }

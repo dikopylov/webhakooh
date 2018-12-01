@@ -13,6 +13,7 @@ class ReservationsStatusesTableSeeder extends Seeder
     public function run()
     {
         DB::table('reservation_statuses')->insert([
+            ['title' => ReservationStatus::ALL],
             ['title' => ReservationStatus::NEW],
             ['title' => ReservationStatus::CONFIRMED],
             ['title' => ReservationStatus::REJECTED],

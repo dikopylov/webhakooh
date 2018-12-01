@@ -8,10 +8,10 @@ use App\Http\Enum;
 abstract class Options extends Enum
 {
     public const STATUSES_OPTIONS = [
-        'all'       => 'Все брони',
-        'new'       => 'Новые брони',
-        'confirmed' => 'Подтвержденные брони',
-        'rejected'  => 'Отклоненные брони',
+        self::ALL_KEY       => 'Все брони',
+        self::NEW_KEY       => 'Новые брони',
+        self::CONFIRMED_KEY => 'Подтвержденные брони',
+        self::REJECTED_KEY  => 'Отклоненные брони',
     ];
 
     public const ALL_KEY       = 'all';
