@@ -45,7 +45,6 @@ class ReservationController extends Controller
      */
     public function index(Request $request)
     {
-        //dd($request->input('filter-key'));
         $filterKey = $request->input('filter-key', Options::ALL_KEY);
 
         if (isset(ReservationStatus::STATUSES_OPTIONS[$filterKey])) {
