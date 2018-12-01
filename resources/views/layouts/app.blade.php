@@ -119,7 +119,7 @@
             <section class="sidebar">
                 <div class="user-panel">
                     <div class="pull-left image">
-                        <img class="bg-white rounded" src="dist/img/guest.png" class="img-circle" alt="User Image">
+                        <img class="bg-white rounded" src="{{asset('dist/img/guest.png')}}" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
                         <p>{{__('Гость')}}</p>
@@ -131,7 +131,7 @@
             <!-- Sidebar user panel -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img class="bg-white rounded" src="dist/img/admin.png" class="img-circle" alt="User Image">
+                    <img class="bg-white rounded" src="{{asset('dist/img/admin.png')}}" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
                     <p>{{ $user->first_name }} {{ $user->second_name }}</p>

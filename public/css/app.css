@@ -38,3 +38,7 @@
 .platens-delete-btn {
     margin-top: -5px;
 }
+
+.reservations-edit-select {
+    min-height: 35px;
+}
