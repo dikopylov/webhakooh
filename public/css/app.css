@@ -42,3 +42,7 @@
 .reservations-edit-select {
     min-height: 35px;
 }
+
+.content-wrapper {
+    overflow: auto;
+}

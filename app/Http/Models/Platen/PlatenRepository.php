@@ -3,16 +3,16 @@
 namespace App\Http\Models\Platen;
 
 
+use App\Http\Frontend\Platen\PlatenPagination;
+
 class PlatenRepository
 {
-    const MAX_ITEMS_ON_ACTIVITY_LOG_PAGE = 5;
-
     /**
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
     public function getAll()
     {
-        return Platen::paginate(self::MAX_ITEMS_ON_ACTIVITY_LOG_PAGE);
+        return Platen::paginate(PlatenPagination::$maxItemsOnPage);
     }
 
     /**

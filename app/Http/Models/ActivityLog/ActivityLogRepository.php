@@ -1,19 +1,18 @@
 <?php
 
-
 namespace App\Http\Models\ActivityLog;
 
+use App\Http\Frontend\ActivityLog\ActivityLogPagination;
 
 class ActivityLogRepository
 {
-    const MAX_ITEMS_ON_ACTIVITY_LOG_PAGE = 7;
 
     /**
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
     public function getAll()
     {
-        return Activity::orderByDesc('created_at')->paginate(self::MAX_ITEMS_ON_ACTIVITY_LOG_PAGE);
+        return Activity::orderByDesc('created_at')->paginate(ActivityLogPagination::$maxItemsOnPage);
     }
 
     /**

@@ -5,6 +5,7 @@ namespace App\Http\Models\User;
 
 
 use App\Http\AuthSession;
+use App\Http\Frontend\User\UserPagination;
 use App\Http\Models\InvitationKey\InvitationKeyRepository;
 use App\Http\Models\Role\RoleRepository;
 use App\Http\Models\Role\RoleType;
@@ -12,8 +13,6 @@ use Illuminate\Database\Eloquent\Collection;
 
 class UserRepository
 {
-    const MAX_ITEMS_ON_ACTIVITY_LOG_PAGE = 3;
-
     /**
      * @var RoleRepository
      */
@@ -37,7 +36,7 @@ class UserRepository
      */
     public function getAll(int $id)
     {
-        return User::where('id', '<>', $id)->paginate(self::MAX_ITEMS_ON_ACTIVITY_LOG_PAGE);
+        return User::where('id', '<>', $id)->paginate(UserPagination::$maxItemsOnPage);
     }
 
     /**
