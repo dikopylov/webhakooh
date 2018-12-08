@@ -1,6 +1,7 @@
 {{-- \resources\views\users\index.blade.php --}}
 
 <?php
+use \App\Http\Models\Role\RoleType;
 ?>
 @extends('layouts.app')
 
@@ -61,9 +62,8 @@
                 </tbody>
             </table>
         </div>
-
-        <p><a href="{{ route('invitation-key') }}" class="btn btn-success"> Пригласительный ключ для регистрации </a>
-        </p>
+        {{$users->links()}}
+        <p><a href="{{ route('invitation-key') }}" class="btn btn-success"> Пригласительный ключ для регистрации </a></p>
 
     </div>
 

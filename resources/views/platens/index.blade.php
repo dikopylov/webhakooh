@@ -32,13 +32,14 @@
 
                             <p><a href="javascript:void(0);"
                                   onclick="deleteItem({{ $platen->id . ', \'' . route('platens.destroy', [$platen->id]) . '\''}})"
-                                  class="btn btn-danger" style="margin-right: 3px;">Удалить</a></p>
+                                  class="btn btn-danger platens-delete-btn" style="margin-right: 3px;">Удалить</a></p>
                         </td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
         </div>
+        {{$platens->links()}}
     </div>
 
 @endsection

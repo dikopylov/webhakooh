@@ -13,7 +13,7 @@
                                 <div class="form-group row">
                                     <label for="platen-id" class="col-md-4 col-form-label text-md-right">{{ __('Столик') }}</label>
                                     <div class="col-md-6">
-                                        <select id="platen-id" class="form-control" name="platen-id">
+                                        <select id="platen-id" class="form-control reservations-edit-select" name="platen-id">
                                             @foreach($platens as $platen)
                                                 @if ($platen->id === $reservation->platen->id)
                                                     <option value="{{$platen->id}}" selected>{{$platen->title}}</option>
@@ -49,7 +49,7 @@
                                 <div class="form-group row">
                                     <label for="status-id" class="col-md-4 col-form-label text-md-right">{{ __('Статус') }}</label>
                                     <div class="col-md-6">
-                                        <select id="status-id" class="form-control" name="status-id">
+                                        <select id="status-id" class="form-control reservations-edit-select" name="status-id">
                                             @foreach($statuses as $status)
                                                 @if ($status->id === $reservation->reservationStatus->id)
                                                     <option value="{{$status->id}}" selected>{{$status->title}}</option>

@@ -5,6 +5,7 @@ namespace App\Http\Models\User;
 
 
 use App\Http\AuthSession;
+use App\Http\Frontend\User\UserPagination;
 use App\Http\Models\InvitationKey\InvitationKeyRepository;
 use App\Http\Models\Role\RoleRepository;
 use App\Http\Models\Role\RoleType;
@@ -33,9 +34,9 @@ class UserRepository
      *
      * @return Collection
      */
-    public function getAll(int $id): Collection
+    public function getAll(int $id)
     {
-        return User::where('id', '<>', $id)->get();
+        return User::where('id', '<>', $id)->paginate(UserPagination::$maxItemsOnPage);
     }
 
     /**

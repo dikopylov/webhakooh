@@ -30,3 +30,19 @@
 .dropdown-menu .user-body a:hover {
     background-color: lightgrey;
 }
+
+.btn {
+    margin: 5px;
+}
+
+.platens-delete-btn {
+    margin-top: -5px;
+}
+
+.reservations-edit-select {
+    min-height: 35px;
+}
+
+.content-wrapper {
+    overflow: auto;
+}

@@ -18,12 +18,10 @@ Route::get('/logs', 'ActivityLogController@index')->name('logs');
 Route::get('/logs/{id}', 'ActivityLogController@showChanges')->name('log.changes');
 Route::get('/logs/user/{id}', 'ActivityLogController@showChangesByUser')->name('log.changes.by.user');
 
-Route::post('reservation/filter', 'ReservationController@filter')->name('reservation.filter');
-
 Route::resources(
     [
-        'users' => 'UsersManagementSystemController',
-        'platens' => 'PlatenController',
+        'users'       => 'UsersManagementSystemController',
+        'platens'     => 'PlatenController',
         'reservation' => 'ReservationController'
     ]
 );

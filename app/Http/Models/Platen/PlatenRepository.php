@@ -3,6 +3,8 @@
 namespace App\Http\Models\Platen;
 
 
+use App\Http\Frontend\Platen\PlatenPagination;
+
 class PlatenRepository
 {
     /**
@@ -10,7 +12,7 @@ class PlatenRepository
      */
     public function getAll()
     {
-        return Platen::all();
+        return Platen::paginate(PlatenPagination::$maxItemsOnPage);
     }
 
     /**
