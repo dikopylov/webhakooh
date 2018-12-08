@@ -40,19 +40,19 @@
                         <td>{{ $reservation->date }}</td>
                         <td>{{ $reservation->reservationStatus->title }}</td>
                         <td>
-                            <p>
+                            <div class="row">
                                 <a href="{{ route('reservation.show', $reservation->id) }}"
-                                   class="btn btn-success pull-left" style="margin-right: 3px;">Посмотреть детали</a>
-                            </p>
-                            <p>
+                                   class="btn btn-success pull-left">Посмотреть детали</a>
+                            </div>
+                            <div class="row">
                                 <a href="{{ route('reservation.edit', $reservation->id) }}"
-                                   class="btn btn-info pull-left" style="margin-right: 20px;">Редактировать</a>
-                            </p>
-
+                                   class="btn btn-info pull-left">Редактировать</a>
+                            </div>
+                            <div class="row">
                                 {!! Form::open(['method' => 'DELETE', 'route' => ['reservation.destroy', $reservation->id] ]) !!}
                                 {!! Form::submit('Удалить', ['class' => 'btn btn-danger']) !!}
                                 {!! Form::close() !!}
-
+                            </div>
                         </td>
                     </tr>
                 @endforeach
