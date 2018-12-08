@@ -47,10 +47,16 @@ class PlatenController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $requestData = $request->request->all();
+
+        $validator = \Validator::make($requestData, [
             'title'=>'required|max:255',
             'platen_capacity' =>'required|integer|between:1,255',
         ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator);
+        }
 
         $this->platenRepository->create($request->only('title', 'platen_capacity'));
 
@@ -82,10 +88,16 @@ class PlatenController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
+        $requestData = $request->request->all();
+
+        $validator = \Validator::make($requestData, [
             'title'=>'required|max:255',
             'platen_capacity' =>'required|integer|between:1,255',
         ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator);
+        }
 
         $this->platenRepository->update(
             $id,
@@ -110,5 +122,8 @@ class PlatenController extends Controller
     public function destroy($id)
     {
         $this->platenRepository->delete($id);
+        $platens = $this->platenRepository->getAll();
+
+        return redirect()->route('platens.index')->with('platens', $platens);
     }
 }
