@@ -60,7 +60,7 @@ use \App\Http\Models\Role\RoleType;
                 </tbody>
             </table>
         </div>
-
+        {{$users->links()}}
         <p><a href="{{ route('invitation-key') }}" class="btn btn-success"> Пригласительный ключ для регистрации </a></p>
 
     </div>

@@ -1,17 +1,18 @@
 <?php
 
-
 namespace App\Http\Models\ActivityLog;
 
+use App\Http\Frontend\ActivityLog\ActivityLogPagination;
 
 class ActivityLogRepository
 {
+
     /**
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
     public function getAll()
     {
-        return Activity::all()->sortByDesc('created_at');
+        return Activity::orderByDesc('created_at')->paginate(ActivityLogPagination::$maxItemsOnPage);
     }
 
     /**

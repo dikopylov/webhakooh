@@ -1,22 +1,12 @@
 <?php
 
-
 namespace App\Http\Models\Reservation;
 
-
+use App\Http\Frontend\Reservations\ReservationPagination;
 use Illuminate\Database\Eloquent\Collection;
 
 class ReservationRepository
 {
-
-    /**
-     * @return Collection
-     */
-    public function getAll() : Collection
-    {
-        return Reservation::all()->sortByDesc('created_at');
-    }
-
     /**
      * @param Reservation $reservation
      * @return bool
@@ -49,8 +39,14 @@ class ReservationRepository
      *
      * @return Collection
      */
-    public function findByStatusId(int $statusId): Collection
+    public function findByStatusId($statusId = null)
     {
-        return Reservation::all()->where('status_id', $statusId)->sortByDesc('created_at');
+        if ($statusId) {
+            $builder = Reservation::where('status_id', $statusId)->orderByDesc('created_at');
+        } else {
+            $builder = Reservation::orderByDesc('created_at');
+        }
+
+        return $builder->paginate(ReservationPagination::$maxItemsOnPage);
     }
 }

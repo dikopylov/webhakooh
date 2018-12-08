@@ -37,6 +37,7 @@
                 </tbody>
             </table>
         </div>
+        {{$logs->links()}}
     </div>
 
 @endsection

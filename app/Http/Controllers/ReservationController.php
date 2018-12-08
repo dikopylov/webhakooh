@@ -9,6 +9,7 @@ use App\Http\Models\Reservation\ReservationRepository;
 use App\Http\Models\ReservationStatus\ReservationStatus;
 use App\Http\Models\ReservationStatus\ReservationStatusRepository;
 use Carbon\Carbon;
+use http\Exception\InvalidArgumentException;
 use Illuminate\Http\Request;
 
 class ReservationController extends Controller
@@ -39,17 +40,25 @@ class ReservationController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $reservations = $this->reservationRepository->getAll();
+        $filterKey = $request->input('filter-key', Options::ALL_KEY);
 
-        return view('reservation.index', [
-            'reservations'  => $reservations,
-            'statusOptions' => Options::STATUSES_OPTIONS,
-            'currentKey'    => Options::ALL_KEY,
-        ]);
+        if (ReservationStatus::isKeyValid($filterKey)) {
+            $statusId     = $this->reservationStatusRepository->getIdByTitle(ReservationStatus::STATUSES_OPTIONS[$filterKey]);
+            $reservations = $this->reservationRepository->findByStatusId($statusId);
+
+            return view('reservation.index', [
+                'reservations'  => $reservations,
+                'statusOptions' => Options::STATUSES_OPTIONS,
+                'currentKey'    => $filterKey,
+            ]);
+        }
+
+        throw new InvalidArgumentException('Неверный фильтр на брони');
     }
 
     /**
@@ -93,7 +102,7 @@ class ReservationController extends Controller
         $reservation->count_persons = $request['persons-count'];
         $this->reservationRepository->save($reservation);
 
-        return $this->index();
+        return $this->index($request);
 
     }
 
@@ -162,7 +171,7 @@ class ReservationController extends Controller
         $reservation->count_persons = $request['persons-count'];
         $this->reservationRepository->save($reservation);
 
-        return $this->index();
+        return $this->index($request);
     }
 
     /**
@@ -170,35 +179,13 @@ class ReservationController extends Controller
      *
      * @param  int $id
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy(int $id)
+    public function destroy(int $id, Request $request)
     {
         $this->reservationRepository->delete($id);
 
-        return $this->index();
-    }
-
-    /**
-     * @param Request $request
-     *
-     * @return $this|\Illuminate\Http\Response
-     */
-    public function filter(Request $request)
-    {
-        $filterKey = $request->input('filterKey');
-
-        if (isset(ReservationStatus::STATUSES_OPTIONS[$filterKey])) {
-            $statusId     = $this->reservationStatusRepository->getIdByTitle(ReservationStatus::STATUSES_OPTIONS[$filterKey]);
-            $reservations = $this->reservationRepository->findByStatusId($statusId);
-
-            return view('reservation.index', [
-                'reservations'  => $reservations,
-                'statusOptions' => Options::STATUSES_OPTIONS,
-                'currentKey'    => $filterKey,
-            ]);
-        }
-
-        return $this->index();
+        return redirect()->route('reservation.index')->with($request->toArray());
     }
 }
