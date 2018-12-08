@@ -186,6 +186,6 @@ class ReservationController extends Controller
     {
         $this->reservationRepository->delete($id);
 
-        return redirect()->route('reservation.index')->with($request->toArray());
+        //return redirect()->route('reservation.index')->with($request->toArray());
     }
 }

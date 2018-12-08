@@ -46,3 +46,7 @@
 .content-wrapper {
     overflow: auto;
 }
+
+.table-responsive {
+    overflow-x: hidden !important;
+}

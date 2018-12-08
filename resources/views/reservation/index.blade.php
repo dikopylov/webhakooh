@@ -47,12 +47,12 @@
                             <div class="row">
                                 <a href="{{ route('reservation.edit', $reservation->id) }}"
                                    class="btn btn-info pull-left" style="margin-right: 3px;">Редактировать</a>
-                            </p>
-
-                                {!! Form::open(['method' => 'DELETE', 'route' => ['reservation.destroy', $reservation->id] ]) !!}
-                                {!! Form::submit('Удалить', ['class' => 'btn btn-danger']) !!}
-                                {!! Form::close() !!}
-
+                            </div>
+                            <div class="row">
+                                <a href="javascript:void(0);"
+                                   onclick="deleteItem({{ $reservation->id. ', \'' . route('reservation.destroy', [$reservation->id]) . '\''}})"
+                                   class="btn btn-danger" style="margin-right: 3px;">Удалить</a>
+                            </div>
                         </td>
                     </tr>
                 @endforeach
