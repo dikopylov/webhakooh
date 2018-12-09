@@ -50,3 +50,13 @@
 .table-responsive {
     overflow-x: hidden !important;
 }
+
+.platen-alert-block {
+    position: relative;
+}
+
+.platen-close-alert-button {
+    position: absolute !important;
+    right: 0 !important;
+    color: white !important;
+}

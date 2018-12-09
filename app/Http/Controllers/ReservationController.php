@@ -185,7 +185,5 @@ class ReservationController extends Controller
     public function destroy(int $id, Request $request)
     {
         $this->reservationRepository->delete($id);
-
-        //return redirect()->route('reservation.index')->with($request->toArray());
     }
 }

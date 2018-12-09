@@ -8,6 +8,14 @@
         <h1><i class="fa fa-users"></i> Столы
         <a href="{{ route('platens.create') }}" class="btn btn-success">Добавить новый стол</a></h1>
         <hr>
+        @if (isset($success))
+            <div class="alert alert-success col-3 text-center alert-dismissible platen-alert-block" role="alert">
+                <button type="button" class="close platen-close-alert-button" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{$success}}
+            </div>
+        @endif
         <div class="table-responsive">
             <table class="table table-bordered table-striped">
 
