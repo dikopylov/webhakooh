@@ -41,9 +41,10 @@ class ReservationController extends Controller
      * Display a listing of the resource.
      *
      * @param Request $request
+     * @param string|null $message
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, string $message = null)
     {
         $filterKey = $request->input('filter-key', Options::ALL_KEY);
 
@@ -51,11 +52,16 @@ class ReservationController extends Controller
             $statusId     = $this->reservationStatusRepository->getIdByTitle(ReservationStatus::STATUSES_OPTIONS[$filterKey]);
             $reservations = $this->reservationRepository->findByStatusId($statusId);
 
-            return view('reservation.index', [
+            $viewParams = [
                 'reservations'  => $reservations,
                 'statusOptions' => Options::STATUSES_OPTIONS,
                 'currentKey'    => $filterKey,
-            ]);
+            ];
+
+            if ($message) {
+                $viewParams['message'] = $message;
+            }
+            return view('reservation.index', $viewParams);
         }
 
         throw new InvalidArgumentException('Неверный фильтр на брони');
@@ -102,7 +108,7 @@ class ReservationController extends Controller
         $reservation->count_persons = $request['persons-count'];
         $this->reservationRepository->save($reservation);
 
-        return $this->index($request);
+        return $this->index($request, 'Заказ успешно создан!');
 
     }
 
@@ -171,7 +177,7 @@ class ReservationController extends Controller
         $reservation->count_persons = $request['persons-count'];
         $this->reservationRepository->save($reservation);
 
-        return $this->index($request);
+        return $this->index($request, 'Заказ успешно изменен!');
     }
 
     /**
