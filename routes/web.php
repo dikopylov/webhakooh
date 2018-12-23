@@ -26,3 +26,4 @@ Route::resources(
     ]
 );
 
+Route::post('reservation/get-free-times', 'ReservationController@getFreeTimes')->name('reservation.get-free-times');

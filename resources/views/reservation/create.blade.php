@@ -12,7 +12,7 @@
                                 <div class="form-group row">
                                     <label for="platen-id" class="col-md-4 col-form-label text-md-right">{{ __('Столик') }}</label>
                                     <div class="col-md-6">
-                                        <select id="platen-id" class="form-control" name="platen-id">
+                                        <select id="platen-id" onchange="loadTimeSelect($('#platen-id').val(), $(this).val(), '{{route('reservation.get-free-times')}}')" class="form-control" name="platen-id">
                                             @foreach($platens as $platen)
                                                 <option value="{{$platen->id}}">{{$platen->title}}</option>
                                             @endforeach
@@ -21,13 +21,20 @@
                                 </div>
                                 <div class="form-group row">
                                     <label for="visit-date" class="col-md-4 col-form-label text-md-right">{{ __('Дата и время посещения') }}</label>
-                                    <div class="col-md-6">
-                                        <input id="visit-date" type="datetime-local" class="form-control{{ $errors->has('visit-date') ? ' is-invalid' : '' }}" name="visit-date"  value="{{ old('visit-date') }}" required autofocus>
+                                    <div class="col-md-3">
+                                        <input id="visit-date" onchange="loadTimeSelect($('#platen-id').val(), $(this).val(), '{{route('reservation.get-free-times')}}')" type="date" class="form-control{{ $errors->has('visit-date') ? ' is-invalid' : '' }}" name="visit-date"  value="{{ $date }}" required autofocus>
                                         @if ($errors->has('visit-date'))
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $errors->first('visit-date') }}</strong>
                                             </span>
                                         @endif
+                                    </div>
+                                    <div class="col-md-3">
+                                        <select name="visit-time" id="visit-time" class="form-control reservations-edit-select">
+                                            @foreach($times as $time)
+                                                <option value="{{$time}}">{{$time}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">

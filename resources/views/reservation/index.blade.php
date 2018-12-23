@@ -37,7 +37,7 @@
                         <td>{{ $reservation->id }}</td>
                         <td>{{ $reservation->platen->title }}</td>
                         <td>{{ $reservation->count_persons }}</td>
-                        <td>{{ $reservation->date }}</td>
+                        <td>{{ $reservation->date }} {{$reservation->time}}</td>
                         <td>{{ $reservation->reservationStatus->title }}</td>
                         <td>
                             <div class="row">

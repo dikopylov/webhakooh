@@ -9,4 +9,28 @@ $(document).ready(function () {
     });
 });
 
+function loadTimeSelect(platenId, date, url)
+{
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $.post(url, {
+        platenId     : platenId,
+        date         : date
+    }, function (response) {
+        var times = response;
+        var options = '';
+        times.forEach(function (value) {
+            options += "<option value='" + value + "'>" + value + "</option>";
+        })
+
+        var visitTimeSelect = $('#visit-time');
+        visitTimeSelect.removeData();
+        visitTimeSelect.html(options);
+    });
+}
+
 

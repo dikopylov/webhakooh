@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Frontend\DateFormats;
 use App\Http\Frontend\Reservations\Options;
 use App\Http\Models\Platen\PlatenRepository;
 use App\Http\Models\Reservation\Reservation;
 use App\Http\Models\Reservation\ReservationRepository;
+use App\Http\Models\Reservation\TimeStingsFactory;
 use App\Http\Models\ReservationStatus\ReservationStatus;
 use App\Http\Models\ReservationStatus\ReservationStatusRepository;
 use Carbon\Carbon;
@@ -29,11 +31,22 @@ class ReservationController extends Controller
      */
     private $reservationStatusRepository;
 
-    public function __construct(PlatenRepository $platenRepository, ReservationRepository $reservationRepository, ReservationStatusRepository $reservationStatusRepository)
+    /**
+     * @var TimeStingsFactory
+     */
+    private $timeStringsFactory;
+
+    public function __construct(
+        PlatenRepository            $platenRepository,
+        ReservationRepository       $reservationRepository,
+        ReservationStatusRepository $reservationStatusRepository,
+        TimeStingsFactory           $timeStingsFactory
+    )
     {
         $this->platenRepository            = $platenRepository;
         $this->reservationRepository       = $reservationRepository;
         $this->reservationStatusRepository = $reservationStatusRepository;
+        $this->timeStringsFactory          = $timeStingsFactory;
         $this->middleware(['auth']);
     }
 
@@ -69,8 +82,23 @@ class ReservationController extends Controller
     public function create()
     {
         $platens = $this->platenRepository->getAll();
+        $defaultDate = Carbon::tomorrow()->toDateString();
+        $bookedTimes = $this->reservationRepository->findBookedTimesByPlatenIdAndDate((int) $platens->first()->id, $defaultDate);
+        $times       = $this->timeStringsFactory->make($bookedTimes);
 
-        return view('reservation.create')->with('platens', $platens);
+        return view('reservation.create', [
+            'date'        => $defaultDate,
+            'platens'     => $platens,
+            'times'       => $times,
+        ]);
+    }
+
+    public function getFreeTimes(Request $request)
+    {
+        $bookedTimes = $this->reservationRepository->findBookedTimesByPlatenIdAndDate((int) $request['platenId'], $request['date']);
+        $times       = $this->timeStringsFactory->make($bookedTimes);
+
+        return $times;
     }
 
     /**
@@ -82,12 +110,12 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        $minDate     = Carbon::now();
+        $now         = Carbon::now();
         $requestData = $request->request->all();
 
         $validator = \Validator::make($requestData, [
             'platen-id'     => 'required|integer',
-            'visit-date'    => "required|after:{$minDate}",
+            'visit-date'    => "required|after:{$now}",
             'persons-count' => 'required|integer|max:65535',
         ]);
 
@@ -98,6 +126,7 @@ class ReservationController extends Controller
         $reservation                = new Reservation();
         $reservation->platen_id     = $request['platen-id'];
         $reservation->date          = $request['visit-date'];
+        $reservation->time          = $request['visit-time'];
         $reservation->status_id     = $this->reservationStatusRepository->getIdByTitle(ReservationStatus::NEW);
         $reservation->count_persons = $request['persons-count'];
         $this->reservationRepository->save($reservation);
@@ -132,11 +161,15 @@ class ReservationController extends Controller
         $platens     = $this->platenRepository->getAll();
         $statuses    = $this->reservationStatusRepository->getAll();
         $reservation = $this->reservationRepository->find($id);
+        $bookedTimes = $this->reservationRepository->findBookedTimesByReservation($reservation);
+        $times       = $this->timeStringsFactory->make($bookedTimes);
 
         return view('reservation.edit', [
                 'platens'     => $platens,
                 'statuses'    => $statuses,
-                'reservation' => $reservation]
+                'reservation' => $reservation,
+                'times'       => $times,
+            ]
         );
     }
 
@@ -167,6 +200,7 @@ class ReservationController extends Controller
         $reservation                = $this->reservationRepository->find($id);
         $reservation->platen_id     = $request['platen-id'];
         $reservation->date          = $request['visit-date'];
+        $reservation->time          = $request['visit-time'];
         $reservation->status_id     = $request['status-id'];
         $reservation->count_persons = $request['persons-count'];
         $this->reservationRepository->save($reservation);
