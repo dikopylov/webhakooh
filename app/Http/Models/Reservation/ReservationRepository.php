@@ -64,7 +64,13 @@ class ReservationRepository
             $whereConditions[] = ['id', '!=', $reservationId];
         }
 
-        return \DB::table($this->table)->where($whereConditions)->get(['time'])->toArray();
+        $times = [];
+        $reservations = \DB::table($this->table)->where($whereConditions)->get(['time']);
+        foreach ($reservations as $reservation) {
+            $times[] = $reservation->time;
+        }
+
+        return $times;
     }
 
     /**

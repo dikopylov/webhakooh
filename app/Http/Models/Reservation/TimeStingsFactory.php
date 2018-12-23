@@ -15,7 +15,7 @@ class TimeStingsFactory
     {
         $bookedTimesDateTime = [];
         foreach ($bookedTimes as $bookedTime) {
-            $bookedTimesDateTime = Carbon::parse($bookedTime);
+            $bookedTimesDateTime[] = Carbon::parse($bookedTime);
         }
 
         $times   = [];
