@@ -35,6 +35,15 @@ class ReservationRepository
     }
 
     /**
+     * @param int $platenId
+     * @return mixed
+     */
+    public function deleteByPlatenId(int $platenId)
+    {
+        return Reservation::where('platen_id', $platenId)->delete();
+    }
+
+    /**
      * @param int $statusId
      *
      * @return Collection

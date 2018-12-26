@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Models\Platen\PlatenRepository;
+use App\Http\Models\Reservation\ReservationRepository;
 use Illuminate\Http\Request;
 
 class PlatenController extends Controller
@@ -13,8 +14,14 @@ class PlatenController extends Controller
      */
     private $platenRepository;
 
-    public function __construct(PlatenRepository $platenRepository) {
-        $this->platenRepository = $platenRepository;
+    /**
+     * @var ReservationRepository
+     */
+    private $reservationRepository;
+
+    public function __construct(PlatenRepository $platenRepository, ReservationRepository $reservationRepository) {
+        $this->platenRepository      = $platenRepository;
+        $this->reservationRepository = $reservationRepository;
         $this->middleware(['auth', 'check.admin' ]);
     }
 
@@ -114,6 +121,7 @@ class PlatenController extends Controller
      */
     public function destroy($id)
     {
+        $this->reservationRepository->deleteByPlatenId($id);
         $this->platenRepository->delete($id);
         $platens = $this->platenRepository->getAll();
 
