@@ -30,13 +30,17 @@ class UsersManagementSystemController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param string $message
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(string $message = null)
     {
         $users = $this->userRepository->getAll(\Auth::id());
 
-        return view('users.index')->with('users', $users);
+        return view('users.index', [
+            'users' => $users,
+            'message' => $message,
+        ]);
     }
 
 
@@ -80,18 +84,22 @@ class UsersManagementSystemController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $message = null;
         $user = $this->userRepository->find($id);
 
         $roles = $request['roles'];
 
         if (isset($roles)) {
-            $user->roles()->sync($roles);  //If one or more role is selected associate user to roles
+            if ($user->roles()->pluck('id')->toArray() === [] || (int)$user->roles()->pluck('id')[0] !== (int)$roles[0]) {
+                $message = 'Пользователь успешно отредактирован!';
+            }
+            $user->roles()->sync($roles);
         }
         else {
             $user->roles()->detach(); //If no role is selected remove exisiting role associated to a user
         }
 
-        return redirect()->route('users.index');
+        return $this->index($message);
     }
 
     /**

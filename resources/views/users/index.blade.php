@@ -13,6 +13,14 @@ use \App\Http\Models\Role\RoleType;
         <h1><i class="fa fa-users"></i> Пользователи
         </h1>
         <hr>
+        @if (isset($message))
+            <div class="alert alert-success col-3 text-center alert-dismissible platen-alert-block" role="alert">
+                <button type="button" class="close platen-close-alert-button" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{$message}}
+            </div>
+        @endif
         <div class="table-responsive">
             <table class="table table-bordered table-striped">
 

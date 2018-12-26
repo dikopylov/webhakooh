@@ -110,8 +110,8 @@ class PlatenController extends Controller
 
         $platens = $this->platenRepository->getAll();
 
-        return redirect()->route('platens.index')
-            ->with([
+        return view('platens.index',
+            [
                 'platens' => $platens,
                 'success' => 'Стол успешно отредактирован!'
             ]);
