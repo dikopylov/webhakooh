@@ -194,7 +194,7 @@ class ReservationController extends Controller
     public function update(Request $request, int $id)
     {
         $minDate = Carbon::now();
-
+        $message = null;
         $requestData = $request->request->all();
 
         $validator = \Validator::make($requestData, [
@@ -210,12 +210,16 @@ class ReservationController extends Controller
         $reservation                = $this->reservationRepository->find($id);
         $reservation->platen_id     = $request['platen-id'];
         $reservation->date          = $request['visit-date'];
-        $reservation->time          = $request['visit-time'];
+        $reservation->time          = Carbon::parse($request['visit-time'])->toTimeString();
         $reservation->status_id     = $request['status-id'];
         $reservation->count_persons = $request['persons-count'];
-        $this->reservationRepository->save($reservation);
 
-        return $this->index($request, 'Заказ успешно изменен!');
+        if($reservation->isDirty()) {
+            $this->reservationRepository->save($reservation);
+            $message = 'Заказ успешно изменен!';
+        }
+
+        return $this->index($request, $message);
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Models\Platen\Platen;
 use App\Http\Models\Platen\PlatenRepository;
 use App\Http\Models\Reservation\ReservationRepository;
 use Illuminate\Http\Request;
@@ -65,14 +66,18 @@ class PlatenController extends Controller
             return back()->withErrors($validator);
         }
 
-        $this->platenRepository->create($request->only('title', 'platen_capacity'));
+        $platen = new Platen();
+        $platen->capacity  = (int) $request['platen_capacity'];
+        $platen->title     = $request['title'];
+
+        $this->platenRepository->save($platen);
 
         $platens = $this->platenRepository->getAll();
 
         return view('platens.index',
             [
                 'platens' => $platens,
-                'success' => 'Стол успешно создан!'
+                'message' => 'Стол успешно создан!'
             ]);
     }
 
@@ -99,6 +104,7 @@ class PlatenController extends Controller
     public function update(Request $request, $id)
     {
         $requestData = $request->request->all();
+        $message     = null;
 
         $validator = \Validator::make($requestData, [
             'title'=>'required|max:255',
@@ -109,18 +115,19 @@ class PlatenController extends Controller
             return back()->withErrors($validator);
         }
 
-        $this->platenRepository->update(
-            $id,
-            $request->input('title'),
-            $request->input('platen_capacity')
-        );
-
+        $platen = $this->platenRepository->find($id);
+        $platen->capacity  = (int) $request['platen_capacity'];
+        $platen->title     = $request['title'];
+        if ($platen->isDirty()) {
+            $message = 'Стол успешно отредактирован!';
+            $this->platenRepository->save($platen);
+        }
         $platens = $this->platenRepository->getAll();
 
         return view('platens.index',
             [
                 'platens' => $platens,
-                'success' => 'Стол успешно отредактирован!'
+                'message' => $message
             ]);
     }
 
