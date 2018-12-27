@@ -203,4 +203,5 @@
 <!-- AdminLTE App -->
 <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
 </body>
+<script type="text/javascript" src="{{ asset('js/confirm-delete.js') }}"></script>
 </html>

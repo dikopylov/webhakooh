@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="col-lg-10 col-lg-offset-1">
+    <div class="col-lg-12">
         <h1><i class="fa fa-users"></i> {{__('Заказы на бронирование')}}
             <a href="{{ route('reservation.create') }}" class="btn btn-success">{{__('Добавить новый заказ')}}</a></h1>
 
@@ -18,6 +18,14 @@
 
             </form>
         <hr>
+        @if (isset($message))
+            <div class="alert alert-success col-3 text-center alert-dismissible platen-alert-block" role="alert">
+                <button type="button" class="close platen-close-alert-button" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{$message}}
+            </div>
+        @endif
         <div class="table-responsive">
             <table class="table table-bordered table-striped">
                 <thead>
@@ -33,7 +41,7 @@
                 <tbody>
                 <?php /** @var \App\Http\Models\Reservation\Reservation $reservation */  ?>
                 @foreach ($reservations as $reservation)
-                    <tr>
+                    <tr id="{{ $reservation->id }}">
                         <td>{{ $reservation->id }}</td>
                         <td>{{ $reservation->platen->title }}</td>
                         <td>{{ $reservation->count_persons }}</td>
@@ -46,12 +54,12 @@
                             </div>
                             <div class="row">
                                 <a href="{{ route('reservation.edit', $reservation->id) }}"
-                                   class="btn btn-info pull-left">Редактировать</a>
+                                   class="btn btn-info pull-left" style="margin-right: 3px;">Редактировать</a>
                             </div>
                             <div class="row">
-                                {!! Form::open(['method' => 'DELETE', 'route' => ['reservation.destroy', $reservation->id] ]) !!}
-                                {!! Form::submit('Удалить', ['class' => 'btn btn-danger']) !!}
-                                {!! Form::close() !!}
+                                <a href="javascript:void(0);"
+                                   onclick="deleteItem({{ $reservation->id. ', \'' . route('reservation.destroy', [$reservation->id]) . '\''}})"
+                                   class="btn btn-danger" style="margin-right: 3px;">Удалить</a>
                             </div>
                         </td>
                     </tr>

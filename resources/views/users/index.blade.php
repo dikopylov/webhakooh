@@ -9,12 +9,18 @@ use \App\Http\Models\Role\RoleType;
 
 @section('content')
 
-    <div class="col-lg-10 col-lg-offset-1">
+    <div class="col-lg-12">
         <h1><i class="fa fa-users"></i> Пользователи
-            {{--<a href="{{ route('roles.index') }}" class="btn btn-default pull-right">Роли</a>--}}
-            {{--<a href="{{ route('permissions.index') }}" class="btn btn-default pull-right">Операции</a>--}}
         </h1>
         <hr>
+        @if (isset($message))
+            <div class="alert alert-success col-3 text-center alert-dismissible platen-alert-block" role="alert">
+                <button type="button" class="close platen-close-alert-button" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{$message}}
+            </div>
+        @endif
         <div class="table-responsive">
             <table class="table table-bordered table-striped">
 
@@ -34,7 +40,7 @@ use \App\Http\Models\Role\RoleType;
 
                 <tbody>
                 @foreach ($users as $user)
-                    <tr>
+                    <tr id="{{ $user->id }}">
 
                         <td>{{ $user->id }}</td>
                         <td>{{ $user->login }}</td>
@@ -45,13 +51,17 @@ use \App\Http\Models\Role\RoleType;
                         <td>{{ $user->created_at }}</td>
                         <td>{{ $user->roles()->pluck('name')->implode(' ') }}</td>{{-- Retrieve array of roles associated to a user and convert to string --}}
                         <td>
-                            <p><a href="{{ route('log.changes.by.user', $user->id) }}" class="btn btn-info pull-left" style="margin-right: 3px;">Посмотреть действия</a></p>
+                            <p><a href="{{ route('log.changes.by.user', $user->id) }}" class="btn btn-info pull-left"
+                                  style="margin-right: 3px;">Посмотреть действия</a></p>
                             @if(!$user->hasRole(RoleType::ADMINISTRATOR))
-                                <p><a href="{{ route('users.edit', $user->id) }}" class="btn btn-info pull-left" style="margin-right: 3px;">Редактировать</a></p>
+                                <p><a href="{{ route('users.edit', $user->id) }}" class="btn btn-info pull-left"
+                                      style="margin-right: 3px;">Редактировать</a></p>
 
-                                {!! Form::open(['method' => 'DELETE', 'route' => ['users.destroy', $user->id] ]) !!}
-                                {!! Form::submit('Удалить', ['class' => 'btn btn-danger']) !!}
-                                {!! Form::close() !!}
+
+                                <p><a href="javascript:void(0);"
+                                      onclick="deleteItem({{ $user->id . ', \'' . route('users.destroy', [$user->id]) . '\''}})"
+                                      class="btn btn-danger" style="margin-right: 3px;">Удалить</a></p>
+
                             @endif
 
                         </td>

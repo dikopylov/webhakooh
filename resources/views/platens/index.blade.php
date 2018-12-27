@@ -4,10 +4,18 @@
 
 @section('content')
 
-    <div class="col-lg-10 col-lg-offset-1">
+    <div class="col-lg-12">
         <h1><i class="fa fa-users"></i> Столы
         <a href="{{ route('platens.create') }}" class="btn btn-success">Добавить новый стол</a></h1>
         <hr>
+        @if (isset($message))
+            <div class="alert alert-success col-3 text-center alert-dismissible platen-alert-block" role="alert">
+                <button type="button" class="close platen-close-alert-button" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{$message}}
+            </div>
+        @endif
         <div class="table-responsive">
             <table class="table table-bordered table-striped">
 
@@ -22,7 +30,7 @@
 
                 <tbody>
                 @foreach ($platens as $platen)
-                    <tr>
+                    <tr id="{{ $platen->id }}">
 
                         <td>{{ $platen->id }}</td>
                         <td>{{ $platen->title }}</td>
@@ -30,9 +38,9 @@
                         <td>
                             <p><a href="{{ route('platens.edit', $platen->id) }}" class="btn btn-info pull-left" style="margin-right: 3px;">Редактировать</a></p>
 
-                            {!! Form::open(['method' => 'DELETE', 'route' => ['platens.destroy', $platen->id] ]) !!}
-                            {!! Form::submit('Удалить', ['class' => 'btn btn-danger platens-delete-btn']) !!}
-                            {!! Form::close() !!}
+                            <p><a href="javascript:void(0);"
+                                  onclick="deleteItem({{ $platen->id . ', \'' . route('platens.destroy', [$platen->id]) . '\''}})"
+                                  class="btn btn-danger platens-delete-btn" style="margin-right: 3px;">Удалить</a></p>
                         </td>
                     </tr>
                 @endforeach

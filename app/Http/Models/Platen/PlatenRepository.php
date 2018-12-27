@@ -4,6 +4,7 @@ namespace App\Http\Models\Platen;
 
 
 use App\Http\Frontend\Platen\PlatenPagination;
+use Illuminate\Database\Eloquent\Model;
 
 class PlatenRepository
 {
@@ -16,38 +17,21 @@ class PlatenRepository
     }
 
     /**
-     * @param array $data
-     * @return mixed
-     */
-    public function create(array $data)
-    {
-        return Platen::create([
-            'title' => $data['title'],
-            'capacity' => $data['platen_capacity'],
-            'is_delete' => false,
-        ]);
-    }
-
-    /**
      * @param $id
-     * @return mixed
+     * @return Model
      */
-    public function find($id)
+    public function find($id): Model
     {
         return Platen::find($id);
     }
 
     /**
-     * @param $id
-     * @param $title
-     * @param $capacity
+     * @param Platen $platen
+     * @return bool
      */
-    public function update($id, $title, $capacity)
+    public function save(Platen $platen): bool
     {
-        $platen = $this->find($id);
-        $platen->title = $title;
-        $platen->capacity = $capacity;
-        $platen->save();
+        return $platen->save();
     }
 
     /**
