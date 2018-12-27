@@ -47,10 +47,6 @@
     overflow: auto;
 }
 
-.table-responsive {
-    overflow-x: hidden !important;
-}
-
 .platen-alert-block {
     position: relative;
 }

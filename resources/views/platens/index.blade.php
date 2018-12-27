@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <div class="col-lg-10 col-lg-offset-1">
+    <div class="col-lg-12">
         <h1><i class="fa fa-users"></i> Столы
         <a href="{{ route('platens.create') }}" class="btn btn-success">Добавить новый стол</a></h1>
         <hr>
