@@ -83,7 +83,7 @@ class ReservationController extends Controller
     {
         $platens = $this->platenRepository->getAll();
         $defaultDate = Carbon::tomorrow()->toDateString();
-        $bookedTimes = $this->reservationRepository->findBookedTimesByPlatenIdAndDate((int) $platens->first()->id, $defaultDate);
+        $bookedTimes = $this->reservationRepository->getBookedTimes((int) $platens->first()->id, $defaultDate, null);
         $times       = $this->timeStringsFactory->make($bookedTimes);
 
         return view('reservation.create', [
@@ -95,7 +95,11 @@ class ReservationController extends Controller
 
     public function getFreeTimes(Request $request)
     {
-        $bookedTimes = $this->reservationRepository->findBookedTimesByPlatenIdAndDate((int) $request['platenId'], $request['date']);
+        $reservationId = null;
+        if ($request['reservationId']) {
+            $reservationId = (int) $request['reservationId'];
+        }
+        $bookedTimes = $this->reservationRepository->getBookedTimes((int) $request['platenId'], $request['date'], (int)$reservationId);
         $times       = $this->timeStringsFactory->make($bookedTimes);
 
         return $times;
@@ -161,7 +165,7 @@ class ReservationController extends Controller
         $platens     = $this->platenRepository->getAll();
         $statuses    = $this->reservationStatusRepository->getAll();
         $reservation = $this->reservationRepository->find($id);
-        $bookedTimes = $this->reservationRepository->findBookedTimesByReservation($reservation);
+        $bookedTimes = $this->reservationRepository->getBookedTimes((int) $reservation->platen_id, $reservation->date, (int) $reservation->id);
         $times       = $this->timeStringsFactory->make($bookedTimes);
 
         return view('reservation.edit', [

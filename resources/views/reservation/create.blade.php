@@ -12,7 +12,7 @@
                                 <div class="form-group row">
                                     <label for="platen-id" class="col-md-4 col-form-label text-md-right">{{ __('Столик') }}</label>
                                     <div class="col-md-6">
-                                        <select id="platen-id" onchange="loadTimeSelect($('#platen-id').val(), $(this).val(), '{{route('reservation.get-free-times')}}')" class="form-control" name="platen-id">
+                                        <select id="platen-id" onchange="loadTimeSelect($(this).val(), $('#visit-date').val(), '{{route('reservation.get-free-times')}}')" class="form-control reservations-edit-select" name="platen-id">
                                             @foreach($platens as $platen)
                                                 <option value="{{$platen->id}}">{{$platen->title}}</option>
                                             @endforeach
@@ -49,7 +49,11 @@
                                     </div>
                                 </div>
                                 <div class="form-group row mb-0">
-                                    <div class="col-md-6 offset-md-4">
+                                    <div class="col-md-3">
+                                        <p><a href="{{ route('reservation.index') }}" class="btn btn-dark btn-default">
+                                                {{__('Назад')}}</a></p>
+                                    </div>
+                                    <div class="col-md-9" style="padding-left: 60%">
                                         <button type="submit" class="btn btn-primary">
                                             {{ __('Добавить') }}
                                         </button>

@@ -29,31 +29,12 @@ class ReservationRepository
     }
 
     /**
-     * @param Reservation $reservation
-     * @return string[]
-     */
-    public function findBookedTimesByReservation(Reservation $reservation): array
-    {
-        return $this->getBookedTimes((int) $reservation->platen_id, $reservation->date, (int) $reservation->id);
-    }
-
-    /**
-     * @param int $platenId
-     * @param string $date
-     * @return string[]
-     */
-    public function findBookedTimesByPlatenIdAndDate(int $platenId, string $date): array
-    {
-        return $this->getBookedTimes($platenId, $date, null);
-    }
-
-    /**
      * @param int $platenId
      * @param string $date
      * @param int|null $reservationId
      * @return string[]
      */
-    private function getBookedTimes(int $platenId, string $date, ?int $reservationId): array
+    public function getBookedTimes(int $platenId, string $date, ?int $reservationId): array
     {
         $whereConditions = [
             ['date', '=', $date],

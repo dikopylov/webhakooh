@@ -13,7 +13,7 @@
                                 <div class="form-group row">
                                     <label for="platen-id" class="col-md-4 col-form-label text-md-right">{{ __('Столик') }}</label>
                                     <div class="col-md-6">
-                                        <select id="platen-id" onchange="loadTimeSelect($(this).val(), $('#visit-date').val(), '{{route('reservation.get-free-times')}}')" class="form-control reservations-edit-select" name="platen-id">
+                                        <select id="platen-id" onchange="loadTimeSelect($(this).val(), $('#visit-date').val(), '{{route('reservation.get-free-times')}}', '{{$reservation->id}}')" class="form-control reservations-edit-select" name="platen-id">
                                             @foreach($platens as $platen)
                                                 @if ($platen->id === $reservation->platen->id)
                                                     <option value="{{$platen->id}}" selected>{{$platen->title}}</option>
@@ -27,7 +27,7 @@
                                 <div class="form-group row">
                                     <label for="visit-date" class="col-md-4 col-form-label text-md-right">{{ __('Дата и время посещения') }}</label>
                                     <div class="col-md-3">
-                                        <input id="visit-date" onchange="loadTimeSelect($('#platen-id').val(), $(this).val(), '{{route('reservation.get-free-times')}}')" type="date" class="form-control{{ $errors->has('visit-date') ? ' is-invalid' : '' }}" name="visit-date"  value="{{ $reservation->date }}" required autofocus>
+                                        <input id="visit-date" onchange="loadTimeSelect($('#platen-id').val(), $(this).val(), '{{route('reservation.get-free-times')}}', '{{$reservation->id}}')" type="date" class="form-control{{ $errors->has('visit-date') ? ' is-invalid' : '' }}" name="visit-date"  value="{{ $reservation->date }}" required autofocus>
                                         @if ($errors->has('visit-date'))
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $errors->first('visit-date') }}</strong>

@@ -9,7 +9,7 @@ $(document).ready(function () {
     });
 });
 
-function loadTimeSelect(platenId, date, url)
+function loadTimeSelect(platenId, date, url, reservationId = null)
 {
     $.ajaxSetup({
         headers: {
@@ -18,8 +18,9 @@ function loadTimeSelect(platenId, date, url)
     });
 
     $.post(url, {
-        platenId     : platenId,
-        date         : date
+        platenId      : platenId,
+        date          : date,
+        reservationId : reservationId
     }, function (response) {
         var times = response;
         var options = '';
