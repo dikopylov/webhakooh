@@ -8,11 +8,16 @@ class ReservationStatusRepository
 {
     /**
      * @param string $title
-     * @see ReservationStatus
+     * @see ReservationStatus::STATUSES_OPTIONS
+     *
      * @return int
      */
-    public function getIdByTitle(string $title) : int
+    public function getIdByTitle(string $title) : ?int
     {
+        if (ReservationStatus::isAll($title)) {
+            return null;
+        }
+
         return ReservationStatus::where('title', $title)->first()['id'];
     }
 

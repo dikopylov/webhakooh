@@ -1,21 +1,14 @@
 <?php
 
-
 namespace App\Http\Models\Reservation;
 
-
+use App\Http\Frontend\Reservations\ReservationPagination;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 
 class ReservationRepository
 {
-
-    /**
-     * @return Collection
-     */
-    public function getAll() : Collection
-    {
-        return Reservation::all()->sortByDesc('created_at');
-    }
+    private $table = 'reservations';
 
     /**
      * @param Reservation $reservation
@@ -36,6 +29,32 @@ class ReservationRepository
     }
 
     /**
+     * @param int $platenId
+     * @param string $date
+     * @param int|null $reservationId
+     * @return string[]
+     */
+    public function getBookedTimes(int $platenId, string $date, ?int $reservationId): array
+    {
+        $whereConditions = [
+            ['date', '=', $date],
+            ['platen_id', '=', $platenId],
+        ];
+
+        if ($reservationId) {
+            $whereConditions[] = ['id', '!=', $reservationId];
+        }
+
+        $times = [];
+        $reservations = \DB::table($this->table)->where($whereConditions)->get(['time']);
+        foreach ($reservations as $reservation) {
+            $times[] = $reservation->time;
+        }
+
+        return $times;
+    }
+
+    /**
      * @param $id
      * @return int
      */
@@ -45,12 +64,27 @@ class ReservationRepository
     }
 
     /**
+     * @param int $platenId
+     * @return mixed
+     */
+    public function deleteByPlatenId(int $platenId)
+    {
+        return Reservation::where('platen_id', $platenId)->delete();
+    }
+
+    /**
      * @param int $statusId
      *
      * @return Collection
      */
-    public function findByStatusId(int $statusId): Collection
+    public function findByStatusId($statusId = null)
     {
-        return Reservation::all()->where('status_id', $statusId)->sortByDesc('created_at');
+        if ($statusId) {
+            $builder = Reservation::where('status_id', $statusId)->orderByDesc('created_at');
+        } else {
+            $builder = Reservation::orderByDesc('created_at');
+        }
+
+        return $builder->paginate(ReservationPagination::$maxItemsOnPage);
     }
 }

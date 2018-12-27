@@ -70,7 +70,7 @@
                                 <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Номер телефона') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="phone" type="text" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{ Auth::user()->phone }}" required autofocus>
+                                    <input id="phone" type="number" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{ Auth::user()->phone }}" required autofocus>
 
                                     @if ($errors->has('phone'))
                                         <span class="invalid-feedback" role="alert">

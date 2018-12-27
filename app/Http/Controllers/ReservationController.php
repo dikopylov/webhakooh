@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Frontend\DateFormats;
 use App\Http\Frontend\Reservations\Options;
 use App\Http\Models\Platen\PlatenRepository;
 use App\Http\Models\Reservation\Reservation;
 use App\Http\Models\Reservation\ReservationRepository;
+use App\Http\Models\Reservation\TimeStingsFactory;
 use App\Http\Models\ReservationStatus\ReservationStatus;
 use App\Http\Models\ReservationStatus\ReservationStatusRepository;
 use Carbon\Carbon;
+use http\Exception\InvalidArgumentException;
 use Illuminate\Http\Request;
 
 class ReservationController extends Controller
@@ -28,28 +31,53 @@ class ReservationController extends Controller
      */
     private $reservationStatusRepository;
 
-    public function __construct(PlatenRepository $platenRepository, ReservationRepository $reservationRepository, ReservationStatusRepository $reservationStatusRepository)
+    /**
+     * @var TimeStingsFactory
+     */
+    private $timeStringsFactory;
+
+    public function __construct(
+        PlatenRepository            $platenRepository,
+        ReservationRepository       $reservationRepository,
+        ReservationStatusRepository $reservationStatusRepository,
+        TimeStingsFactory           $timeStingsFactory
+    )
     {
         $this->platenRepository            = $platenRepository;
         $this->reservationRepository       = $reservationRepository;
         $this->reservationStatusRepository = $reservationStatusRepository;
+        $this->timeStringsFactory          = $timeStingsFactory;
         $this->middleware(['auth']);
     }
 
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
+     * @param string|null $message
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request, string $message = null)
     {
-        $reservations = $this->reservationRepository->getAll();
+        $filterKey = $request->input('filter-key', Options::ALL_KEY);
 
-        return view('reservation.index', [
-            'reservations'  => $reservations,
-            'statusOptions' => Options::STATUSES_OPTIONS,
-            'currentKey'    => Options::ALL_KEY,
-        ]);
+        if (ReservationStatus::isKeyValid($filterKey)) {
+            $statusId     = $this->reservationStatusRepository->getIdByTitle(ReservationStatus::STATUSES_OPTIONS[$filterKey]);
+            $reservations = $this->reservationRepository->findByStatusId($statusId);
+
+            $viewParams = [
+                'reservations'  => $reservations,
+                'statusOptions' => Options::STATUSES_OPTIONS,
+                'currentKey'    => $filterKey,
+            ];
+
+            if ($message) {
+                $viewParams['message'] = $message;
+            }
+            return view('reservation.index', $viewParams);
+        }
+
+        throw new InvalidArgumentException('Неверный фильтр на брони');
     }
 
     /**
@@ -59,9 +87,47 @@ class ReservationController extends Controller
      */
     public function create()
     {
-        $platens = $this->platenRepository->getAll();
+        $platens         = $this->platenRepository->getAll();
+        $minDate         = Carbon::now()->toDateString();
+        $defaultDate     = Carbon::tomorrow()->toDateString();
+        $defaultPlatenId = $platens->first()->id;
+        $bookedTimes     = $this->reservationRepository->getBookedTimes((int) $platens->first()->id, $defaultDate, null);
+        $times           = $this->timeStringsFactory->make($bookedTimes);
 
-        return view('reservation.create')->with('platens', $platens);
+        if ($times === []) {
+            for ($dateTime = Carbon::parse($defaultDate);;$dateTime->addDay()) {
+                foreach ($platens as $platen) {
+                    $bookedTimes     = $this->reservationRepository->getBookedTimes($platen->id, $dateTime->toDateString(), null);
+                    $times           = $this->timeStringsFactory->make($bookedTimes);
+
+                    if ($times) {
+                        $defaultPlatenId = $platen->id;
+                        $defaultDate     = $dateTime->toDateString();
+                        break 2;
+                    }
+                }
+            }
+        }
+
+        return view('reservation.create', [
+            'date'            => $defaultDate,
+            'defaultPlatenId' => $defaultPlatenId,
+            'platens'         => $platens,
+            'times'           => $times,
+            'minDate'         => $minDate,
+        ]);
+    }
+
+    public function getFreeTimes(Request $request)
+    {
+        $reservationId = null;
+        if ($request['reservationId']) {
+            $reservationId = (int) $request['reservationId'];
+        }
+        $bookedTimes = $this->reservationRepository->getBookedTimes((int) $request['platenId'], $request['date'], (int)$reservationId);
+        $times       = $this->timeStringsFactory->make($bookedTimes);
+
+        return $times;
     }
 
     /**
@@ -73,27 +139,28 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        $minDate     = Carbon::now();
+        $now         = Carbon::now();
         $requestData = $request->request->all();
 
         $validator = \Validator::make($requestData, [
             'platen-id'     => 'required|integer',
-            'visit-date'    => "required|after:{$minDate}",
+            'visit-date'    => "required|after:{$now}",
             'persons-count' => 'required|integer|max:65535',
         ]);
 
         if ($validator->fails()) {
-            return back()->withErrors($validator);
+            return back()->withErrors($validator)->withInput();
         }
 
         $reservation                = new Reservation();
         $reservation->platen_id     = $request['platen-id'];
         $reservation->date          = $request['visit-date'];
-        $reservation->status_id     = $this->reservationStatusRepository->getIdByTitle(ReservationStatus::NEW);
+        $reservation->time          = $request['visit-time'];
+        $reservation->status_id     = $this->reservationStatusRepository->getIdByTitle(ReservationStatus::CONFIRMED);
         $reservation->count_persons = $request['persons-count'];
         $this->reservationRepository->save($reservation);
 
-        return $this->index();
+        return $this->index($request, 'Заказ успешно создан!');
 
     }
 
@@ -123,11 +190,15 @@ class ReservationController extends Controller
         $platens     = $this->platenRepository->getAll();
         $statuses    = $this->reservationStatusRepository->getAll();
         $reservation = $this->reservationRepository->find($id);
+        $bookedTimes = $this->reservationRepository->getBookedTimes((int) $reservation->platen_id, $reservation->date, (int) $reservation->id);
+        $times       = $this->timeStringsFactory->make($bookedTimes);
 
         return view('reservation.edit', [
                 'platens'     => $platens,
                 'statuses'    => $statuses,
-                'reservation' => $reservation]
+                'reservation' => $reservation,
+                'times'       => $times,
+            ]
         );
     }
 
@@ -142,7 +213,7 @@ class ReservationController extends Controller
     public function update(Request $request, int $id)
     {
         $minDate = Carbon::now();
-
+        $message = null;
         $requestData = $request->request->all();
 
         $validator = \Validator::make($requestData, [
@@ -158,11 +229,16 @@ class ReservationController extends Controller
         $reservation                = $this->reservationRepository->find($id);
         $reservation->platen_id     = $request['platen-id'];
         $reservation->date          = $request['visit-date'];
+        $reservation->time          = Carbon::parse($request['visit-time'])->toTimeString();
         $reservation->status_id     = $request['status-id'];
         $reservation->count_persons = $request['persons-count'];
-        $this->reservationRepository->save($reservation);
 
-        return $this->index();
+        if($reservation->isDirty()) {
+            $this->reservationRepository->save($reservation);
+            $message = 'Заказ успешно изменен!';
+        }
+
+        return $this->index($request, $message);
     }
 
     /**
@@ -170,35 +246,11 @@ class ReservationController extends Controller
      *
      * @param  int $id
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy(int $id)
+    public function destroy(int $id, Request $request)
     {
         $this->reservationRepository->delete($id);
-
-        return $this->index();
-    }
-
-    /**
-     * @param Request $request
-     *
-     * @return $this|\Illuminate\Http\Response
-     */
-    public function filter(Request $request)
-    {
-        $filterKey = $request->input('filterKey');
-
-        if (isset(ReservationStatus::STATUSES_OPTIONS[$filterKey])) {
-            $statusId     = $this->reservationStatusRepository->getIdByTitle(ReservationStatus::STATUSES_OPTIONS[$filterKey]);
-            $reservations = $this->reservationRepository->findByStatusId($statusId);
-
-            return view('reservation.index', [
-                'reservations'  => $reservations,
-                'statusOptions' => Options::STATUSES_OPTIONS,
-                'currentKey'    => $filterKey,
-            ]);
-        }
-
-        return $this->index();
     }
 }
