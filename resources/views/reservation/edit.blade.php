@@ -13,7 +13,7 @@
                                 <div class="form-group row">
                                     <label for="platen-id" class="col-md-4 col-form-label text-md-right">{{ __('Столик') }}</label>
                                     <div class="col-md-6">
-                                        <select id="platen-id" class="form-control reservations-edit-select" name="platen-id">
+                                        <select id="platen-id" onchange="loadTimeSelect($(this).val(), $('#visit-date').val(), '{{route('reservation.get-free-times')}}', '{{$reservation->id}}')" class="form-control reservations-edit-select" name="platen-id">
                                             @foreach($platens as $platen)
                                                 @if ($platen->id === $reservation->platen->id)
                                                     <option value="{{$platen->id}}" selected>{{$platen->title}}</option>
@@ -26,13 +26,24 @@
                                 </div>
                                 <div class="form-group row">
                                     <label for="visit-date" class="col-md-4 col-form-label text-md-right">{{ __('Дата и время посещения') }}</label>
-                                    <div class="col-md-6">
-                                        <input id="visit-date" type="datetime-local" class="form-control{{ $errors->has('visit-date') ? ' is-invalid' : '' }}" name="visit-date"  value="{{ old('visit-date') }}" required autofocus>
+                                    <div class="col-md-3">
+                                        <input id="visit-date" onchange="loadTimeSelect($('#platen-id').val(), $(this).val(), '{{route('reservation.get-free-times')}}', '{{$reservation->id}}')" type="date" class="form-control{{ $errors->has('visit-date') ? ' is-invalid' : '' }}" name="visit-date"  value="{{ $reservation->date }}" required autofocus>
                                         @if ($errors->has('visit-date'))
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $errors->first('visit-date') }}</strong>
                                             </span>
                                         @endif
+                                    </div>
+                                    <div class="col-md-3">
+                                        <select name="visit-time" id="visit-time" class="form-control reservations-edit-select">
+                                            @foreach($times as $time)
+                                                @if (\Carbon\Carbon::parse($time) == \Carbon\Carbon::parse($reservation->time))
+                                                    <option value="{{$time}}" selected>{{$time}}</option>
+                                                @else
+                                                    <option value="{{$time}}">{{$time}}</option>
+                                                @endif
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">

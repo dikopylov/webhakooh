@@ -7,6 +7,7 @@ use App\Http\Models\Notifier;
 use App\Http\Models\Platen\Platen;
 use App\Http\Models\ReservationStatus\ReservationStatus;
 use App\Http\Models\TranslateActivityLog\EventsTranslator;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\CausesActivity;

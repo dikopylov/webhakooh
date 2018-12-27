@@ -3,10 +3,13 @@
 namespace App\Http\Models\Reservation;
 
 use App\Http\Frontend\Reservations\ReservationPagination;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 
 class ReservationRepository
 {
+    private $table = 'reservations';
+
     /**
      * @param Reservation $reservation
      * @return bool
@@ -23,6 +26,32 @@ class ReservationRepository
     public function find(int $id) : Reservation
     {
         return Reservation::find($id);
+    }
+
+    /**
+     * @param int $platenId
+     * @param string $date
+     * @param int|null $reservationId
+     * @return string[]
+     */
+    public function getBookedTimes(int $platenId, string $date, ?int $reservationId): array
+    {
+        $whereConditions = [
+            ['date', '=', $date],
+            ['platen_id', '=', $platenId],
+        ];
+
+        if ($reservationId) {
+            $whereConditions[] = ['id', '!=', $reservationId];
+        }
+
+        $times = [];
+        $reservations = \DB::table($this->table)->where($whereConditions)->get(['time']);
+        foreach ($reservations as $reservation) {
+            $times[] = $reservation->time;
+        }
+
+        return $times;
     }
 
     /**
