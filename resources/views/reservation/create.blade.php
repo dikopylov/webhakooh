@@ -14,7 +14,11 @@
                                     <div class="col-md-6">
                                         <select id="platen-id" onchange="loadTimeSelect($(this).val(), $('#visit-date').val(), '{{route('reservation.get-free-times')}}')" class="form-control reservations-edit-select" name="platen-id">
                                             @foreach($platens as $platen)
-                                                <option value="{{$platen->id}}">{{$platen->title}}</option>
+                                                @if ($platen->id === $defaultPlatenId)
+                                                    <option value="{{$platen->id}}" selected>{{$platen->title}}</option>
+                                                @else
+                                                    <option value="{{$platen->id}}">{{$platen->title}}</option>
+                                                @endif
                                             @endforeach
                                         </select>
                                     </div>
@@ -22,7 +26,7 @@
                                 <div class="form-group row">
                                     <label for="visit-date" class="col-md-4 col-form-label text-md-right">{{ __('Дата и время посещения') }}</label>
                                     <div class="col-md-3">
-                                        <input id="visit-date" onchange="loadTimeSelect($('#platen-id').val(), $(this).val(), '{{route('reservation.get-free-times')}}')" type="date" class="form-control{{ $errors->has('visit-date') ? ' is-invalid' : '' }}" name="visit-date"  value="{{ $date }}" required autofocus>
+                                        <input id="visit-date" onchange="loadTimeSelect($('#platen-id').val(), $(this).val(), '{{route('reservation.get-free-times')}}')" type="date" class="form-control{{ $errors->has('visit-date') ? ' is-invalid' : '' }}" name="visit-date" min="{{ $minDate }}" value="{{ $date }}" required autofocus>
                                         @if ($errors->has('visit-date'))
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $errors->first('visit-date') }}</strong>
@@ -40,7 +44,7 @@
                                 <div class="form-group row">
                                     <label for="persons-count" class="col-md-4 col-form-label text-md-right">{{ __('Количество гостей') }}</label>
                                     <div class="col-md-6">
-                                        <input id="persons-count" type="number" min="1" class="form-control{{ $errors->has('persons-count') ? ' is-invalid' : '' }}" name="persons-count" value="{{ old('persons-count') }}" required>
+                                        <input id="persons-count" type="number" min="1" class="form-control{{ $errors->has('persons-count') ? ' is-invalid' : '' }}" name="persons-count" value="{{ old('persons-count') ?: 1  }}" required>
                                         @if ($errors->has('persons-count'))
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $errors->first('persons-count') }}</strong>
@@ -54,7 +58,7 @@
                                                 {{__('Назад')}}</a></p>
                                     </div>
                                     <div class="col-md-9" style="padding-left: 60%">
-                                        <button type="submit" class="btn btn-primary">
+                                        <button name="add-button" type="submit" class="btn btn-primary">
                                             {{ __('Добавить') }}
                                         </button>
                                     </div>

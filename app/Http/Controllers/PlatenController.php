@@ -33,7 +33,7 @@ class PlatenController extends Controller
      */
     public function index()
     {
-        $platens = $this->platenRepository->getAll();
+        $platens = $this->platenRepository->getWithPagination();
         return view('platens.index')->with('platens', $platens);
     }
 
@@ -58,8 +58,8 @@ class PlatenController extends Controller
         $requestData = $request->request->all();
 
         $validator = \Validator::make($requestData, [
-            'title'=>'required|max:255',
-            'platen_capacity' =>'required|integer|between:1,255',
+            'title'           =>'required|max:255',
+            'platen_capacity' =>'required|integer|between:1,255'
         ]);
 
         if ($validator->fails()) {

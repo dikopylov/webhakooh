@@ -87,15 +87,34 @@ class ReservationController extends Controller
      */
     public function create()
     {
-        $platens = $this->platenRepository->getAll();
-        $defaultDate = Carbon::tomorrow()->toDateString();
-        $bookedTimes = $this->reservationRepository->getBookedTimes((int) $platens->first()->id, $defaultDate, null);
-        $times       = $this->timeStringsFactory->make($bookedTimes);
+        $platens         = $this->platenRepository->getAll();
+        $minDate         = Carbon::now()->toDateString();
+        $defaultDate     = Carbon::tomorrow()->toDateString();
+        $defaultPlatenId = $platens->first()->id;
+        $bookedTimes     = $this->reservationRepository->getBookedTimes((int) $platens->first()->id, $defaultDate, null);
+        $times           = $this->timeStringsFactory->make($bookedTimes);
+
+        if ($times === []) {
+            for ($dateTime = Carbon::parse($defaultDate);;$dateTime->addDay()) {
+                foreach ($platens as $platen) {
+                    $bookedTimes     = $this->reservationRepository->getBookedTimes($platen->id, $dateTime->toDateString(), null);
+                    $times           = $this->timeStringsFactory->make($bookedTimes);
+
+                    if ($times) {
+                        $defaultPlatenId = $platen->id;
+                        $defaultDate     = $dateTime->toDateString();
+                        break 2;
+                    }
+                }
+            }
+        }
 
         return view('reservation.create', [
-            'date'        => $defaultDate,
-            'platens'     => $platens,
-            'times'       => $times,
+            'date'            => $defaultDate,
+            'defaultPlatenId' => $defaultPlatenId,
+            'platens'         => $platens,
+            'times'           => $times,
+            'minDate'         => $minDate,
         ]);
     }
 
@@ -130,14 +149,14 @@ class ReservationController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return back()->withErrors($validator);
+            return back()->withErrors($validator)->withInput();
         }
 
         $reservation                = new Reservation();
         $reservation->platen_id     = $request['platen-id'];
         $reservation->date          = $request['visit-date'];
         $reservation->time          = $request['visit-time'];
-        $reservation->status_id     = $this->reservationStatusRepository->getIdByTitle(ReservationStatus::NEW);
+        $reservation->status_id     = $this->reservationStatusRepository->getIdByTitle(ReservationStatus::CONFIRMED);
         $reservation->count_persons = $request['persons-count'];
         $this->reservationRepository->save($reservation);
 
