@@ -56,6 +56,7 @@ class PlatenRepository
      */
     public function delete($id)
     {
+
         return Platen::destroy($id);
     }
 }
