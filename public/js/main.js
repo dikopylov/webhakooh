@@ -22,15 +22,21 @@ function loadTimeSelect(platenId, date, url, reservationId = null)
         date          : date,
         reservationId : reservationId
     }, function (response) {
-        var times = response;
-        var options = '';
-        times.forEach(function (value) {
-            options += "<option value='" + value + "'>" + value + "</option>";
-        })
-
+        var times           = response;
         var visitTimeSelect = $('#visit-time');
-        visitTimeSelect.removeData();
-        visitTimeSelect.html(options);
+        var addButton       = $('[name=add-button]');
+        if (times.length) {
+            var options = '';
+            times.forEach(function (value) {
+                options += "<option value='" + value + "'>" + value + "</option>";
+            });
+            visitTimeSelect.html(options);
+            addButton.show();
+        } else {
+            visitTimeSelect.html('');
+            addButton.hide();
+            alert('На указанную дату и стол нет свободного времени! Бронируйте на другой стол/дату :)');
+        }
     });
 }
 

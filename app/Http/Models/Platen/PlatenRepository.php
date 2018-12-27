@@ -13,6 +13,11 @@ class PlatenRepository
      */
     public function getAll()
     {
+        return Platen::all();
+    }
+
+    public function getWithPagination()
+    {
         return Platen::paginate(PlatenPagination::$maxItemsOnPage);
     }
 
