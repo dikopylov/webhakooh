@@ -54,16 +54,6 @@ class ReservationRepository
         return $times;
     }
 
-    public function getValidDate()
-    {
-
-    }
-
-    public function getValidPlaten()
-    {
-
-    }
-
     /**
      * @param $id
      * @return int
