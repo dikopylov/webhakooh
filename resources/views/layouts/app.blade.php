@@ -160,6 +160,12 @@
                     <a href="{{ URL::route('reservation.index') }}" >
                         <i class="glyphicon-glyphicon-user"></i> <span> Брони</span> </a>
                 </li>
+                @if ($user->hasRole(RoleType::ADMINISTRATOR))
+                <li>
+                    <a href="{{ URL::route('contacts.show') }}" >
+                        <i class="glyphicon-glyphicon-user"></i> <span> Контакты</span> </a>
+                </li>
+                @endif
             </ul>
         </section>
     @endguest

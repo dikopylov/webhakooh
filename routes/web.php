@@ -25,5 +25,8 @@ Route::resources(
         'reservation' => 'ReservationController'
     ]
 );
-
 Route::post('reservation/get-free-times', 'ReservationController@getFreeTimes')->name('reservation.get-free-times');
+
+Route::get('contacts', 'ContactController@show')->name('contacts.show');
+Route::get('contacts/edit', 'ContactController@edit')->name('contacts.edit');
+Route::put('contacts', 'ContactController@update')->name('contacts.update');
