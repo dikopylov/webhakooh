@@ -9,6 +9,9 @@ use App\Http\Controllers\Controller;
 
 class SchemeController extends Controller
 {
+    /**
+     * @var SchemeRepository
+     */
     private $schemeRepository;
 
     public function __construct(SchemeRepository $schemeRepository)

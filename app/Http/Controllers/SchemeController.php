@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Models\Scheme\SchemeRepository;
-use App\Http\Models\Scheme\SchemeService;
 use \App\Http\Models\Scheme\Scheme;
 use Illuminate\Http\Request;
-use Symfony\Component\Finder\SplFileInfo;
 
 class SchemeController extends Controller
 {
+    /**
+     * @var SchemeRepository
+     */
     private $schemeRepository;
 
     public function __construct(SchemeRepository $schemeRepository)
@@ -17,11 +18,9 @@ class SchemeController extends Controller
         $this->schemeRepository = $schemeRepository;
     }
 
-    public function store(Request $request)
-    {
-        //
-    }
-
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show()
     {
         return view('scheme.show',
@@ -30,12 +29,20 @@ class SchemeController extends Controller
             ]);
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function edit()
     {
         return view('scheme.edit');
     }
 
 
+    /**
+     * @param Request $request
+     * @param Scheme $scheme
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function update(Request $request, Scheme $scheme)
     {
         $path = $request['scheme-file']->path();
