@@ -30,5 +30,7 @@ Route::post('reservation/get-free-times', 'ReservationController@getFreeTimes')-
 Route::get('contacts', 'ContactController@show')->name('contacts.show');
 Route::get('contacts/edit', 'ContactController@edit')->name('contacts.edit');
 Route::put('contacts', 'ContactController@update')->name('contacts.update');
+
 Route::get('scheme', 'SchemeController@show')->name('scheme.show');
 Route::get('scheme/edit', 'SchemeController@edit')->name('scheme.edit');
+Route::post('scheme', 'SchemeController@update')->name('scheme.update');

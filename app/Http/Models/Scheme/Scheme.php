@@ -2,10 +2,17 @@
 
 namespace App\Http\Models\Scheme;
 
-class Scheme
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\Traits\CausesActivity;
+use Spatie\Activitylog\Traits\LogsActivity;
+
+class Scheme extends Model
 {
-    /**
-     * @var string
-     */
-    public $base64;
+    use LogsActivity, SoftDeletes, CausesActivity;
+
+    protected $dates = ['deleted_at'];
+
+    protected static $logName = 'Схема столов';
+
 }
