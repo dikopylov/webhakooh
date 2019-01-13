@@ -11,6 +11,11 @@ class Scheme extends Model
 {
     use LogsActivity, SoftDeletes, CausesActivity;
 
+    protected $fillable = [
+        'id',
+        'base64',
+    ];
+
     protected $dates = ['deleted_at'];
 
     protected static $logName = 'Схема столов';

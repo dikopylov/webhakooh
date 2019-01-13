@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class Scheme extends JsonResource
+class ContactResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,8 +16,10 @@ class Scheme extends JsonResource
     {
         return [
             'id'         => $this->id,
-            'name'       => $this->name,
-            'base64'      => $this->base64,
+            'address'    => $this->address,
+            'phone'      => $this->phone,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ];
     }
 }

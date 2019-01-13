@@ -5,9 +5,9 @@ namespace App\Http\Models\Scheme;
 class SchemeRepository
 {
     /**
-     * @return mixed
+     * @return Scheme
      */
-    public function get()
+    public function get() : Scheme
     {
         return Scheme::all()->first();
     }
@@ -16,7 +16,7 @@ class SchemeRepository
      * @param Scheme $scheme
      * @return bool
      */
-    public function save(Scheme $scheme)
+    public function save(Scheme $scheme) : bool
     {
         return $scheme->save();
     }
@@ -24,7 +24,7 @@ class SchemeRepository
     /**
      * @return int
      */
-    public function deleteOld()
+    public function deleteOld() : int
     {
         return Scheme::destroy($this->get()->id);
     }

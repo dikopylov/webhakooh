@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Models\Scheme\SchemeRepository;
-use App\Http\Resources\Scheme as SchemeResource;
+use App\Http\Resources\SchemeResource;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
