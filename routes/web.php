@@ -22,7 +22,8 @@ Route::resources(
     [
         'users'       => 'UsersManagementSystemController',
         'platens'     => 'PlatenController',
-        'reservation' => 'ReservationController'
+        'reservation' => 'ReservationController',
+        'reviews'     => 'ReviewController',
     ]
 );
 Route::post('reservation/get-free-times', 'ReservationController@getFreeTimes')->name('reservation.get-free-times');

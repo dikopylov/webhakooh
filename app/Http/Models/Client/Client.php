@@ -10,5 +10,13 @@ class Client extends Model
 {
     use LogsActivity, SoftDeletes;
 
+    protected $fillable = [
+        'id',
+        'name',
+        'phone',
+        'chat_id',
+
+    ];
+
     protected $dates = ['deleted_at'];
 }
