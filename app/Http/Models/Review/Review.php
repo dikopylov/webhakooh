@@ -2,6 +2,7 @@
 
 namespace App\Http\Models\Review;
 
+use App\Http\Models\Clients\Client;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\CausesActivity;
@@ -18,4 +19,12 @@ class Review extends Model
     ];
 
     protected $dates = ['deleted_at'];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function client()
+    {
+        return $this->hasOne(Client::class, 'id', 'client_id');
+    }
 }

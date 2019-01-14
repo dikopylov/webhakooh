@@ -165,6 +165,10 @@
                     <a href="{{ URL::route('contacts.show') }}" >
                         <i class="glyphicon-glyphicon-user"></i> <span> Контакты</span> </a>
                 </li>
+                <li>
+                    <a href="{{ URL::route('reviews.index') }}" >
+                        <i class="glyphicon-glyphicon-user"></i> <span> Отзывы</span> </a>
+                </li>
                 @endif
             </ul>
         </section>

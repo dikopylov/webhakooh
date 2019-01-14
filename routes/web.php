@@ -23,7 +23,6 @@ Route::resources(
         'users'       => 'UsersManagementSystemController',
         'platens'     => 'PlatenController',
         'reservation' => 'ReservationController',
-        'reviews'     => 'ReviewController',
     ]
 );
 Route::post('reservation/get-free-times', 'ReservationController@getFreeTimes')->name('reservation.get-free-times');
@@ -31,3 +30,6 @@ Route::post('reservation/get-free-times', 'ReservationController@getFreeTimes')-
 Route::get('contacts', 'ContactController@show')->name('contacts.show');
 Route::get('contacts/edit', 'ContactController@edit')->name('contacts.edit');
 Route::put('contacts', 'ContactController@update')->name('contacts.update');
+
+Route::get('reviews', 'ReviewController@index')->name('reviews.index');
+Route::delete('reviews/{id}', 'ReviewController@destroy')->name('reviews.destroy');

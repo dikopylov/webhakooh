@@ -2,39 +2,42 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Models\Review\ReviewRepository;
 use Illuminate\Http\Request;
 
 class ReviewController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @var ReviewRepository
      */
-    public function index()
+    private $reviewRepository;
+
+    public function __construct(ReviewRepository $reviewRepository)
     {
-        //
+        $this->middleware(['auth', 'check.admin' ]);
+        $this->reviewRepository = $reviewRepository;
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show($id)
+    public function index()
     {
-        //
+        $reviews = $this->reviewRepository->getWithPagination();
+
+        return view('reviews.index', [
+            'reviews' => $reviews,
+        ]);
     }
+
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
-        //
+        $this->reviewRepository->delete($id);
     }
 }
