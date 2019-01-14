@@ -21,6 +21,11 @@ class Review extends Model
     protected $dates = ['deleted_at'];
 
     /**
+     * @var string
+     */
+    protected static $logName = 'Отзывы';
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function client()
