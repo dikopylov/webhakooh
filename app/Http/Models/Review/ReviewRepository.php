@@ -11,26 +11,9 @@ class ReviewRepository
     /**
      * @return Review[]|\Illuminate\Database\Eloquent\Collection
      */
-    public function getAll()
-    {
-        return Review::all();
-    }
-
-    /**
-     * @return Review[]|\Illuminate\Database\Eloquent\Collection
-     */
     public function getWithPagination()
     {
         return Review::paginate(ReviewPagination::$maxItemsOnPage);
-    }
-
-    /**
-     * @param $id
-     * @return Review
-     */
-    public function find($id): Review
-    {
-        return Review::find($id);
     }
 
     /**
