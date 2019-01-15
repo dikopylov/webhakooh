@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\CausesActivity;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class Scheme extends Model
+class PlatensScheme extends Model
 {
     use LogsActivity, SoftDeletes, CausesActivity;
 

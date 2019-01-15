@@ -2,7 +2,7 @@
 
 @section('content')
 <?php
-/** @var \App\Http\Models\Scheme\Scheme $scheme */
+/** @var \App\Http\Models\Scheme\PlatensScheme $scheme */
 ?>
     <div class="container">
         <div class="row justify-content-center">

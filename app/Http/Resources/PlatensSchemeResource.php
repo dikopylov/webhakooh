@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class SchemeResource extends JsonResource
+class PlatensSchemeResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,7 +17,7 @@ class SchemeResource extends JsonResource
         return [
             'id'         => $this->id,
             'name'       => $this->name,
-            'base64'      => $this->base64,
+            'base64'     => $this->base64,
         ];
     }
 }

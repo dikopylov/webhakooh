@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Models\Scheme\SchemeRepository;
-use \App\Http\Models\Scheme\Scheme;
+use App\Http\Models\Scheme\PlatensSchemeRepository;
+use \App\Http\Models\Scheme\PlatensScheme;
 use Illuminate\Http\Request;
 
-class SchemeController extends Controller
+class PlatensSchemeController extends Controller
 {
     /**
-     * @var SchemeRepository
+     * @var PlatensSchemeRepository
      */
     private $schemeRepository;
 
-    public function __construct(SchemeRepository $schemeRepository)
+    public function __construct(PlatensSchemeRepository $schemeRepository)
     {
         $this->schemeRepository = $schemeRepository;
     }
@@ -40,10 +40,10 @@ class SchemeController extends Controller
 
     /**
      * @param Request $request
-     * @param Scheme $scheme
+     * @param PlatensScheme $scheme
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function update(Request $request, Scheme $scheme)
+    public function update(Request $request, PlatensScheme $scheme)
     {
         $path = $request['scheme-file']->path();
         $type = pathinfo($path, PATHINFO_EXTENSION);
