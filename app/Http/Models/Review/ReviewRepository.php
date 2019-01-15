@@ -26,10 +26,10 @@ class ReviewRepository
     }
 
     /**
-     * @param $id
+     * @param int $id
      * @return int
      */
-    public function delete($id)
+    public function delete(int $id)
     {
         return Review::destroy($id);
     }

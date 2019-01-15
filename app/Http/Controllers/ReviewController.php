@@ -38,6 +38,6 @@ class ReviewController extends Controller
      */
     public function destroy(int $id)
     {
-        $this->reviewRepository->delete($id);
+        $this->reviewRepository->delete((int) $id);
     }
 }
