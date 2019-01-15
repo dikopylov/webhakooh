@@ -169,6 +169,10 @@
                     <a href="{{ URL::route('scheme.show') }}" >
                         <i class="glyphicon-glyphicon-user"></i> <span> Схема расположения столов</span> </a>
                 </li>
+                <li>
+                    <a href="{{ URL::route('reviews.index') }}" >
+                        <i class="glyphicon-glyphicon-user"></i> <span> Отзывы</span> </a>
+                </li>
                 @endif
             </ul>
         </section>

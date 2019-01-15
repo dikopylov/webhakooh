@@ -22,7 +22,7 @@ Route::resources(
     [
         'users'       => 'UsersManagementSystemController',
         'platens'     => 'PlatenController',
-        'reservation' => 'ReservationController'
+        'reservation' => 'ReservationController',
     ]
 );
 Route::post('reservation/get-free-times', 'ReservationController@getFreeTimes')->name('reservation.get-free-times');
@@ -34,3 +34,7 @@ Route::put('contacts', 'ContactController@update')->name('contacts.update');
 Route::get('scheme', 'SchemeController@show')->name('scheme.show');
 Route::get('scheme/edit', 'SchemeController@edit')->name('scheme.edit');
 Route::post('scheme', 'SchemeController@update')->name('scheme.update');
+
+
+Route::get('reviews', 'ReviewController@index')->name('reviews.index');
+Route::delete('reviews/{id}', 'ReviewController@destroy')->name('reviews.destroy');
