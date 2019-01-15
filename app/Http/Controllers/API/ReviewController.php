@@ -35,14 +35,14 @@ class ReviewController extends Controller
      */
     public function store(Request $request, Review $review)
     {
-        $client = $this->clientRepository->findByChatId($request['chatId']);
+        $client = $this->clientRepository->findByChatId((int) $request['chatId']);
         if (!$client) {
             $client = new Client();
             $client->chat_id = $request['chatId'];
             $client->name    = $request['clientName'];
             $client->phone   = $request['phone'];
             $this->clientRepository->save($client);
-            $client = $this->clientRepository->findByChatId($request['chatId']);
+            $client = $this->clientRepository->findByChatId((int) $request['chatId']);
         }
         $review->client_id = $client->id;
         $review->content = $request['content'];

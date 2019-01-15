@@ -8,10 +8,10 @@ use App\Http\Models\Clients\Client;
 class ClientRepository
 {
     /**
-     * @param string $chatId
+     * @param int $chatId
      * @return Client|null
      */
-    public function findByChatId(string $chatId) : ?Client
+    public function findByChatId(int $chatId) : ?Client
     {
         return Client::where('chat_id', $chatId)->first();
     }
