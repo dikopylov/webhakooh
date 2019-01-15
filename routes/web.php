@@ -31,5 +31,10 @@ Route::get('contacts', 'ContactController@show')->name('contacts.show');
 Route::get('contacts/edit', 'ContactController@edit')->name('contacts.edit');
 Route::put('contacts', 'ContactController@update')->name('contacts.update');
 
+Route::get('scheme', 'PlatensSchemeController@show')->name('scheme.show');
+Route::get('scheme/edit', 'PlatensSchemeController@edit')->name('scheme.edit');
+Route::post('scheme', 'PlatensSchemeController@update')->name('scheme.update');
+
+
 Route::get('reviews', 'ReviewController@index')->name('reviews.index');
 Route::delete('reviews/{id}', 'ReviewController@destroy')->name('reviews.destroy');

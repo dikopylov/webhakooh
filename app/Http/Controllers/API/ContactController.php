@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Models\Contact\ContactRepository;
-use App\Http\Resources\Contact as ContactResource;
+use App\Http\Resources\ContactResource;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 

@@ -56,3 +56,8 @@
     right: 0 !important;
     color: white !important;
 }
+
+.scheme-platens_scheme {
+    max-width: 400px;
+    max-height: 500px;
+}
