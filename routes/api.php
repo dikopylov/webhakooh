@@ -18,3 +18,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('get-contacts', 'API\ContactController@show');
+
+Route::post('save-review', 'API\ReviewController@store');
