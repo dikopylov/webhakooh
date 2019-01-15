@@ -15,7 +15,7 @@ class ClientsTableSeeder extends Seeder
             'id'   => 1,
             'name' => 'Анатолий',
             'phone' => '8989993',
-            'chat_id' => '123123123123123',
+            'chat_id' => 88889898,
         ]);
     }
 }
