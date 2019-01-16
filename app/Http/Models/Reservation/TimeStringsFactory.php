@@ -5,7 +5,7 @@ namespace App\Http\Models\Reservation;
 use App\Http\Frontend\DateFormats;
 use Carbon\Carbon;
 
-class TimeStingsFactory
+class TimeStringsFactory
 {
     /**
      * @param string[] $bookedTimes
@@ -25,7 +25,8 @@ class TimeStingsFactory
 
         while ($current <= $end) {
             if (!in_array($current, $bookedTimesDateTime)) {
-                $times[] = $current->format(DateFormats::SELECT_TIME_FORMAT);
+                $time = $current->format(DateFormats::SELECT_TIME_FORMAT);
+                $times[$time] = $time;
             }
             $current->addMinute(30);
         }

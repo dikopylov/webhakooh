@@ -3,7 +3,6 @@
 namespace App\Http\Models\Reservation;
 
 use App\Http\Frontend\Reservations\ReservationPagination;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 
 class ReservationRepository
@@ -86,5 +85,22 @@ class ReservationRepository
         }
 
         return $builder->paginate(ReservationPagination::$maxItemsOnPage);
+    }
+
+    /**
+     * @param string $date
+     * @param string $time
+     * @param int $platenId
+     * @return bool
+     */
+    public function isFreePlaten(string $date, string $time, int $platenId) :bool
+    {
+        $reservations = \DB::table($this->table)->where([
+            'platen_id' => $platenId,
+            'time'      => $time,
+            'date'      => $date
+        ])->get();
+
+        return $reservations->isEmpty() ? true : false;
     }
 }
