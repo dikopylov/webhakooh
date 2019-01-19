@@ -52,7 +52,8 @@ class PlatenService
      */
     public function getFirstFreePlatenId(Carbon $date, Carbon $time, int $personsCount): int
     {
-        $platen = array_shift($this->getFreePlatens($date, $time, $personsCount));
+        $platens = $this->getFreePlatens($date, $time, $personsCount);
+        $platen = array_shift($platens);
         return $platen->id;
     }
 }

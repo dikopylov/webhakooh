@@ -17,7 +17,7 @@ class CreateClientsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('phone')->nullable();
-            $table->unsignedBigInteger('chat_id');
+            $table->unsignedBigInteger('chat_id')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

@@ -32,6 +32,7 @@
                 <tr>
                     <th>{{__('Номер')}}</th>
                     <th>{{__('Название столика')}}</th>
+                    <th>{{__('Имя клиента')}}</th>
                     <th>{{__('Количество гостей')}}</th>
                     <th>{{__('Дата и время')}}</th>
                     <th>{{__('Статус')}}</th>
@@ -44,6 +45,7 @@
                     <tr id="{{ $reservation->id }}">
                         <td>{{ $reservation->id }}</td>
                         <td>{{ $reservation->platen->title }}</td>
+                        <td>{{ $reservation->client->name }}</td>
                         <td>{{ $reservation->count_persons }}</td>
                         <td>{{ $reservation->date }} {{$reservation->time}}</td>
                         <td>{{ $reservation->reservationStatus->title }}</td>

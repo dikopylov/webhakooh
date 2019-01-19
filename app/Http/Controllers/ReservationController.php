@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Frontend\DateFormats;
 use App\Http\Frontend\Reservations\Options;
+use App\Http\Models\Client\ClientRepository;
+use App\Http\Models\Clients\Client;
 use App\Http\Models\Platen\PlatenRepository;
 use App\Http\Models\Reservation\Reservation;
 use App\Http\Models\Reservation\ReservationRepository;
@@ -36,18 +38,25 @@ class ReservationController extends Controller
      */
     private $timeStringsFactory;
 
+    /**
+     * @var ClientRepository
+     */
+    private $clientRepository;
+
     public function __construct(
         PlatenRepository            $platenRepository,
         ReservationRepository       $reservationRepository,
         ReservationStatusRepository $reservationStatusRepository,
-        TimeStringsFactory           $timeStingsFactory
+        ClientRepository            $clientRepository,
+        TimeStringsFactory          $timeStingsFactory
     )
     {
+        $this->middleware(['auth']);
         $this->platenRepository            = $platenRepository;
         $this->reservationRepository       = $reservationRepository;
         $this->reservationStatusRepository = $reservationStatusRepository;
         $this->timeStringsFactory          = $timeStingsFactory;
-        $this->middleware(['auth']);
+        $this->clientRepository            = $clientRepository;
     }
 
     /**
@@ -59,7 +68,7 @@ class ReservationController extends Controller
      */
     public function index(Request $request, string $message = null)
     {
-        $filterKey = $request->input('filter-key', Options::ALL_KEY);
+        $filterKey = $request->input('filter-key', Options::NEW_KEY);
 
         if (ReservationStatus::isKeyValid($filterKey)) {
             $statusId     = $this->reservationStatusRepository->getIdByTitle(ReservationStatus::STATUSES_OPTIONS[$filterKey]);
@@ -127,7 +136,7 @@ class ReservationController extends Controller
         $bookedTimes = $this->reservationRepository->getBookedTimes((int) $request['platenId'], $request['date'], (int)$reservationId);
         $times       = $this->timeStringsFactory->make($bookedTimes, Carbon::parse($request['date']));
 
-        return $times;
+        return array_values($times);
     }
 
     /**
@@ -139,18 +148,24 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        $now         = Carbon::now();
+        $now         = Carbon::yesterday();
         $requestData = $request->request->all();
 
         $validator = \Validator::make($requestData, [
             'platen-id'     => 'required|integer',
-            'visit-date'    => "required|after:{$now}",
+            'visit-date'    => "required|after:{$now->toDateString()}",
             'persons-count' => 'required|integer|max:65535',
+            'client-name'   => 'required',
+            'client-phone'  => 'required',
         ]);
 
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
+        $client = new Client();
+        $client->name  = $request['client-name'];
+        $client->phone = $request['client-phone'];
+        $this->clientRepository->save($client);
 
         $reservation                = new Reservation();
         $reservation->platen_id     = $request['platen-id'];
@@ -158,6 +173,7 @@ class ReservationController extends Controller
         $reservation->time          = $request['visit-time'];
         $reservation->status_id     = $this->reservationStatusRepository->getIdByTitle(ReservationStatus::CONFIRMED);
         $reservation->count_persons = $request['persons-count'];
+        $reservation->client_id     = $client->id;
         $this->reservationRepository->save($reservation);
 
         return $this->index($request, 'Заказ успешно создан!');
@@ -212,13 +228,13 @@ class ReservationController extends Controller
      */
     public function update(Request $request, int $id)
     {
-        $minDate = Carbon::now();
+        $minDate = Carbon::yesterday();
         $message = null;
         $requestData = $request->request->all();
 
         $validator = \Validator::make($requestData, [
             'platen-id'     => 'required|integer',
-            'visit-date'    => "required|after:{$minDate}",
+            'visit-date'    => "required|after:{$minDate->toDateString()}",
             'persons-count' => 'required|integer|max:65535',
         ]);
 

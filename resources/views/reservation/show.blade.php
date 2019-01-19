@@ -29,12 +29,12 @@
                             <div class="col-md-9">{{$reservation->client ? $reservation->client->name : __('Не указан')}}</div>
                         </div>
                         <div class="row">
-                            <div class="col-md-3">{{__('Количество гостей')}}</div>
-                            <div class="col-md-9">{{$reservation->count_persons}}</div>
+                            <div class="col-md-3">{{__('Телефон клиента')}}</div>
+                            <div class="col-md-9">{{$reservation->client ? $reservation->client->phone : __('Не указан')}}</div>
                         </div>
                         <div class="row">
-                            <div class="col-md-3">{{__('Способ уведомления')}}</div>
-                            <div class="col-md-9">{{$reservation->notifier ? $reservation->notifier->title : __('Не указан')}}</div>
+                            <div class="col-md-3">{{__('Количество гостей')}}</div>
+                            <div class="col-md-9">{{$reservation->count_persons}}</div>
                         </div>
                         <div class="row">
                             <div class="col-md-3">{{__('Комментарий')}}</div>

@@ -22,7 +22,7 @@ class TimeStringsFactory
         $times   = [];
         if ($bookDate->toDateString() === Carbon::now()->toDateString()) {
             $currentMinute = (int) Carbon::now()->format('i');
-            $format = $currentMinute >= 30 ? 'h:00' : 'h:30';
+            $format = $currentMinute >= 30 ? 'H:00' : 'H:30';
             $start = Carbon::parse(Carbon::now()->addMinute(30)->format($format));
         } else {
             $start   = Carbon::parse('00:00');
