@@ -20,6 +20,10 @@ class PlatenController extends Controller
         $this->platenService = $platenService;
     }
 
+    /**
+     * @param Request $request
+     * @return PlatenResourceCollection
+     */
     public function getFreePlatens(Request $request)
     {
         return new PlatenResourceCollection($this->platenService->getFreePlatens(

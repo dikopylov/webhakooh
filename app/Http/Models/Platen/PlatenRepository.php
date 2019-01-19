@@ -27,7 +27,7 @@ class PlatenRepository
      */
     public function getByCapacity(int $capacity)
     {
-        return Platen::where('capacity', '>=', $personsCount);
+        return Platen::where('capacity', '>=', $capacity);
     }
 
     /**
