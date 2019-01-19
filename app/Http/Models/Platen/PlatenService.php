@@ -36,7 +36,7 @@ class PlatenService
         $freePlatens     = [];
 
         foreach ($platens as $platen) {
-            if ($this->reservationRepository->isFreePlaten($date->toDateString(), $time->toTimeString(), $platen)) {
+            if ($this->reservationRepository->isFreePlaten($date->toDateString(), $time->toTimeString(), $platen->id)) {
                 $freePlatens[$platen->id] = $platen;
             }
         }

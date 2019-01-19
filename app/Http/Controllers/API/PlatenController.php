@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Models\Platen\PlatenService;
-use App\Http\Resources\PlatenResourceCollection;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -22,14 +21,16 @@ class PlatenController extends Controller
 
     /**
      * @param Request $request
-     * @return PlatenResourceCollection
+     * @return array
      */
-    public function getFreePlatens(Request $request): PlatenResourceCollection
+    public function getFreePlatens(Request $request): array
     {
-        return new PlatenResourceCollection($this->platenService->getFreePlatens(
-            Carbon::parse($request['date']),
-            Carbon::parse($request['time']),
-            (int) $request['personsCount']
-        ));
+        return [
+            'platens' => $this->platenService->getFreePlatens(
+                Carbon::parse($request['date']),
+                Carbon::parse($request['time']),
+                (int) $request['personsCount']
+            )
+        ];
     }
 }
