@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 */
 Route::post('get-contacts', 'API\ContactController@show');
 
-Route::post('get-scheme', 'API\SchemeController@show');
+Route::post('get-scheme', 'API\PlatensSchemeController@show');
 
 Route::post('save-review', 'API\ReviewController@store');
 
