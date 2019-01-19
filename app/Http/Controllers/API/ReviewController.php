@@ -6,7 +6,6 @@ use App\Http\Models\Client\ClientRepository;
 use App\Http\Models\Clients\Client;
 use App\Http\Models\Review\Review;
 use App\Http\Models\Review\ReviewRepository;
-use App\Http\Resources\ReviewResource;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -31,9 +30,9 @@ class ReviewController extends Controller
     /**
      * @param Request $request
      * @param Review $review
-     * @return ReviewResource
+     * @return array
      */
-    public function store(Request $request, Review $review)
+    public function store(Request $request, Review $review): array
     {
         $chatId = (int) $request['chatId'];
         $client = $this->clientRepository->findByChatId($chatId) ?: new Client(['chat_id' => $chatId]);
@@ -43,6 +42,6 @@ class ReviewController extends Controller
         $review->client_id = $client->id;
         $review->content = $request['content'];
 
-        return new ReviewResource(['success' => $this->reviewRepository->save($review)]);
+        return ['success' => $this->reviewRepository->save($review)];
     }
 }

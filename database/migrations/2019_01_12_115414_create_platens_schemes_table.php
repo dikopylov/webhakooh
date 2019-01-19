@@ -29,6 +29,6 @@ class CreatePlatensSchemesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('schemes');
+        Schema::dropIfExists('platens_schemes');
     }
 }
