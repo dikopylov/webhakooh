@@ -7,7 +7,7 @@ use App\Http\Frontend\Reservations\Options;
 use App\Http\Models\Platen\PlatenRepository;
 use App\Http\Models\Reservation\Reservation;
 use App\Http\Models\Reservation\ReservationRepository;
-use App\Http\Models\Reservation\TimeStingsFactory;
+use App\Http\Models\Reservation\TimeStringsFactory;
 use App\Http\Models\ReservationStatus\ReservationStatus;
 use App\Http\Models\ReservationStatus\ReservationStatusRepository;
 use Carbon\Carbon;
@@ -32,7 +32,7 @@ class ReservationController extends Controller
     private $reservationStatusRepository;
 
     /**
-     * @var TimeStingsFactory
+     * @var TimeStringsFactory
      */
     private $timeStringsFactory;
 
@@ -40,7 +40,7 @@ class ReservationController extends Controller
         PlatenRepository            $platenRepository,
         ReservationRepository       $reservationRepository,
         ReservationStatusRepository $reservationStatusRepository,
-        TimeStingsFactory           $timeStingsFactory
+        TimeStringsFactory           $timeStingsFactory
     )
     {
         $this->platenRepository            = $platenRepository;
@@ -89,7 +89,7 @@ class ReservationController extends Controller
     {
         $platens         = $this->platenRepository->getAll();
         $minDate         = Carbon::now()->toDateString();
-        $defaultDate     = Carbon::tomorrow()->toDateString();
+        $defaultDate     = $minDate;
         $defaultPlatenId = $platens->first()->id;
         $bookedTimes     = $this->reservationRepository->getBookedTimes((int) $platens->first()->id, $defaultDate, null);
         $times           = $this->timeStringsFactory->make($bookedTimes);

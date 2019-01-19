@@ -22,6 +22,15 @@ class PlatenRepository
     }
 
     /**
+     * @param int $capacity
+     * @return mixed
+     */
+    public function getByCapacity(int $capacity)
+    {
+        return Platen::where('capacity', '>=', $capacity);
+    }
+
+    /**
      * @param $id
      * @return Model
      */
