@@ -9,9 +9,10 @@ class TimeStringsFactory
 {
     /**
      * @param string[] $bookedTimes
+     * @param Carbon $bookDate
      * @return array
      */
-    public function make(array $bookedTimes): array
+    public function make(array $bookedTimes, Carbon $bookDate): array
     {
         $bookedTimesDateTime = [];
         foreach ($bookedTimes as $bookedTime) {
@@ -19,12 +20,18 @@ class TimeStringsFactory
         }
 
         $times   = [];
-        $start   = Carbon::parse('00:00');
+        if ($bookDate->toDateString() === Carbon::now()->toDateString()) {
+            $currentMinute = (int) Carbon::now()->format('i');
+            $format = $currentMinute >= 30 ? 'h:00' : 'h:30';
+            $start = Carbon::parse(Carbon::now()->addMinute(30)->format($format));
+        } else {
+            $start   = Carbon::parse('00:00');
+        }
         $end     = Carbon::parse('23:30');
         $current = $start;
 
         while ($current <= $end) {
-            if (!in_array($current, $bookedTimesDateTime)) {
+            if (!in_array($current, $bookedTimesDateTime) ) {
                 $time = $current->format(DateFormats::SELECT_TIME_FORMAT);
                 $times[$time] = $time;
             }

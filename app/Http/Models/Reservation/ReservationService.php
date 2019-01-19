@@ -42,7 +42,7 @@ class ReservationService
 
         foreach ($platens as $platen) {
             $bookedTimes     = $this->reservationRepository->getBookedTimes($platen->id, $date->toDateString(), null);
-            $times           = $this->timeStringsFactory->make($bookedTimes);
+            $times           = $this->timeStringsFactory->make($bookedTimes, $date);
 
             if ($times) {
                 $isFree = true;
@@ -64,7 +64,7 @@ class ReservationService
 
         foreach ($platens as $platen) {
             $bookedTimes     = $this->reservationRepository->getBookedTimes($platen->id, $date->toDateString(), null);
-            $times           = $times + $this->timeStringsFactory->make($bookedTimes);
+            $times           = $times + $this->timeStringsFactory->make($bookedTimes, $date);
         }
 
         return $times;

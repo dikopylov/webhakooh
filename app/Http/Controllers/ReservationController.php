@@ -92,13 +92,13 @@ class ReservationController extends Controller
         $defaultDate     = $minDate;
         $defaultPlatenId = $platens->first()->id;
         $bookedTimes     = $this->reservationRepository->getBookedTimes((int) $platens->first()->id, $defaultDate, null);
-        $times           = $this->timeStringsFactory->make($bookedTimes);
+        $times           = $this->timeStringsFactory->make($bookedTimes, Carbon::parse($defaultDate));
 
         if ($times === []) {
             for ($dateTime = Carbon::parse($defaultDate);;$dateTime->addDay()) {
                 foreach ($platens as $platen) {
                     $bookedTimes     = $this->reservationRepository->getBookedTimes($platen->id, $dateTime->toDateString(), null);
-                    $times           = $this->timeStringsFactory->make($bookedTimes);
+                    $times           = $this->timeStringsFactory->make($bookedTimes, $dateTime);
 
                     if ($times) {
                         $defaultPlatenId = $platen->id;
@@ -125,7 +125,7 @@ class ReservationController extends Controller
             $reservationId = (int) $request['reservationId'];
         }
         $bookedTimes = $this->reservationRepository->getBookedTimes((int) $request['platenId'], $request['date'], (int)$reservationId);
-        $times       = $this->timeStringsFactory->make($bookedTimes);
+        $times       = $this->timeStringsFactory->make($bookedTimes, Carbon::parse($request['date']));
 
         return $times;
     }
@@ -191,7 +191,7 @@ class ReservationController extends Controller
         $statuses    = $this->reservationStatusRepository->getAll();
         $reservation = $this->reservationRepository->find($id);
         $bookedTimes = $this->reservationRepository->getBookedTimes((int) $reservation->platen_id, $reservation->date, (int) $reservation->id);
-        $times       = $this->timeStringsFactory->make($bookedTimes);
+        $times       = $this->timeStringsFactory->make($bookedTimes, Carbon::parse($reservation->date));
 
         return view('reservation.edit', [
                 'platens'     => $platens,
