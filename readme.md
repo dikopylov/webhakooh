@@ -20,3 +20,6 @@ VMmanager OVZ - внешняя панель управления серверо�
 Команда "ZOMRO"    
 
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDHRBEyoqxnTLYlSfg8jL6UGvDuy802U7vQl1nAU8a89H1Q0UiRBWZz5anenzQbYkdCD0sclGe1QOYSOkVW0M46QZxI2g58Nf0ajgNyRdfFqVH0Wsk7R5U6KBwuH/IGAzqSqDGwT7At8NNSJuSznxZg22sDnJiqHZ0ZdhAAuJwHT0qA2/N38W65OO6WHZM9liBtis6zQzYO9QygC+CbIj+uJ/dfGZLt39GQGuHlzJtTdym5XR1NlMmEMJF+uk9NgtLHzAf7WLizyAjFs4JkwYlpMOzLw3HlMBjS3I1HwYT+HRkfGuyujn6LPQ9VIrnFNg/1i9A+VmGRxDz9MXCcU4Qt an_tux@iMac-Aleksandr.local
+
+user hakooh
+password webhakooh
