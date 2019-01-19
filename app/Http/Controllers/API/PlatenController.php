@@ -24,7 +24,7 @@ class PlatenController extends Controller
      * @param Request $request
      * @return PlatenResourceCollection
      */
-    public function getFreePlatens(Request $request)
+    public function getFreePlatens(Request $request): PlatenResourceCollection
     {
         return new PlatenResourceCollection($this->platenService->getFreePlatens(
             Carbon::parse($request['date']),

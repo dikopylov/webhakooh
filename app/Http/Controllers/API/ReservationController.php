@@ -52,7 +52,7 @@ class ReservationController extends Controller
      * @param Request $request
      * @return array
      */
-    public function isDateFree(Request $request)
+    public function isDateFree(Request $request): array
     {
         return [
             'isDateFree' => $this->reservationService->isDateFree(Carbon::parse($request['date'])),
@@ -63,7 +63,7 @@ class ReservationController extends Controller
      * @param Request $request
      * @return array
      */
-    public function getFreeTimes(Request $request)
+    public function getFreeTimes(Request $request): array
     {
         return  [
             'times' => $this->reservationService->getFreeTimes(Carbon::parse($request['date']))
@@ -74,12 +74,12 @@ class ReservationController extends Controller
      * @param Request $request
      * @return array
      */
-    public function store(Request $request)
+    public function store(Request $request): array
     {
         $visitDate    = $request['visitDate'];
         $visitTime    = $request['visitTime'];
         $personsCount = (int) $request['personsCount'];
-        $platenId     = $request['platenId'] ?: $this->platenService->getFirstFreePlatenId(
+        $platenId     = $request['platenId'] ? (int) $request['platenId']: $this->platenService->getFirstFreePlatenId(
             Carbon::parse($visitDate),
             Carbon::parse($visitTime),
             $personsCount

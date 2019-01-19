@@ -101,6 +101,6 @@ class ReservationRepository
             'date'      => $date
         ])->get();
 
-        return $reservations->isEmpty() ? true : false;
+        return $reservations->isEmpty();
     }
 }
