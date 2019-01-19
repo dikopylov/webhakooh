@@ -69,4 +69,14 @@ class ReservationService
 
         return $times;
     }
+
+    /**
+     * @param Reservation $reservation
+     * @return int|null
+     */
+    public function save(Reservation $reservation): ?int
+    {
+        $this->reservationRepository->save($reservation);
+        return $reservation->id;
+    }
 }

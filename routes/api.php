@@ -25,5 +25,6 @@ Route::post('save-review', 'API\ReviewController@store');
 
 Route::post('is-date-free', 'API\ReservationController@isDateFree');
 Route::post('get-free-times', 'API\ReservationController@getFreeTimes');
+Route::post('save-reservation', 'API\ReservationController@store');
 
 Route::post('get-free-platens', 'API\PlatenController@getFreePlatens');

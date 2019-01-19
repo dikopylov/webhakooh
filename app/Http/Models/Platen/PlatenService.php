@@ -43,4 +43,16 @@ class PlatenService
 
         return $freePlatens;
     }
+
+    /**
+     * @param Carbon $date
+     * @param Carbon $time
+     * @param int $personsCount
+     * @return int
+     */
+    public function getFirstFreePlatenId(Carbon $date, Carbon $time, int $personsCount): int
+    {
+        $platen = array_shift($this->getFreePlatens($date, $time, $personsCount));
+        return $platen->id;
+    }
 }
