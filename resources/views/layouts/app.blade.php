@@ -76,11 +76,6 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li class="user-body">
-                                <a href="{{ route('home') }}">
-                                    {{ __('Личный кабинет') }}
-                                </a>
-                            </li>
-                            <li class="user-body">
                                 <a href="{{ route('edit/profile') }}">
                                     {{ __('Редактировать данные') }}
                                 </a>
@@ -160,6 +155,20 @@
                     <a href="{{ URL::route('reservation.index') }}" >
                         <i class="glyphicon-glyphicon-user"></i> <span> Брони</span> </a>
                 </li>
+                @if ($user->hasRole(RoleType::ADMINISTRATOR))
+                <li>
+                    <a href="{{ URL::route('contacts.show') }}" >
+                        <i class="glyphicon-glyphicon-user"></i> <span> Контакты</span> </a>
+                </li>
+                <li>
+                    <a href="{{ URL::route('scheme.show') }}" >
+                        <i class="glyphicon-glyphicon-user"></i> <span> Схема расположения столов</span> </a>
+                </li>
+                <li>
+                    <a href="{{ URL::route('reviews.index') }}" >
+                        <i class="glyphicon-glyphicon-user"></i> <span> Отзывы</span> </a>
+                </li>
+                @endif
             </ul>
         </section>
     @endguest

@@ -16,5 +16,9 @@ class DatabaseSeeder extends Seeder
         $this->call(PlatensTableSeeder::class);
         $this->call(ReservationsStatusesTableSeeder::class);
         $this->call(ReservationsTableSeeder::class);
+        $this->call(ContactsTableSeeder::class);
+        $this->call(PlatensSchemesTableSeeder::class);
+        $this->call(ClientsTableSeeder::class);
+        $this->call(ReviewsTableSeeder::class);
     }
 }
