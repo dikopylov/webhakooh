@@ -76,11 +76,6 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li class="user-body">
-                                <a href="{{ route('home') }}">
-                                    {{ __('Личный кабинет') }}
-                                </a>
-                            </li>
-                            <li class="user-body">
                                 <a href="{{ route('edit/profile') }}">
                                     {{ __('Редактировать данные') }}
                                 </a>

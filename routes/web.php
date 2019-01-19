@@ -1,11 +1,10 @@
 <?php
 
-Route::get('/', function () {
-    return view('main');
-})->middleware(['auth', 'check.delete']);
 Auth::routes();
+Route::get('/', function () {
+    return redirect('reservation');
+});
 Route::post('/verify', 'InvitationController@verify')->name('verify');
-Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/edit/profile', 'AuthUserController@showProfileForm')->name('edit/profile');
 Route::post('edit/profile', 'AuthUserController@updateProfile');
 Route::post('edit/profile/{id}', 'AuthUserController@destroy')->name('delete-myself');
