@@ -60,7 +60,7 @@ use \App\Http\Models\Role\RoleType;
 
                                 <p><a href="javascript:void(0);"
                                       onclick="deleteItem({{ $user->id . ', \'' . route('users.destroy', [$user->id]) . '\''}})"
-                                      class="btn btn-danger" style="margin-right: 3px;">Удалить</a></p>
+                                      class="btn btn-danger pull-left" style="margin-right: 3px;">Удалить</a></p>
 
                             @endif
 

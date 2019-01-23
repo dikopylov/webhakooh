@@ -23,7 +23,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css?20190123') }}" rel="stylesheet">
     <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet" href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
     <!-- Font Awesome -->
@@ -58,6 +58,9 @@
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top static-top-height">
+            <button type="button" class="btn btn-default btn-md pull-left sidebar-transform-change-button" onclick="changeSidebarTransform()">
+                <span class="glyphicon glyphicon-list"></span>
+            </button>
             <div class="navbar-custom-menu static-top-user-icon">
                 <ul class="nav navbar-nav static-top-height">
                     @guest

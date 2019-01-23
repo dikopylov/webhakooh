@@ -61,3 +61,25 @@
     max-width: 400px;
     max-height: 500px;
 }
+
+.zero-sidebar-transform {
+    -webkit-transform: translate(0, 0) !important;
+    -ms-transform: translate(0, 0) !important;
+    -o-transform: translate(0, 0) !important;
+    transform: translate(0, 0) !important;
+}
+.sidebar-transform-change-button {
+    display: none !important;
+}
+
+@media (max-width: 767px) {
+    .static-top-height {
+        position: relative !important;
+    }
+
+    .sidebar-transform-change-button {
+        position: absolute;
+        top: 3px;
+        display: block !important;
+    }
+}
