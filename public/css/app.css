@@ -35,10 +35,6 @@
     margin: 5px;
 }
 
-.platens-delete-btn {
-    margin-top: -5px;
-}
-
 .reservations-edit-select {
     min-height: 35px;
 }
@@ -82,4 +78,16 @@
         top: 3px;
         display: block !important;
     }
+}
+
+.create-edit-button {
+    position: absolute;
+    right: 5px;
+    bottom: 10px;
+}
+
+.back-button {
+    position: absolute;
+    left: 5px;
+    bottom: 10px;
 }

@@ -79,8 +79,8 @@
                                         <p><a href="{{ route('reservation.index') }}" class="btn btn-dark btn-default">
                                                 {{__('Назад')}}</a></p>
                                     </div>
-                                    <div class="col-md-9" style="padding-left: 60%">
-                                        <button name="add-button" type="submit" class="btn btn-primary">
+                                    <div class="col-md-9">
+                                        <button name="add-button" type="submit" class="btn btn-primary add-button">
                                             {{ __('Добавить') }}
                                         </button>
                                     </div>
