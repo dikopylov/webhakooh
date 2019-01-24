@@ -74,7 +74,7 @@
     }
 
     .sidebar-transform-change-button {
-        position: absolute;
+        /* position: absolute; */
         top: 3px;
         display: block !important;
     }
