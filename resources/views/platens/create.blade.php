@@ -42,18 +42,15 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group row">
-                                    <div class="col-md-2 col-xm-2 col-xs-2">
+                                <div class="create-edit-buttons-container">
+                                    <div>
                                         <a href="{{ route('platens.index') }}" class="btn btn-default">
                                                 {{__('Назад')}}</a>
                                     </div>
-                                    <div class="col-md-7 col-xm-7 col-xs-7"></div>
-                                    <div class="col-md-2 col-xm-2 col-xs-2">
+                                    <div>
                                         <button type="submit" class="btn btn-primary">
                                             {{ __('Добавить') }}
                                         </button>
-                                    </div>
-                                    <div class="col-md-1 col-xm-1 col-xs-1">
                                     </div>
                                 </div>
                             </form>

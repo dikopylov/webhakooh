@@ -21,13 +21,12 @@
                                                accept=".jpg, .jpeg, .png" required autofocus>
                                     </div>
                                 </div>
-                                <div class="form-group row mb-0">
-                                    <div class="col-md-3">
+                                <div class="create-edit-buttons-container">
+                                    <div>
                                         <p><a href="{{ route('scheme.show') }}" class="btn btn-dark btn-default">
                                                 {{__('Назад')}}</a></p>
                                     </div>
-                                    <div class="col-md-5"></div>
-                                    <div class="col-md-4">
+                                    <div>
                                         <button name="add-button" type="submit" class="btn btn-primary">
                                             {{ __('Сохранить') }}
                                         </button>

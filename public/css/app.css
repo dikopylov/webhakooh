@@ -54,8 +54,8 @@
 }
 
 .scheme-platens_scheme {
-    max-width: 400px;
-    max-height: 500px;
+    max-width: 90%;
+    max-height: 100%;
 }
 
 .zero-sidebar-transform {
@@ -90,4 +90,9 @@
     position: absolute;
     left: 5px;
     bottom: 10px;
+}
+
+.create-edit-buttons-container {
+    display: flex;
+    justify-content: space-between;
 }

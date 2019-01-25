@@ -74,12 +74,12 @@
                                         @endif
                                     </div>
                                 </div>
-                                <div class="form-group row mb-0">
-                                    <div class="col-md-3">
+                                <div class="create-edit-buttons-container">
+                                    <div>
                                         <p><a href="{{ route('reservation.index') }}" class="btn btn-dark btn-default">
                                                 {{__('Назад')}}</a></p>
                                     </div>
-                                    <div class="col-md-9">
+                                    <div>
                                         <button name="add-button" type="submit" class="btn btn-primary add-button">
                                             {{ __('Добавить') }}
                                         </button>
