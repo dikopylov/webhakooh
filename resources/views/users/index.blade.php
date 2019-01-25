@@ -12,6 +12,8 @@ use \App\Http\Models\Role\RoleType;
     <div class="col-lg-12">
         <h1><i class="fa fa-users"></i> Пользователи
         </h1>
+
+        <a href="{{ route('invitation-key') }}" class="btn btn-success"> Пригласительный ключ для регистрации </a>
         <hr>
         @if (isset($message))
             <div class="alert alert-success col-3 text-center alert-dismissible platen-alert-block" role="alert">
