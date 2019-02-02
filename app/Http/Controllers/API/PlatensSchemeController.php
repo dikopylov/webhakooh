@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use App\Http\Models\Scheme\PlatensSchemeRepository;
 use App\Http\Resources\PlatensSchemeResource;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class PlatensSchemeController extends Controller
 {
@@ -20,10 +19,10 @@ class PlatensSchemeController extends Controller
     }
 
     /**
-     * @return PlatensSchemeResource
+     * @return array
      */
     public function show()
     {
-        return new PlatensSchemeResource($this->schemeRepository->get());
+        return ['platenScheme' => new PlatensSchemeResource($this->schemeRepository->get())];
     }
 }
