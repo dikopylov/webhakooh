@@ -12,6 +12,8 @@ class ReservationStatus extends Model
     public const CONFIRMED = 'подтвержден';
     public const REJECTED  = 'отклонен';
 
+    public const REJECTED_ID = 3;
+
     public const STATUSES_OPTIONS = [
         Options::ALL_KEY       => self::ALL,
         Options::NEW_KEY       => self::NEW,
@@ -29,4 +31,11 @@ class ReservationStatus extends Model
         return array_key_exists($key, self::STATUSES_OPTIONS);
     }
 
+    /**
+     * @return bool
+     */
+    public function isConfirm(): bool
+    {
+        return $this->title === self::CONFIRMED;
+    }
 }

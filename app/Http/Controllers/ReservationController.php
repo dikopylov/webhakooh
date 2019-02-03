@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ChangeReservationStatusEvent;
 use App\Http\Frontend\DateFormats;
 use App\Http\Frontend\Reservations\Options;
 use App\Http\Models\Client\ClientRepository;
@@ -12,6 +13,7 @@ use App\Http\Models\Reservation\ReservationRepository;
 use App\Http\Models\Reservation\TimeStringsFactory;
 use App\Http\Models\ReservationStatus\ReservationStatus;
 use App\Http\Models\ReservationStatus\ReservationStatusRepository;
+use App\Providers\EventServiceProvider;
 use Carbon\Carbon;
 use http\Exception\InvalidArgumentException;
 use Illuminate\Http\Request;
@@ -248,8 +250,13 @@ class ReservationController extends Controller
         $reservation->time          = Carbon::parse($request['visit-time'])->toTimeString();
         $reservation->status_id     = $request['status-id'];
         $reservation->count_persons = $request['persons-count'];
+        $reservation->cancel_reason = $request['cancel-reason'] ?? null;
 
         if($reservation->isDirty()) {
+            if (isset($reservation->getDirty()['status-id']) && $reservation->chat_id) {
+                event(new ChangeReservationStatusEvent($reservation));
+            }
+
             $this->reservationRepository->save($reservation);
             $message = 'Заказ успешно изменен!';
         }
