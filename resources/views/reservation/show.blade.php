@@ -8,37 +8,53 @@
                 <div class="card">
                     <div class="card-header">
                     <h4>{{__('Просмотр заказа')}}</h4>
-                        <div class="row">
-                            <div class="col-md-3">{{__('Номер')}}</div>
-                            <div class="col-md-9">{{$reservation->id}}</div>
+                        <div class="row margin">
+                            <div class="col-md-3 text-bold">{{__('Номер')}}</div>
+                            <div class="col-md-9">
+                                <input type="text" disabled value="{{$reservation->id}}">
+                            </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-3">{{__('Столик')}}</div>
-                            <div class="col-md-9">{{$reservation->platen->id}}</div>
+                        <div class="row margin">
+                            <div class="col-md-3 text-bold">{{__('Столик')}}</div>
+                            <div class="col-md-9">
+                                <input type="text" disabled value="{{$reservation->platen->id}}">
+                            </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-3">{{__('Дата посещения')}}</div>
-                            <div class="col-md-9">{{$reservation->date}}</div>
+                        <div class="row margin">
+                            <div class="col-md-3 text-bold">{{__('Дата посещения')}}</div>
+                            <div class="col-md-9">
+                                <input type="text" disabled value="{{$reservation->date}}">
+                            </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-3">{{__('Статус')}}</div>
-                            <div class="col-md-9">{{$reservation->reservationStatus->title}}</div>
+                        <div class="row margin">
+                            <div class="col-md-3 text-bold">{{__('Статус')}}</div>
+                            <div class="col-md-9">
+                                <input type="text" disabled value="{{$reservation->reservationStatus->title}}">
+                            </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-3">{{__('Клиент')}}</div>
-                            <div class="col-md-9">{{$reservation->client ? $reservation->client->name : __('Не указан')}}</div>
+                        <div class="row margin">
+                            <div class="col-md-3 text-bold">{{__('Клиент')}}</div>
+                            <div class="col-md-9">
+                                <input type="text" disabled value="{{$reservation->client ? $reservation->client->name : __('Не указан')}}">
+                            </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-3">{{__('Телефон клиента')}}</div>
-                            <div class="col-md-9">{{$reservation->client ? $reservation->client->phone : __('Не указан')}}</div>
+                        <div class="row margin">
+                            <div class="col-md-3 text-bold">{{__('Телефон клиента')}}</div>
+                            <div class="col-md-9">
+                                <input type="text" disabled value="{{$reservation->client ? $reservation->client->phone : __('Не указан')}}">
+                            </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-3">{{__('Количество гостей')}}</div>
-                            <div class="col-md-9">{{$reservation->count_persons}}</div>
+                        <div class="row margin">
+                            <div class="col-md-3 text-bold">{{__('Количество гостей')}}</div>
+                            <div class="col-md-9">
+                                <input type="text" disabled value="{{$reservation->count_persons}}">
+                            </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-3">{{__('Комментарий')}}</div>
-                            <div class="col-md-9">{{$reservation->comment ?: __('Отсутсвует')}}</div>
+                        <div class="row margin">
+                            <div class="col-md-3 text-bold">{{__('Комментарий')}}</div>
+                            <div class="col-md-9">
+                                <input type="text" disabled value="{{$reservation->comment ?: __('Отсутсвует')}}">
+                            </div>
                         </div>
                         <div class="row" style="margin-top: 20px">
                             <div class="col-md-3">

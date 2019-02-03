@@ -40,4 +40,16 @@ function loadTimeSelect(platenId, date, url, reservationId = null)
     });
 }
 
+function changeSidebarTransform() {
+    var mainSidebar    = $('.main-sidebar');
+    var transformClass = 'zero-sidebar-transform';
+    if (mainSidebar.hasClass(transformClass)) {
+        mainSidebar.removeClass(transformClass);
+    } else {
+        mainSidebar.addClass(transformClass);
+    }
+
+
+}
+
 

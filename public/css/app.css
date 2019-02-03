@@ -35,10 +35,6 @@
     margin: 5px;
 }
 
-.platens-delete-btn {
-    margin-top: -5px;
-}
-
 .reservations-edit-select {
     min-height: 35px;
 }
@@ -58,6 +54,45 @@
 }
 
 .scheme-platens_scheme {
-    max-width: 400px;
-    max-height: 500px;
+    max-width: 90%;
+    max-height: 100%;
+}
+
+.zero-sidebar-transform {
+    -webkit-transform: translate(0, 0) !important;
+    -ms-transform: translate(0, 0) !important;
+    -o-transform: translate(0, 0) !important;
+    transform: translate(0, 0) !important;
+}
+.sidebar-transform-change-button {
+    display: none !important;
+}
+
+@media (max-width: 767px) {
+    .static-top-height {
+        position: relative !important;
+    }
+
+    .sidebar-transform-change-button {
+        margin-right: 100%;
+        margin-top: -1px;
+        display: block !important;
+    }
+}
+
+.create-edit-button {
+    position: absolute;
+    right: 5px;
+    bottom: 10px;
+}
+
+.back-button {
+    position: absolute;
+    left: 5px;
+    bottom: 10px;
+}
+
+.create-edit-buttons-container {
+    display: flex;
+    justify-content: space-between;
 }

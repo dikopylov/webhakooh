@@ -36,11 +36,14 @@
                         <td>{{ $platen->title }}</td>
                         <td>{{ $platen->capacity }}</td>
                         <td>
-                            <p><a href="{{ route('platens.edit', $platen->id) }}" class="btn btn-info pull-left" style="margin-right: 3px;">Редактировать</a></p>
+                            <div class="row col-sm-10">
+                                <a href="{{ route('platens.edit', $platen->id) }}" class="btn btn-info pull-left" style="margin-right: 3px;">Редактировать</a>
 
-                            <p><a href="javascript:void(0);"
-                                  onclick="deleteItem({{ $platen->id . ', \'' . route('platens.destroy', [$platen->id]) . '\''}})"
-                                  class="btn btn-danger platens-delete-btn" style="margin-right: 3px;">Удалить</a></p>
+                                <a href="javascript:void(0);"
+                                      onclick="deleteItem({{ $platen->id . ', \'' . route('platens.destroy', [$platen->id]) . '\''}})"
+                                      class="btn btn-danger" style="margin-right: 3px;">Удалить</a>
+                            </div>
+                            <div class="col-sm-2"></div>
                         </td>
                     </tr>
                 @endforeach
