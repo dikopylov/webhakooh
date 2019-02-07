@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Frontend\Frontend;
 use App\Http\Models\Scheme\PlatensSchemeRepository;
-use App\Http\Resources\PlatensSchemeResource;
 
 class PlatensSchemeController extends Controller
 {
@@ -23,27 +23,14 @@ class PlatensSchemeController extends Controller
      */
     public function show()
     {
-        $platenScheme      = new PlatensSchemeResource($this->schemeRepository->get());
-        $platenScheme->url = $this->convertBase64ToImage($platenScheme->base64);
+        $platenScheme      = $this->schemeRepository->get();
+        $imagePath         = Frontend::ImageService()->convertBase64ToImage($platenScheme->base64);
+        $platenScheme->url = url($imagePath);
 
-        return ['platenScheme' => $platenScheme];
-    }
-
-    /**
-     * @param $base64
-     *
-     * @return string
-     */
-    private function convertBase64ToImage($base64): string
-    {
-        $imageLink = __DIR__ . '/../../resources/images/platen-scheme.png';
-        $file      = fopen($imageLink, "wb");
-
-        $data = explode(',', $base64);
-
-        fwrite($file, base64_decode($data[1]));
-        fclose($file);
-
-        return $imageLink;
+        return ['platenScheme' => [
+            'id'   => $platenScheme->id,
+            'name' => $platenScheme->name,
+            'url'  => $platenScheme->url,
+        ]];
     }
 }
