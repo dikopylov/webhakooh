@@ -18,14 +18,14 @@ class ImageService
     public function convertBase64ToImage(string $base64, string $fileName = null): string
     {
         if ($fileName) {
+            $imageLink  = self::IMAGE_DIR . $fileName;
+            $outputPath = "/{$fileName}";
+        }
+        else {
             $imageLink  = self::IMAGE_DIR . self::FILE_NAME;
             $outputPath = '/' . self::FILE_NAME;
         }
-        else {
-            $imageLink  = self::IMAGE_DIR . $fileName;
-            $outputPath = "/{$fileName}";
 
-        }
         $file = fopen($imageLink, "wb");
 
         $data = explode(',', $base64);
