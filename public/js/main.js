@@ -64,4 +64,20 @@ function changeReservationStatus(isRejected)
     }
 }
 
+function getReservations(currentKey, message, alert, url)
+{
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $.post(url, {
+        currentKey : currentKey,
+        message    : message,
+        alert      : alert,
+    }, function (response) {
+        $('section.content').html(response);
+    });
+}
 

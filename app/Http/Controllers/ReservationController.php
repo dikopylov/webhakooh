@@ -79,7 +79,24 @@ class ReservationController extends Controller
      */
     public function index(Request $request)
     {
-        $filterKey = $request->input('filter-key', Options::NEW_KEY);
+        $filterKey = $request->input('currentKey', Options::NEW_KEY);
+
+        if (ReservationStatus::isKeyValid($filterKey)) {
+            $viewParams = [
+                'currentKey'    => $filterKey,
+            ];
+            $viewParams['message'] = $request->input('message');
+            $viewParams['alert']   = $request->input('alert');
+
+            return view('reservation.index', $viewParams);
+        }
+
+        throw new InvalidArgumentException('Неверный фильтр на брони');
+    }
+
+    public function showAll(Request $request)
+    {
+        $filterKey = $request->input('currentKey', Options::NEW_KEY);
 
         if (ReservationStatus::isKeyValid($filterKey)) {
             $statusId     = $this->reservationStatusRepository->getIdByTitle(ReservationStatus::STATUSES_OPTIONS[$filterKey]);
@@ -99,7 +116,7 @@ class ReservationController extends Controller
                 $viewParams['alert']   = $request['alert'];
             }
 
-            return view('reservation.index', $viewParams);
+            return view('reservation.main', $viewParams);
         }
 
         throw new InvalidArgumentException('Неверный фильтр на брони');
