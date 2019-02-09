@@ -79,9 +79,9 @@ class ReservationRepository
     public function findByStatusId($statusId = null)
     {
         if ($statusId) {
-            $builder = Reservation::where('status_id', $statusId)->orderByDesc('created_at');
+            $builder = Reservation::where('status_id', $statusId)->orderByDesc('date')->orderByDesc('time');
         } else {
-            $builder = Reservation::orderByDesc('created_at');
+            $builder = Reservation::orderByDesc('date')->orderByDesc('time');
         }
 
         return $builder->paginate(ReservationPagination::$maxItemsOnPage);

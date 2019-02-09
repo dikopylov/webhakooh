@@ -16,6 +16,11 @@ class ClientRepository
         return Client::where('chat_id', $chatId)->first();
     }
 
+    public function findById(int $id)
+    {
+        return Client::find($id);
+    }
+
     /**
      * @param Client $client
      * @return bool

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+<?php use \App\Http\Models\ReservationStatus\ReservationStatus; ?>
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -82,7 +82,8 @@
                                 <div class="form-group row">
                                     <label for="status-id" class="col-md-4 col-form-label text-md-right">{{ __('Статус') }}</label>
                                     <div class="col-md-6">
-                                        <select id="status-id" class="form-control reservations-edit-select" name="status-id">
+                                        <select id="status-id" class="form-control reservations-edit-select" name="status-id"
+                                                onchange="changeReservationStatus(this.value == {{ReservationStatus::REJECTED_ID}})">
                                             @foreach($statuses as $status)
                                                 @if ($status->id === $reservation->reservationStatus->id)
                                                     <option value="{{$status->id}}" selected>{{$status->title}}</option>
@@ -91,6 +92,12 @@
                                                 @endif
                                             @endforeach
                                         </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row" id="cancel-reason">
+                                    <label for="client-phone" class="col-md-4 col-form-label text-md-right">{{ __('Причина отклонения') }}</label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control{{ $errors->has('cancel-reason') ? ' is-invalid' : '' }}" name="cancel-reason" value="{{ $reservation->cancel_reason }}">
                                     </div>
                                 </div>
                                 <div class="create-edit-buttons-container">

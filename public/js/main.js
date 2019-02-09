@@ -7,6 +7,8 @@ $(document).ready(function () {
             $(this).addClass("active");
         }
     });
+
+    changeReservationStatus($('#status-id').val() == 3);
 });
 
 function loadTimeSelect(platenId, date, url, reservationId = null)
@@ -48,8 +50,34 @@ function changeSidebarTransform() {
     } else {
         mainSidebar.addClass(transformClass);
     }
-
-
 }
 
+function changeReservationStatus(isRejected)
+{
+    var cancelReasonDiv = $('#cancel-reason');
+    var cancelReasonInput = $('input[name=cancel-reason]');
+    cancelReasonDiv.hide();
+    cancelReasonInput.removeAttr('required');
+    if (isRejected) {
+        cancelReasonDiv.show();
+        cancelReasonInput.attr('required', 'required');
+    }
+}
+
+function getReservations(currentKey, message, alert, url)
+{
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $.post(url, {
+        currentKey : currentKey,
+        message    : message,
+        alert      : alert,
+    }, function (response) {
+        $('section.content').html(response);
+    });
+}
 

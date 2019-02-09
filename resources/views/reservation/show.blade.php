@@ -56,6 +56,14 @@
                                 <input type="text" disabled value="{{$reservation->comment ?: __('Отсутсвует')}}">
                             </div>
                         </div>
+                        @if ($reservation->cancel_reason)
+                            <div class="row margin">
+                                <div class="col-md-3 text-bold">{{__('Причина отклонения')}}</div>
+                                <div class="col-md-9">
+                                    <input type="text" disabled value="{{$reservation->cancel_reason}}">
+                                </div>
+                            </div>
+                        @endif
                         <div class="row" style="margin-top: 20px">
                             <div class="col-md-3">
                                 <p><a href="{{ route('reservation.index') }}" class="btn btn-dark btn-default">
