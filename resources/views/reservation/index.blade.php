@@ -71,4 +71,9 @@
         </div>
         {{$reservations->appends(['filter-key' => $currentKey])->links()}}
     </div>
+    @if (isset($alert))
+        <script type="text/javascript">
+            alert('{{$alert}}');
+        </script>
+    @endif
 @endsection

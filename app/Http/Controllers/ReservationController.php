@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Connectors\TelegramBotConnector;
+use App\Connectors\TelegramBotConnectorException;
 use App\Events\ChangeReservationStatusEvent;
 use App\Http\Frontend\DateFormats;
 use App\Http\Frontend\Reservations\Options;
@@ -15,6 +17,7 @@ use App\Http\Models\ReservationStatus\ReservationStatus;
 use App\Http\Models\ReservationStatus\ReservationStatusRepository;
 use App\Providers\EventServiceProvider;
 use Carbon\Carbon;
+use GuzzleHttp\Exception\TransferException;
 use http\Exception\InvalidArgumentException;
 use Illuminate\Http\Request;
 
@@ -45,12 +48,18 @@ class ReservationController extends Controller
      */
     private $clientRepository;
 
+    /**
+     * @var TelegramBotConnector
+     */
+    private $telegramBotConnector;
+
     public function __construct(
         PlatenRepository            $platenRepository,
         ReservationRepository       $reservationRepository,
         ReservationStatusRepository $reservationStatusRepository,
         ClientRepository            $clientRepository,
-        TimeStringsFactory          $timeStingsFactory
+        TimeStringsFactory          $timeStingsFactory,
+        TelegramBotConnector $telegramBotConnector
     )
     {
         $this->middleware(['auth']);
@@ -59,16 +68,16 @@ class ReservationController extends Controller
         $this->reservationStatusRepository = $reservationStatusRepository;
         $this->timeStringsFactory          = $timeStingsFactory;
         $this->clientRepository            = $clientRepository;
+        $this->telegramBotConnector        = $telegramBotConnector;
     }
 
     /**
      * Display a listing of the resource.
      *
      * @param Request $request
-     * @param string|null $message
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, string $message = null)
+    public function index(Request $request)
     {
         $filterKey = $request->input('filter-key', Options::NEW_KEY);
 
@@ -82,9 +91,14 @@ class ReservationController extends Controller
                 'currentKey'    => $filterKey,
             ];
 
-            if ($message) {
-                $viewParams['message'] = $message;
+            if (isset($request['message'])) {
+                $viewParams['message'] = $request['message'];
             }
+
+            if (isset($request['alert'])) {
+                $viewParams['alert']   = $request['alert'];
+            }
+
             return view('reservation.index', $viewParams);
         }
 
@@ -178,8 +192,9 @@ class ReservationController extends Controller
         $reservation->client_id     = $client->id;
         $this->reservationRepository->save($reservation);
 
-        return $this->index($request, 'Заказ успешно создан!');
-
+        return redirect()->route('reservation.index', [
+            'message' => 'Заказ успешно создан!',
+        ]);
     }
 
     /**
@@ -232,6 +247,7 @@ class ReservationController extends Controller
     {
         $minDate = Carbon::yesterday();
         $message = null;
+        $alert   = null;
         $requestData = $request->request->all();
 
         $validator = \Validator::make($requestData, [
@@ -253,15 +269,25 @@ class ReservationController extends Controller
         $reservation->cancel_reason = $request['cancel-reason'] ?? null;
 
         if($reservation->isDirty()) {
-            if (isset($reservation->getDirty()['status-id']) && $reservation->chat_id) {
-                event(new ChangeReservationStatusEvent($reservation));
+
+            if (isset($reservation->getDirty()['status_id'])
+                && $reservation->client->chat_id
+                && $reservation->getDirty()['status_id'] != 1) {
+                try {
+                    $this->telegramBotConnector->notifyOnStatus($reservation);
+                } catch (TelegramBotConnectorException $e) {
+                    $alert = $e->getMessage();
+                }
             }
 
             $this->reservationRepository->save($reservation);
             $message = 'Заказ успешно изменен!';
         }
 
-        return $this->index($request, $message);
+        return redirect()->route('reservation.index', [
+            'message' => $message,
+            'alert' => $alert,
+        ]);
     }
 
     /**

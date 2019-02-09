@@ -29,10 +29,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(TelegramBotConnector::class, function ($app) {
             return new TelegramBotConnector(
                  new Client([
-                    // Base URI is used with relative requests
-                    'base_uri' => env('TELEGRAM_BOT_URL') . '/' . env('TELEGRAM_BOT_TOKEN'),
-                    // You can set any number of default request options.
-                    'timeout'  => 2.0,
+                    'base_uri' => getenv('TELEGRAM_BOT_URL') . '/' . getenv('TELEGRAM_BOT_TOKEN') . '/api/'
                 ])
             );
         });
