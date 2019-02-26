@@ -1,0 +1,1437 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="9ede31e1-f01b-46f1-afb2-c39b7f63cfdf" name="Default Changelist" comment="" />
+    <list id="3965e02a-60fb-408f-b91f-37a078b0f03a" name="fix migrations bug" comment="" />
+    <ignored path="C:\OSPanel\domains\webhakooh\.idea\shelf/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
+  </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="1514170608">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="71" />
+          <entry key="project.open.time.15" value="1" />
+          <entry key="project.open.time.16" value="2" />
+          <entry key="project.open.time.18" value="1" />
+          <entry key="project.open.time.2" value="3" />
+          <entry key="project.open.time.20" value="1" />
+          <entry key="project.open.time.21" value="1" />
+          <entry key="project.open.time.22" value="1" />
+          <entry key="project.open.time.23" value="1" />
+          <entry key="project.open.time.26" value="1" />
+          <entry key="project.open.time.27" value="2" />
+          <entry key="project.open.time.30" value="2" />
+          <entry key="project.open.time.31" value="4" />
+          <entry key="project.open.time.32" value="6" />
+          <entry key="project.open.time.33" value="3" />
+          <entry key="project.open.time.34" value="2" />
+          <entry key="project.open.time.35" value="3" />
+          <entry key="project.open.time.36" value="2" />
+          <entry key="project.open.time.37" value="2" />
+          <entry key="project.open.time.38" value="5" />
+          <entry key="project.open.time.39" value="3" />
+          <entry key="project.open.time.40" value="5" />
+          <entry key="project.open.time.41" value="3" />
+          <entry key="project.open.time.43" value="1" />
+          <entry key="project.open.time.44" value="2" />
+          <entry key="project.open.time.46" value="1" />
+          <entry key="project.open.time.48" value="1" />
+          <entry key="project.open.time.49" value="3" />
+          <entry key="project.open.time.51" value="1" />
+          <entry key="project.open.time.52" value="1" />
+          <entry key="project.open.time.53" value="3" />
+          <entry key="project.open.time.58" value="1" />
+          <entry key="project.open.time.61" value="2" />
+          <entry key="project.open.time.63" value="1" />
+          <entry key="project.open.time.77" value="1" />
+          <entry key="project.open.time.8" value="1" />
+          <entry key="project.open.time.98" value="1" />
+          <entry key="project.opened" value="76" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="artisan" value="1" />
+          <entry key="css" value="24" />
+          <entry key="env" value="16" />
+          <entry key="example" value="9" />
+          <entry key="gif" value="2" />
+          <entry key="gitignore" value="4" />
+          <entry key="html" value="7" />
+          <entry key="jpg" value="5" />
+          <entry key="js" value="31" />
+          <entry key="lock" value="1" />
+          <entry key="log" value="2" />
+          <entry key="map" value="1" />
+          <entry key="md" value="2" />
+          <entry key="php" value="905" />
+          <entry key="png" value="19" />
+          <entry key="scss" value="1" />
+          <entry key="svg" value="4" />
+          <entry key="ts" value="3" />
+          <entry key="vue" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key=".env file" value="24" />
+          <entry key="Blade" value="173" />
+          <entry key="CSS" value="24" />
+          <entry key="HTML" value="7" />
+          <entry key="Image" value="26" />
+          <entry key="JSON" value="1" />
+          <entry key="JavaScript" value="31" />
+          <entry key="Markdown" value="2" />
+          <entry key="PHP" value="733" />
+          <entry key="PLAIN_TEXT" value="7" />
+          <entry key="SCSS" value="1" />
+          <entry key="SVG" value="4" />
+          <entry key="SourceMap" value="1" />
+          <entry key="TypeScript" value="3" />
+          <entry key="Vue.js" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="css" value="821" />
+          <entry key="dummy" value="77" />
+          <entry key="env" value="63" />
+          <entry key="example" value="45" />
+          <entry key="js" value="1712" />
+          <entry key="php" value="22801" />
+          <entry key="txt" value="3302" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key=".env file" value="92" />
+          <entry key="Blade" value="5833" />
+          <entry key="CSS" value="821" />
+          <entry key="HTML" value="2" />
+          <entry key="JavaScript" value="1712" />
+          <entry key="PHP" value="16966" />
+          <entry key="PLAIN_TEXT" value="3395" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.vcs.git.usages">
+        <counts>
+          <entry key="git.branch.checkout.local" value="19" />
+          <entry key="git.branch.checkout.remote" value="4" />
+          <entry key="git.branch.compare" value="2" />
+          <entry key="git.branch.create.new" value="10" />
+          <entry key="git.branch.merge" value="1" />
+          <entry key="git.checkout.as.new.branch" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.php.new.class">
+        <counts>
+          <entry key="PHP Class.type" value="26" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.js.language.service.starts">
+        <counts>
+          <entry key="TypeScriptServerServiceImpl" value="1" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.env">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="9" column="64" selection-start-line="9" selection-start-column="64" selection-end-line="9" selection-end-column="64" />
+              <folding>
+                <marker date="1551015583761" expanded="true" signature="151:215" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/js/main.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1343">
+              <caret line="79" column="8" selection-start-line="79" selection-start-column="8" selection-end-line="79" selection-end-column="44" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/js/confirm-delete.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="12" column="11" selection-start-line="12" selection-start-column="11" selection-end-line="12" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ReservationController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="5134">
+              <caret line="319" column="50" selection-start-line="319" selection-start-column="50" selection-end-line="319" selection-end-column="50" />
+              <folding>
+                <element signature="e#40#80#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>/api'</find>
+      <find>-&gt;base64</find>
+      <find>BigI</find>
+      <find>Имя клиента</find>
+      <find>reservation.create</find>
+      <find>на указанную дату и</find>
+      <find>main</find>
+      <find>Hakooh</find>
+      <find>home</find>
+      <find>redirect</find>
+      <find>Bootstrap any application service</find>
+      <find>email</find>
+      <find>artisan</find>
+      <find>function first(</find>
+      <find>first(</find>
+      <find>max-width</find>
+      <find>width</find>
+      <find>transform: translate(-230px, 0);</find>
+      <find>main-sidebar&quot;</find>
+      <find>main-sidebar</find>
+      <find>(max-wid</find>
+      <find>navbar navbar-static-top static-top-height</find>
+      <find>app.css</find>
+      <find>platens-delete-btn</find>
+      <find>Laravel</find>
+      <find>scheme-platens_scheme</find>
+      <find>save-reservation</find>
+      <find>confirm-delete.</find>
+      <find>base64</find>
+      <find>class=&quot;content&quot;</find>
+    </findStrings>
+    <dirStrings>
+      <dir>C:\OSPanel\domains\webhakooh\app\Http\Controllers</dir>
+      <dir>C:\OSPanel\domains\webhakooh\database\migrations</dir>
+    </dirStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="7-final-api-integration" />
+      </map>
+    </option>
+    <option name="PREVIEW_PUSH_PROTECTED_ONLY" value="true" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/app/Http/Resources/PlatensSchemeResource.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2019_01_12_115414_create_schemes_table.php" />
+        <option value="$PROJECT_DIR$/database/seeds/SchemesTableSeeder.php" />
+        <option value="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" />
+        <option value="$PROJECT_DIR$/database/seeds/PlatensSchemesTableSeeder.php" />
+        <option value="$PROJECT_DIR$/app/Http/Resources/PlatenResourceCollection.php" />
+        <option value="$PROJECT_DIR$/routes/api.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/API/ReviewController.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2019_01_12_115414_create_platens_schemes_table.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2018_09_29_162129_create_reviews_table.php" />
+        <option value="$PROJECT_DIR$/app/Http/Models/Reservation/ReservationService.php" />
+        <option value="$PROJECT_DIR$/app/Http/Models/Platen/PlatenRepository.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/API/PlatenController.php" />
+        <option value="$PROJECT_DIR$/app/Http/Models/Platen/PlatenService.php" />
+        <option value="$PROJECT_DIR$/database/factories/ReservationsFactory.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2018_09_29_161438_create_clients_table.php" />
+        <option value="$PROJECT_DIR$/app/Http/Models/Reservation/TimeStringsFactory.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/InvitationController.php" />
+        <option value="$PROJECT_DIR$/public/dist/css/alt/AdminLTE-without-plugins.css" />
+        <option value="$PROJECT_DIR$/resources/views/platens/index.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/platens/create.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/platens/edit.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/reservation/create.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/contacts/edit.blade.php" />
+        <option value="$PROJECT_DIR$/public/css/app.css" />
+        <option value="$PROJECT_DIR$/resources/views/scheme/edit.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/users/index.blade.php" />
+        <option value="$PROJECT_DIR$/.env.example" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/API/ReservationController.php" />
+        <option value="$PROJECT_DIR$/app/Events/ChangeReservationStatusEvent.php" />
+        <option value="$PROJECT_DIR$/app/Connectors/TelergamBotConnector.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2018_09_29_160502_create_reservations_table.php" />
+        <option value="$PROJECT_DIR$/app/Http/Models/ReservationStatus/ReservationStatus.php" />
+        <option value="$PROJECT_DIR$/public/js/cancel-reason.js" />
+        <option value="$PROJECT_DIR$/resources/views/reservation/edit.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/reservation/show.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Models/Client/ClientRepository.php" />
+        <option value="$PROJECT_DIR$/app/Connectors/TelegramBotConnectorException.php" />
+        <option value="$PROJECT_DIR$/app/Listeners/ChangeReservationStatusListener.php" />
+        <option value="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" />
+        <option value="$PROJECT_DIR$/app/Connectors/TelegramBotConnector.php" />
+        <option value="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" />
+        <option value="$PROJECT_DIR$/resources/views/layouts/app.blade.php" />
+        <option value="$PROJECT_DIR$/routes/web.php" />
+        <option value="$PROJECT_DIR$/resources/views/reservation/main.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Models/Reservation/ReservationRepository.php" />
+        <option value="$PROJECT_DIR$/public/js/main.js" />
+        <option value="$PROJECT_DIR$/resources/views/reservation/index.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/ReservationController.php" />
+        <option value="$PROJECT_DIR$/public/js/confirm-delete.js" />
+        <option value="$PROJECT_DIR$/.env" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER">
+    <package-json value="$PROJECT_DIR$/package.json" />
+  </component>
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths>
+      <path value="$PROJECT_DIR$/package.json" />
+      <path value="$PROJECT_DIR$/public/bower_components/bootstrap/package.json" />
+    </packageJsonPaths>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration">
+    <include_path>
+      <path value="$PROJECT_DIR$/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/vendor/psr/simple-cache" />
+      <path value="$PROJECT_DIR$/vendor/psy/psysh" />
+      <path value="$PROJECT_DIR$/vendor/filp/whoops" />
+      <path value="$PROJECT_DIR$/vendor/seld/phar-utils" />
+      <path value="$PROJECT_DIR$/vendor/seld/jsonlint" />
+      <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
+      <path value="$PROJECT_DIR$/vendor/erusev/parsedown" />
+      <path value="$PROJECT_DIR$/vendor/league/flysystem" />
+      <path value="$PROJECT_DIR$/vendor/nesbot/carbon" />
+      <path value="$PROJECT_DIR$/vendor/ramsey/uuid" />
+      <path value="$PROJECT_DIR$/vendor/spatie/laravel-permission" />
+      <path value="$PROJECT_DIR$/vendor/vlucas/phpdotenv" />
+      <path value="$PROJECT_DIR$/vendor/dnoegel/php-xdg-base-dir" />
+      <path value="$PROJECT_DIR$/vendor/egulias/email-validator" />
+      <path value="$PROJECT_DIR$/vendor/laravel/tinker" />
+      <path value="$PROJECT_DIR$/vendor/laravel/framework" />
+      <path value="$PROJECT_DIR$/vendor/mockery/mockery" />
+      <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
+      <path value="$PROJECT_DIR$/vendor/myclabs/deep-copy" />
+      <path value="$PROJECT_DIR$/vendor/phar-io/manifest" />
+      <path value="$PROJECT_DIR$/vendor/phar-io/version" />
+      <path value="$PROJECT_DIR$/vendor/phpspec/prophecy" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-file-iterator" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-timer" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-text-template" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-token-stream" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-code-coverage" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/phpunit" />
+      <path value="$PROJECT_DIR$/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/vendor/symfony/process" />
+      <path value="$PROJECT_DIR$/vendor/symfony/debug" />
+      <path value="$PROJECT_DIR$/vendor/symfony/var-dumper" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php72" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-kernel" />
+      <path value="$PROJECT_DIR$/vendor/symfony/filesystem" />
+      <path value="$PROJECT_DIR$/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/vendor/symfony/routing" />
+      <path value="$PROJECT_DIR$/vendor/symfony/css-selector" />
+      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/vendor/symfony/translation" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-foundation" />
+      <path value="$PROJECT_DIR$/vendor/theseer/tokenizer" />
+      <path value="$PROJECT_DIR$/vendor/barryvdh/reflection-docblock" />
+      <path value="$PROJECT_DIR$/vendor/barryvdh/laravel-ide-helper" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/instantiator" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/inflector" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/lexer" />
+      <path value="$PROJECT_DIR$/vendor/hamcrest/hamcrest-php" />
+      <path value="$PROJECT_DIR$/vendor/fideloper/proxy" />
+      <path value="$PROJECT_DIR$/vendor/paragonie/random_compat" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/global-state" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/comparator" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/environment" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/exporter" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/recursion-context" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/object-enumerator" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/object-reflector" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/resource-operations" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/code-unit-reverse-lookup" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/diff" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/version" />
+      <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
+      <path value="$PROJECT_DIR$/vendor/beyondcode/laravel-dump-server" />
+      <path value="$PROJECT_DIR$/vendor/fzaninotto/faker" />
+      <path value="$PROJECT_DIR$/vendor/nunomaduro/collision" />
+      <path value="$PROJECT_DIR$/vendor/swiftmailer/swiftmailer" />
+      <path value="$PROJECT_DIR$/vendor/tijsverkoyen/css-to-inline-styles" />
+      <path value="$PROJECT_DIR$/vendor/dragonmantank/cron-expression" />
+      <path value="$PROJECT_DIR$/vendor/jakub-onderka/php-console-highlighter" />
+      <path value="$PROJECT_DIR$/vendor/jakub-onderka/php-console-color" />
+      <path value="$PROJECT_DIR$/vendor/justinrainbow/json-schema" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-docblock" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/type-resolver" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-common" />
+      <path value="$PROJECT_DIR$/vendor/laravelcollective/html" />
+      <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/anahkiasen/underscore-php" />
+      <path value="$PROJECT_DIR$/vendor/patchwork/utf8" />
+      <path value="$PROJECT_DIR$/vendor/spatie/string" />
+      <path value="$PROJECT_DIR$/vendor/spatie/laravel-activitylog" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/event-manager" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/cache" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/guzzle" />
+      <path value="$PROJECT_DIR$/vendor/opis/closure" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/promises" />
+    </include_path>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-15" />
+    <option name="y" value="-15" />
+    <option name="width" value="1870" />
+    <option name="height" value="2175" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <autoscrollFromSource ProjectPane="true" />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="webhakooh" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webhakooh" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="webhakooh" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webhakooh" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="webhakooh" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webhakooh" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Connectors" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="webhakooh" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webhakooh" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Http" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="webhakooh" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webhakooh" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Http" type="462c0819:PsiDirectoryNode" />
+              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="webhakooh" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webhakooh" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Http" type="462c0819:PsiDirectoryNode" />
+              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
+              <item name="API" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="webhakooh" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webhakooh" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Http" type="462c0819:PsiDirectoryNode" />
+              <item name="Models" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="webhakooh" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webhakooh" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Http" type="462c0819:PsiDirectoryNode" />
+              <item name="Models" type="462c0819:PsiDirectoryNode" />
+              <item name="Platen" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="webhakooh" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webhakooh" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Http" type="462c0819:PsiDirectoryNode" />
+              <item name="Models" type="462c0819:PsiDirectoryNode" />
+              <item name="Reservation" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="webhakooh" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webhakooh" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Http" type="462c0819:PsiDirectoryNode" />
+              <item name="Models" type="462c0819:PsiDirectoryNode" />
+              <item name="ReservationStatus" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="webhakooh" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webhakooh" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Http" type="462c0819:PsiDirectoryNode" />
+              <item name="Models" type="462c0819:PsiDirectoryNode" />
+              <item name="Scheme" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="webhakooh" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webhakooh" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Providers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="webhakooh" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webhakooh" type="462c0819:PsiDirectoryNode" />
+              <item name="database" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="webhakooh" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webhakooh" type="462c0819:PsiDirectoryNode" />
+              <item name="database" type="462c0819:PsiDirectoryNode" />
+              <item name="seeds" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="webhakooh" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webhakooh" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="webhakooh" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webhakooh" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="webhakooh" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webhakooh" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="webhakooh" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webhakooh" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="webhakooh" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webhakooh" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="layouts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="webhakooh" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webhakooh" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="reservation" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="webhakooh" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webhakooh" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="scheme" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="webhakooh" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webhakooh" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="users" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="webhakooh" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webhakooh" type="462c0819:PsiDirectoryNode" />
+              <item name="routes" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="webhakooh" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webhakooh" type="462c0819:PsiDirectoryNode" />
+              <item name="storage" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="webhakooh" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webhakooh" type="462c0819:PsiDirectoryNode" />
+              <item name="storage" type="462c0819:PsiDirectoryNode" />
+              <item name="framework" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="webhakooh" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webhakooh" type="462c0819:PsiDirectoryNode" />
+              <item name="storage" type="462c0819:PsiDirectoryNode" />
+              <item name="framework" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="webhakooh" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webhakooh" type="462c0819:PsiDirectoryNode" />
+              <item name="vendor" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="webhakooh" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webhakooh" type="462c0819:PsiDirectoryNode" />
+              <item name="vendor" type="462c0819:PsiDirectoryNode" />
+              <item name="guzzlehttp" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="webhakooh" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webhakooh" type="462c0819:PsiDirectoryNode" />
+              <item name="vendor" type="462c0819:PsiDirectoryNode" />
+              <item name="guzzlehttp" type="462c0819:PsiDirectoryNode" />
+              <item name="guzzle" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="webhakooh" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webhakooh" type="462c0819:PsiDirectoryNode" />
+              <item name="vendor" type="462c0819:PsiDirectoryNode" />
+              <item name="guzzlehttp" type="462c0819:PsiDirectoryNode" />
+              <item name="guzzle" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="webhakooh" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webhakooh" type="462c0819:PsiDirectoryNode" />
+              <item name="vendor" type="462c0819:PsiDirectoryNode" />
+              <item name="laravel" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="webhakooh" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webhakooh" type="462c0819:PsiDirectoryNode" />
+              <item name="vendor" type="462c0819:PsiDirectoryNode" />
+              <item name="laravel" type="462c0819:PsiDirectoryNode" />
+              <item name="framework" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="webhakooh" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webhakooh" type="462c0819:PsiDirectoryNode" />
+              <item name="vendor" type="462c0819:PsiDirectoryNode" />
+              <item name="laravel" type="462c0819:PsiDirectoryNode" />
+              <item name="framework" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="webhakooh" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webhakooh" type="462c0819:PsiDirectoryNode" />
+              <item name="vendor" type="462c0819:PsiDirectoryNode" />
+              <item name="laravel" type="462c0819:PsiDirectoryNode" />
+              <item name="framework" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Illuminate" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="webhakooh" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webhakooh" type="462c0819:PsiDirectoryNode" />
+              <item name="vendor" type="462c0819:PsiDirectoryNode" />
+              <item name="laravel" type="462c0819:PsiDirectoryNode" />
+              <item name="framework" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Illuminate" type="462c0819:PsiDirectoryNode" />
+              <item name="Notifications" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="webhakooh" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webhakooh" type="462c0819:PsiDirectoryNode" />
+              <item name="vendor" type="462c0819:PsiDirectoryNode" />
+              <item name="laravel" type="462c0819:PsiDirectoryNode" />
+              <item name="framework" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Illuminate" type="462c0819:PsiDirectoryNode" />
+              <item name="Notifications" type="462c0819:PsiDirectoryNode" />
+              <item name="Channels" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="webhakooh" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="bcb0276e:PhpExternalLibrariesNodePatcher$PatchedExternalLibrariesNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
+    <property name="SearchEverywhereHistoryKey" value="getplate&#9;null&#9;null&#10;ChangeR&#9;FILE&#9;file://C:/OSPanel/domains/webhakooh/app/Listeners/ChangeReservationStatusListener.php&#10;isConfirm&#9;null&#9;null&#10;Client&#9;FILE&#9;file://C:/OSPanel/domains/webhakooh/app/Http/Models/Client/Client.php&#10;Config&#9;null&#9;null&#10;ReservationController&#9;FILE&#9;file://C:/OSPanel/domains/webhakooh/app/Http/Controllers/API/ReservationController.php&#10;EventServiceProvider&#9;null&#9;null&#10;InvitationController&#9;null&#9;null&#10;PlatenController&#9;FILE&#9;file://C:/OSPanel/domains/webhakooh/app/Http/Controllers/API/PlatenController.php&#10;api&#9;FILE&#9;file://C:/OSPanel/domains/webhakooh/routes/api.php&#10;ReviewController&#9;FILE&#9;file://C:/OSPanel/domains/webhakooh/app/Http/Controllers/API/ReviewController.php&#10;SchemeController&#9;FILE&#9;file://C:/OSPanel/domains/webhakooh/app/Http/Controllers/API/PlatensSchemeController.php&#10;get-free-platens&#9;ACTION&#9;null&#10;TimeS&#9;FILE&#9;file://C:/OSPanel/domains/webhakooh/app/Http/Models/Reservation/TimeStringsFactory.php&#10;ContactController&#9;FILE&#9;file://C:/OSPanel/domains/webhakooh/app/Http/Controllers/API/ContactController.php&#10;Statuse&#9;null&#9;null&#10;app/Http/Models/Scheme/Scheme.php&#9;FILE&#9;file://C:/OSPanel/domains/webhakooh/app/Http/Models/Scheme/Scheme.php&#10;App&#9;null&#9;null&#10;toTimeString&#9;null&#9;null&#10;alert&#9;FILE&#9;file://C:/OSPanel/domains/webhakooh/public/bower_components/bootstrap/js/alert.js&#10;ReservationsStatusesTableSeeder&#9;FILE&#9;file://C:/OSPanel/domains/webhakooh/database/seeds/ReservationsStatusesTableSeeder.php&#10;SplE&#9;null&#9;null&#10;Enum&#9;null&#9;null&#10;paginate(&#9;null&#9;null&#10;ActivityLogController&#9;null&#9;null&#10;translator&#9;null&#9;null&#10;app.php&#9;FILE&#9;file://C:/OSPanel/domains/webhakooh/config/app.php" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../tghakooh" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\OSPanel\domains\webhakooh\resources\views\reviews" />
+      <recent name="C:\OSPanel\domains\webhakooh\public\img" />
+      <recent name="C:\OSPanel\domains\webhakooh\public" />
+      <recent name="C:\OSPanel\domains\webhakooh\resources" />
+      <recent name="C:\OSPanel\domains\webhakooh\app\Http\Models\ReservationStatus" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\OSPanel\domains\webhakooh\resources\views\reviews" />
+      <recent name="C:\OSPanel\domains\webhakooh\resources\views\scheme" />
+      <recent name="C:\OSPanel\domains\webhakooh\resources\views\contacts" />
+      <recent name="C:\OSPanel\domains\webhakooh\resources" />
+      <recent name="C:\OSPanel\domains\webhakooh" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9ede31e1-f01b-46f1-afb2-c39b7f63cfdf" name="Default Changelist" comment="" />
+      <created>1538210705255</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1538210705255</updated>
+      <workItem from="1538210711412" duration="1018000" />
+      <workItem from="1538211770941" duration="3545000" />
+      <workItem from="1539523107996" duration="4982000" />
+      <workItem from="1540042043868" duration="17325000" />
+      <workItem from="1540128834185" duration="5786000" />
+      <workItem from="1540307928762" duration="3699000" />
+      <workItem from="1540642237332" duration="12365000" />
+      <workItem from="1540728945223" duration="12483000" />
+      <workItem from="1540799366459" duration="712000" />
+      <workItem from="1540802786193" duration="9000" />
+      <workItem from="1540826124287" duration="3826000" />
+      <workItem from="1541078896605" duration="89000" />
+      <workItem from="1541254744324" duration="129000" />
+      <workItem from="1541301602258" duration="19812000" />
+      <workItem from="1541388955650" duration="6000" />
+      <workItem from="1541776515199" duration="693000" />
+      <workItem from="1541936347582" duration="596000" />
+      <workItem from="1541949770283" duration="3768000" />
+      <workItem from="1542209234652" duration="2564000" />
+      <workItem from="1542295295497" duration="1716000" />
+      <workItem from="1542547211497" duration="6637000" />
+      <workItem from="1542997106660" duration="1689000" />
+      <workItem from="1543075109118" duration="8997000" />
+      <workItem from="1543087402278" duration="715000" />
+      <workItem from="1543132181407" duration="40000" />
+      <workItem from="1543324786129" duration="4720000" />
+      <workItem from="1543584067829" duration="3386000" />
+      <workItem from="1543673008363" duration="6486000" />
+      <workItem from="1543744075681" duration="6906000" />
+      <workItem from="1543933618445" duration="2024000" />
+    </task>
+    <task id="LOCAL-00001" summary="добавил хелпер для классов-моделей">
+      <created>1539524153547</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1539524153547</updated>
+    </task>
+    <task id="LOCAL-00002" summary="#4 создал фундамент для заказов бронирования&#10;&#10;https://github.com/dikopylov/webhakooh/issues/4&#10;Страница &quot;Все брони&quot;">
+      <created>1540134015352</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1540134015352</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Merge branch 'master' of https://github.com/dikopylov/webhakooh into 4-add-reservations-page&#10;&#10;# Conflicts:&#10;#&#9;routes/web.php">
+      <created>1540134174061</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1540134174061</updated>
+    </task>
+    <task id="LOCAL-00004" summary="#4 сломал авторизацию :(">
+      <created>1540311873871</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1540311873871</updated>
+    </task>
+    <task id="LOCAL-00005" summary="#4 сломал авторизацию :(">
+      <created>1540312245843</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1540312245843</updated>
+    </task>
+    <task id="LOCAL-00006" summary="#4 восстановил id">
+      <created>1540645050112</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1540645050112</updated>
+    </task>
+    <task id="LOCAL-00007" summary="#4 почистил изменения">
+      <created>1540645396678</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1540645396678</updated>
+    </task>
+    <task id="LOCAL-00008" summary="почистил изменения">
+      <created>1540645453297</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1540645453297</updated>
+    </task>
+    <task id="LOCAL-00009" summary="почистил изменения">
+      <created>1540647442833</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1540647442833</updated>
+    </task>
+    <task id="LOCAL-00010" summary="начал исправлять валидацию">
+      <created>1540656679220</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1540656679220</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Merge branch 'rc-reservation' of https://github.com/dikopylov/webhakooh into 4-add-reservations-page&#10;&#10;# Conflicts:&#10;#&#9;app/Http/Models/Reservation/Reservation.php&#10;#&#9;database/migrations/2018_09_29_160502_create_reservations_table.php&#10;#&#9;database/seeds/DatabaseSeeder.php">
+      <created>1540729423389</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1540729423389</updated>
+    </task>
+    <task id="LOCAL-00012" summary="#4 сделал всё кроме удаления и редактирования">
+      <created>1540742833973</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1540742833973</updated>
+    </task>
+    <task id="LOCAL-00013" summary="#4 допилил удаление и редактирование">
+      <created>1540829040622</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1540829040622</updated>
+    </task>
+    <task id="LOCAL-00014" summary="#4 форматирование">
+      <created>1540829317537</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1540829317537</updated>
+    </task>
+    <task id="LOCAL-00015" summary="#4 форматирование">
+      <created>1540829359563</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1540829359563</updated>
+    </task>
+    <task id="LOCAL-00016" summary="#16 натянул LTE на текущий функционал">
+      <created>1542210854034</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1542210854036</updated>
+    </task>
+    <task id="LOCAL-00017" summary="#27 сделал переключение меню относительно текущей странице">
+      <created>1542555260866</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1542555260866</updated>
+    </task>
+    <task id="LOCAL-00018" summary="#28 сверстал всплывающее меню пользователя, задал поведение кнопкам">
+      <created>1543077914134</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1543077914134</updated>
+    </task>
+    <task id="LOCAL-00019" summary="#28 исправил баг Регистрация -&gt; Авторизация">
+      <created>1543079945323</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1543079945323</updated>
+    </task>
+    <task id="LOCAL-00020" summary="#29 добавил пагинацию на всех страницах">
+      <created>1543325020119</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1543325020120</updated>
+    </task>
+    <task id="LOCAL-00021" summary="#29 поправил вёрстку всех кнопок, починил фильтр броней">
+      <created>1543675422822</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1543675422822</updated>
+    </task>
+    <task id="LOCAL-00022" summary="#29 поправил вёрстку селектов в бронях, исправил периодические исчезновения фотографии пользователя">
+      <created>1543676016467</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1543676016467</updated>
+    </task>
+    <task id="LOCAL-00023" summary="#29 удалил комментарий">
+      <created>1543676213416</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1543676213416</updated>
+    </task>
+    <task id="LOCAL-00024" summary="#29 фиксы после ревью">
+      <created>1543680377343</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1543680377343</updated>
+    </task>
+    <task id="LOCAL-00025" summary="#30 удалил кастомные страницы админки">
+      <created>1543745878793</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1543745878793</updated>
+    </task>
+    <task id="LOCAL-00026" summary="#30 удалил неиспользуемые картинки">
+      <created>1543746102464</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1543746102464</updated>
+    </task>
+    <task id="LOCAL-00027" summary="#30 удалил плагин select2">
+      <created>1543746292730</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1543746292730</updated>
+    </task>
+    <task id="LOCAL-00028" summary="#30 удалил плагин raphael">
+      <created>1543746503808</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1543746503808</updated>
+    </task>
+    <task id="LOCAL-00029" summary="#30 удалил плагин morris.js">
+      <created>1543746585307</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1543746585307</updated>
+    </task>
+    <task id="LOCAL-00030" summary="#30 удалил плагин moment">
+      <created>1543746683463</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1543746683463</updated>
+    </task>
+    <task id="LOCAL-00031" summary="#30 удалил плагин mocha">
+      <created>1543746991980</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1543746991980</updated>
+    </task>
+    <task id="LOCAL-00032" summary="#30 удалил плагин jvectormap">
+      <created>1543747119476</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1543747119476</updated>
+    </task>
+    <task id="LOCAL-00033" summary="#30 удалил jquery в bower_components">
+      <created>1543747228190</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1543747228190</updated>
+    </task>
+    <task id="LOCAL-00034" summary="#30 удалил ненужный bootstrap в bower_components">
+      <created>1543747361254</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1543747361254</updated>
+    </task>
+    <task id="LOCAL-00035" summary="#30 удалил еще щепотку неиспользуемых компонентов">
+      <created>1543747590659</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1543747590659</updated>
+    </task>
+    <task id="LOCAL-00036" summary="#30 удалил оставшийся мусор">
+      <created>1543747893152</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1543747893152</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="136723000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-6" y="-6" width="1549" height="837" extended-state="6" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49705306" visible="true" weight="0.28973842" />
+      <window_info id="Structure" order="1" sideWeight="0.5013405" side_tool="true" weight="0.26032192" />
+      <window_info id="npm" order="2" sideWeight="0.502947" side_tool="true" weight="0.14553991" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49832326" weight="0.22804533" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5057009" side_tool="true" visible="true" weight="0.19971672" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="10" sideWeight="0.4942991" visible="true" weight="0.19971672" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.3286119" />
+      <window_info anchor="bottom" id="TypeScript" order="12" />
+      <window_info anchor="bottom" id="Terminal" order="13" sideWeight="0.49966466" weight="0.15439093" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="#46 typeHint" />
+    <MESSAGE value="Merge branch 'rc-api-integration' of https://github.com/dikopylov/webhakooh into 47-add-platen-scheme&#10;&#10;# Conflicts:&#10;#&#9;database/seeds/DatabaseSeeder.php&#10;#&#9;resources/views/layouts/app.blade.php&#10;#&#9;routes/api.php&#10;#&#9;routes/web.php" />
+    <MESSAGE value="#47 schemes -&gt; platens_schemes" />
+    <MESSAGE value="#7 добавил проверку даты на свободу, получение времени, схемы и столов" />
+    <MESSAGE value="#7 релизовал все необходимые api операции" />
+    <MESSAGE value="#7 форматирование" />
+    <MESSAGE value="#7 добавил возращаемые значения" />
+    <MESSAGE value="выпилил мусорный роут" />
+    <MESSAGE value="переменовал невалидный роут схемы" />
+    <MESSAGE value="починил миграции" />
+    <MESSAGE value="пофиксил баг с рассчетом времени" />
+    <MESSAGE value="пофиксил баг с вычислением свободных столов" />
+    <MESSAGE value="добавил телефон клиента в отображение заказа" />
+    <MESSAGE value="сделал главной страницей сайта Брони" />
+    <MESSAGE value="fix migrations bug" />
+    <MESSAGE value="#60 добавил кнопку открытия / закрытия меню + починил вёрстку кнопок на странице просмотра пользователей" />
+    <MESSAGE value="#60 поправил вёрстку в кнопках создания стола" />
+    <MESSAGE value="#60 убрал абсолютное позиционирование" />
+    <MESSAGE value="#60 поправил вёрстку кнопки" />
+    <MESSAGE value="#60 внес правки в вёрстку сайта" />
+    <MESSAGE value="#60 продублировал кнопку пригласительного ключа" />
+    <MESSAGE value="#58 каркас" />
+    <MESSAGE value="#58 добавил уведомление бота о смене статуса заказа" />
+    <MESSAGE value="#58 выпилил ивенты" />
+    <MESSAGE value="#58 добавил динамичное обновление данных на странице все брони" />
+    <option name="LAST_COMMIT_MESSAGE" value="#58 добавил динамичное обновление данных на странице все брони" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/resources/views/contacts/edit.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="38" column="32" selection-start-line="38" selection-start-column="32" selection-end-line="38" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/users/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="158">
+          <caret line="15" column="114" selection-start-line="15" selection-start-column="114" selection-end-line="15" selection-end-column="114" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Contracts/Auth/MustVerifyEmail.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="10" selection-start-line="4" selection-start-column="10" selection-end-line="4" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Auth/Listeners/SendEmailVerificationNotification.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="17" column="39" selection-start-line="17" selection-start-column="39" selection-end-line="17" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/api.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="22" column="58" selection-start-line="22" selection-start-column="37" selection-end-line="22" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_ide_helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="6130" column="39" selection-start-line="6130" selection-start-column="39" selection-end-line="6130" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/monolog/monolog/src/Monolog/Logger.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="285" column="20" selection-start-line="285" selection-start-column="20" selection-end-line="285" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/nesbot/carbon/src/Carbon/Carbon.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="583" column="27" selection-start-line="583" selection-start-column="27" selection-end-line="583" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Listeners/ChangeReservationStatusListner.php" />
+    <entry file="file://$PROJECT_DIR$/app/Connectors/TelergamBotConnector.php" />
+    <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Support/ServiceProvider.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="7" selection-start-line="12" selection-start-column="7" selection-end-line="12" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="505">
+          <caret line="118" column="9" selection-start-line="118" selection-start-column="9" selection-end-line="118" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/composer/composer/src/Composer/Config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="257">
+          <caret line="100" column="5" selection-start-line="100" selection-start-column="5" selection-end-line="100" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2018_10_21_190419_create_reservation_statuses_table.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2018_09_29_160502_create_reservations_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="24" column="39" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/cancel-reason.js" />
+    <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Concerns/HasAttributes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18054">
+          <caret line="1070" column="20" selection-start-line="1070" selection-start-column="20" selection-end-line="1070" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Models/Client/Client.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="16" column="16" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Models/Reservation/Reservation.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="501">
+          <caret line="73" column="20" selection-start-line="73" selection-start-column="20" selection-end-line="73" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Models/Client/ClientRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="274">
+          <caret line="21" column="5" lean-forward="true" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Events/ChangeReservationStatusEvent.php" />
+    <entry file="file://$PROJECT_DIR$/vendor/guzzlehttp/guzzle/src/Exception/TransferException.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="6" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Models/Scheme/PlatensScheme.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/seeds/PlatensSchemesTableSeeder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="11" selection-start-line="14" selection-start-column="11" selection-end-line="14" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Connectors/TelegramBotConnectorException.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Notifications/Channels/SlackWebhookChannel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="43" column="21" selection-start-line="43" selection-start-column="21" selection-end-line="43" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Listeners/ChangeReservationStatusListener.php" />
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/API/PlatenController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="363">
+          <caret line="28" column="56" selection-start-line="28" selection-start-column="56" selection-end-line="28" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Models/Platen/PlatenService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="34" column="60" selection-start-line="34" selection-start-column="60" selection-end-line="34" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Models/Platen/PlatenRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="27" column="20" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/guzzlehttp/guzzle/src/Client.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="14" column="3" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290632">
+          <caret line="17109" column="66" selection-start-line="17109" selection-start-column="66" selection-end-line="17109" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PlatensSchemeController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="34" column="26" selection-start-line="34" selection-start-column="26" selection-end-line="34" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/storage/framework/views/8d70e45a19c084dc37e5bc37a8ba9b48f03d3e6b.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="86" column="128" selection-start-line="86" selection-start-column="128" selection-end-line="86" selection-end-column="128" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Providers/AppServiceProvider.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="29" column="23" selection-start-line="29" selection-start-column="23" selection-end-line="29" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Providers/EventServiceProvider.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env.example">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" selection-start-line="9" selection-end-line="9" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/reservation/show.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="64" column="34" selection-start-line="64" selection-start-column="34" selection-end-line="64" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/layouts/app.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="190" column="32" selection-start-line="190" selection-start-column="17" selection-end-line="190" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/API/ReservationController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="965">
+          <caret line="66" column="5" selection-start-line="66" selection-start-column="5" selection-end-line="66" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Models/ReservationStatus/ReservationStatus.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="28" column="27" selection-start-line="28" selection-start-column="27" selection-end-line="28" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Models/Reservation/ReservationRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="78" column="20" selection-start-line="78" selection-start-column="20" selection-end-line="78" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/reservation/edit.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="29" column="167" selection-start-line="29" selection-start-column="126" selection-end-line="29" selection-end-column="167" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/web.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="28" selection-start-line="28" selection-end-line="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/reservation/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="17" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/reservation/main.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="54" lean-forward="true" selection-start-line="11" selection-start-column="54" selection-end-line="11" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Connectors/TelegramBotConnector.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="39" column="14" selection-start-line="39" selection-start-column="14" selection-end-line="39" selection-end-column="14" />
+          <folding>
+            <element signature="e#35#79#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1343">
+          <caret line="79" column="8" selection-start-line="79" selection-start-column="8" selection-end-line="79" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ReservationController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5134">
+          <caret line="319" column="50" selection-start-line="319" selection-start-column="50" selection-end-line="319" selection-end-column="50" />
+          <folding>
+            <element signature="e#40#80#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/confirm-delete.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="11" selection-start-line="12" selection-start-column="11" selection-end-line="12" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="64" selection-start-line="9" selection-start-column="64" selection-end-line="9" selection-end-column="64" />
+          <folding>
+            <marker date="1551015583761" expanded="true" signature="151:215" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
