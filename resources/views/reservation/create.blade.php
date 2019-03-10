@@ -66,7 +66,7 @@
                                 <div class="form-group row">
                                     <label for="client-phone" class="col-md-4 col-form-label text-md-right">{{ __('Телефон клиента') }}</label>
                                     <div class="col-md-6">
-                                        <input id="client-phone" type="number" min="1" class="form-control{{ $errors->has('client-phone') ? ' is-invalid' : '' }}" name="client-phone" value="{{ old('client-phone') }}" required>
+                                        <input id="client-phone" type="text" min="1" class="form-control{{ $errors->has('client-phone') ? ' is-invalid' : '' }}" name="client-phone" value="{{ old('client-phone') }}" required>
                                         @if ($errors->has('client-phone'))
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $errors->first('client-phone') }}</strong>
