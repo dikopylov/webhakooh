@@ -72,7 +72,7 @@ class PlatenController extends Controller
 
         $this->platenRepository->save($platen);
 
-        $platens = $this->platenRepository->getAll();
+        $platens = $this->platenRepository->getWithPagination();
 
         return view('platens.index',
             [
@@ -122,7 +122,7 @@ class PlatenController extends Controller
             $message = 'Стол успешно отредактирован!';
             $this->platenRepository->save($platen);
         }
-        $platens = $this->platenRepository->getAll();
+        $platens = $this->platenRepository->getWithPagination();
 
         return view('platens.index',
             [
